@@ -600,7 +600,7 @@ activeCount() returns the number of active threads in a specified group and itâ€
 
 Multithreading in Java is a programming concept that refers to small tasks running simultaneously. Let's take an example of multithreading as our computer or mobile phones, which allows us to run various tasks at once. Its main purpose is to enable multiple threads to run simultaneously, maximizing CPU usage and improving program execution speed. This Java feature allows a program to be divided into multiple threads for faster and easier execution.
 
-## 1.What is a thread in Java?
+## What is a thread in Java?
 Threads are referred to as the smallest parts of a process that simply let a program execute efficiently with other parts or threads of the process at the same time. They share a common address space and are independent of each other. In Java, there are two ways of creating threads:
 
 1. Via Thread class
@@ -636,6 +636,7 @@ A program in execution is called a process, while the smallest independent units
 |They share data with each other.| They do not share data with each other.|
 
 ## 7. What is the task of the main thread?
+
 The main Thread is a thread contained in every program created by the JVM at the start of the program when the main() function is invoked with the main Thread as depicted from the output perceived from pseudo-code illustration.
 
 ```java
@@ -652,6 +653,7 @@ Output: main
 **run()**:  The run() method is used to start or begin the execution of the same Thread. When the run() method is called, no new thread is created, as in the case of the start() method. This method is executed by the current Thread. One can call the run() method multiple times. 
 
 ## 10. How to set the name of the thread?
+
 A method named as setName() is there which is used to change or set the names of the threads.
 
 ```java
@@ -705,7 +707,8 @@ Semaphore is regarded as a thread synchronization system that is usually require
 
 There are two methods in the thread class that is used to make a user thread into a daemon thread. First, the setDaemon() method converts the user thread to the daemon thread and vice-versa. After this, the isDaemon() method is used, which returns a boolean true if the Thread is daemon. Else returns false if it is a non-daemon thread. 
 
-20. Can you start a thread twice?
+## 20. Can you start a thread twice?
+
 No, it's not at all possible to restart a thread once a thread gets started and completes its execution. Thread only runs once, and if you try to run it for a second time, then it will throw a runtime exception, i.e., Java. lang.IllegalThreadStateException. 
 
 ## 21. What are the tasks of the start() method?
@@ -1478,25 +1481,25 @@ A thread pool manages the pool of worker threads, it contains a queue that keeps
 
 # Java Concurrency Interview Questions and Answers
 
-What is atomic operation? What are atomic classes in Java Concurrency API?
+## What is atomic operation? What are atomic classes in Java Concurrency API?
 
-What is Lock interface in Java Concurrency API? What are its benefits over synchronization?
+## What is Lock interface in Java Concurrency API? What are its benefits over synchronization?
 
-What is Executors Framework?
+## What is Executors Framework?
 
-What is BlockingQueue? How can we implement Producer-Consumer problem using Blocking Queue?
+## What is BlockingQueue? How can we implement Producer-Consumer problem using Blocking Queue?
 
-What is Callable and Future?
+## What is Callable and Future?
 
-What is FutureTask Class?
+## What is FutureTask Class?
 
-What are Concurrent Collection Classes?
+## What are Concurrent Collection Classes?
 
-What is Executors Class?
+## What is Executors Class?
 
-What are some of the improvements in Concurrency API in Java 8?
+## What are some of the improvements in Concurrency API in Java 8?
 
-Some important concurrent API enhancements are:
+## Some important concurrent API enhancements are:
 
 -   ConcurrentHashMap compute(), forEach(), forEachEntry(), forEachKey(), forEachValue(), merge(), reduce() and search() methods.
 -   CompletableFuture that may be explicitly completed (setting its value and status).
@@ -1504,53 +1507,255 @@ Some important concurrent API enhancements are:
 
 **Recommended Read**: [Java 8 Features](/community/tutorials/java-8-features-with-examples "Java 8 Features for Developers â€“ lambdas, Functional interface, Stream and Time API")
 
+## 1) What is multithreading?
+
+Multithreading is a process of executing multiple threads simultaneously. Multithreading is used to obtain the multitasking. It consumes less memory and gives the fast and efficient performance. Its main advantages are:
+
+* Threads share the same address space.
+
+* The thread is lightweight.
+
+* The cost of communication between the processes is low.
+
+## 2) What is the thread?
+
+A thread is a lightweight subprocess. It is a separate path of execution because each thread runs in a different stack frame. A process may contain multiple threads. Threads share the process resources, but still, they execute independently.
+
+## 4) What do you understand by inter-thread communication?
+
+* The process of communication between synchronized threads is termed as inter-thread communication.
+* Inter-thread communication is used to avoid thread polling in Java.
+
+* The thread is paused running in its critical section, and another thread is allowed to enter (or lock) in the same critical section to be executed.
+
+* It can be obtained by wait(), notify(), and notifyAll() methods.
+
 ## 6) Why must wait() method be called from the synchronized block?
 We must call the wait method otherwise it will throw java.lang.IllegalMonitorStateException exception. Moreover, we need wait() method for inter-thread communication with notify() and notifyAll(). Therefore It must be present in the synchronized block for the proper and correct communication.
 
 ## 9) What is the difference between preemptive scheduling and time slicing?
+ 
 Under preemptive scheduling, the highest priority task executes until it enters the waiting or dead states or a higher priority task comes into existence. Under time slicing, a task executes for a predefined slice of time and then reenters the pool of ready tasks. The scheduler then determines which task should execute next, based on priority and other factors.
 
-29) Does each thread have its stack in multithreaded programming?
+## 10) What is context switching?
+
+In Context switching the state of the process (or thread) is stored so that it can be restored and execution can be resumed from the same point later. Context switching enables the multiple processes to share the same CPU.
+
+## 12) What does join() method?
+The join() method waits for a thread to die. In other words, it causes the currently running threads to stop executing until the thread it joins with completes its task. Join method is overloaded in Thread class in the following ways.
+
+* public void join()throws InterruptedException
+* public void join(long milliseconds)throws InterruptedException
+
+## 17) What about the daemon threads?
+
+The daemon threads are the low priority threads that provide the background support and services to the user threads. Daemon thread gets automatically terminated by the JVM if the program remains with the daemon thread only, and all other user threads are ended/died. There are two methods for daemon thread available in the Thread class:
+
+* **public void setDaemon(boolean status)**: It used to mark the thread daemon thread or a user thread.
+
+* **public boolean isDaemon()**: It checks the thread is daemon or not.
+
+## 18) Can we make the user thread as daemon thread if the thread is started?
+
+No, if you do so, it will throw IllegalThreadStateException. Therefore, we can only create a daemon thread before starting the thread.
+
+```java
+class Testdaemon1 extends Thread{    
+public void run(){  
+          System.out.println("Running thread is daemon...");  
+}  
+public static void main (String[] args) {  
+      Testdaemon1 td= new Testdaemon1();  
+      td.start();  
+      setDaemon(true);// It will throw the exception: td.   
+   }  
+}  
+```
+
+Output
+
+```java
+Running thread is daemon...
+Exception in thread "main" java.lang.IllegalThreadStateException
+at java.lang.Thread.setDaemon(Thread.java:1359)
+at Testdaemon1.main(Testdaemon1.java:8)
+```
+
+## 19) What is shutdown hook?
+
+The shutdown hook is a thread that is invoked implicitly before JVM shuts down. So we can use it to perform clean up the resource or save the state when JVM shuts down normally or abruptly. We can add shutdown hook by using the following method:
+
+```java
+public void addShutdownHook(Thread hook){}    
+Runtime r=Runtime.getRuntime();  
+r.addShutdownHook(new MyThread());
+```
+
+Some important points about shutdown hooks are :
+
+* Shutdown hooks initialized but can only be started when JVM shutdown occurred.
+
+* Shutdown hooks are more reliable than the finalizer() because there are very fewer chances that shutdown hooks not run.
+
+* The shutdown hook can be stopped by calling the halt(int) method of Runtime class.
+
+## 20)When should we interrupt a thread?
+
+We should interrupt a thread when we want to break out the sleep or wait state of a thread. We can interrupt a thread by calling the interrupt() throwing the InterruptedException.
+
+## 21) What is the synchronization?
+
+Synchronization is the capability to control the access of multiple threads to any shared resource. It is used:
+
+1. To prevent thread interference.
+
+2. To prevent consistency problem.
+
+When the multiple threads try to do the same task, there is a possibility of an erroneous result, hence to remove this issue, Java uses the process of synchronization which allows only one thread to be executed at a time. Synchronization can be achieved in three ways:
+
+* by the synchronized method
+
+* by synchronized block
+
+* by static synchronization
+
+Syntax for synchronized block
+
+```java
+synchronized(object reference expression)  
+    {  
+        //code block  
+    }  
+```
+
+## 22) What is the purpose of the Synchronized block?
+
+The Synchronized block can be used to perform synchronization on any specific resource of the method. Only one thread at a time can execute on a particular resource, and all other threads which attempt to enter the synchronized block are blocked.
+
+* Synchronized block is used to lock an object for any shared resource.
+
+* The scope of the synchronized block is limited to the block on which, it is applied. Its scope is smaller than a method.
+
+## 23) Can Java object be locked down for exclusive use by a given thread?
+
+Yes. You can lock an object by putting it in a "synchronized" block. The locked object is inaccessible to any thread other than the one that explicitly claimed it.
+
+
+## 24) What is static synchronization?
+
+If you make any static method as synchronized, the lock will be on the class not on the object. If we use the synchronized keyword before a method so it will lock the object (one thread can access an object at a time) but if we use static synchronized so it will lock a class (one thread can access a class at a time).
+
+## 25)What is the difference between notify() and notifyAll()?
+
+The notify() is used to unblock one waiting thread whereas notifyAll() method is used to unblock all the threads in waiting state.
+
+##  26)What is the deadlock?
+
+Deadlock is a situation in which every thread is waiting for a resource which is held by some other waiting thread. In this situation, Neither of the thread executes nor it gets the chance to be executed. Instead, there exists a universal waiting state among all the threads. Deadlock is a very complicated situation which can break our code at runtime.
+
+## 27) How to detect a deadlock condition? How can it be avoided?
+
+We can detect the deadlock condition by running the code on cmd and collecting the Thread Dump, and if any deadlock is present in the code, then a message will appear on cmd.
+
+Ways to avoid the deadlock condition in Java:
+
+* **Avoid Nested lock**: Nested lock is the common reason for deadlock as deadlock occurs when we provide locks to various threads so we should give one lock to only one thread at some particular time.
+
+* **Avoid unnecessary locks**: we must avoid the locks which are not required.
+
+* **Using thread join**: Thread join helps to wait for a thread until another thread doesn't finish its execution so we can avoid deadlock by maximum use of join method.
+
+## 28) What is Thread Scheduler in java?
+
+In Java, when we create the threads, they are supervised with the help of a Thread Scheduler, which is the part of JVM. Thread scheduler is only responsible for deciding which thread should be executed. Thread scheduler uses two mechanisms for scheduling the threads: Preemptive and Time Slicing.
+
+Java thread scheduler also works for deciding the following for a thread:
+* It selects the priority of the thread.
+
+* It determines the waiting time for a thread
+
+* It checks the Nature of thread
+
+## 29) Does each thread have its stack in multithreaded programming?
+
 Yes, in multithreaded programming every thread maintains its own or separate stack area in memory due to which every thread is independent of each other.
 
-30) How is the safety of a thread achieved?
+## 30) How is the safety of a thread achieved?
+
 If a method or class object can be used by multiple threads at a time without any race condition, then the class is thread-safe. Thread safety is used to make a program safe to use in multithreaded programming. It can be achieved by the following ways:
 
-Synchronization
-Using Volatile keyword
-Using a lock based mechanism
-Use of atomic wrapper classes
-31) What is race-condition?
+* Synchronization
+* Using Volatile keyword
+* Using a lock based mechanism
+* Use of atomic wrapper classes
+
+## 31) What is race-condition?
+
 A Race condition is a problem which occurs in the multithreaded programming when various threads execute simultaneously accessing a shared resource at the same time. The proper use of synchronization can avoid the Race condition.
 
-32) What is the volatile keyword in java?
+## 32) What is the volatile keyword in java?
+
 Volatile keyword is used in multithreaded programming to achieve the thread safety, as a change in one volatile variable is visible to all other threads so one variable can be used by one thread at a time.
 
-34) What are the main components of concurrency API?
+## 33) What do you understand by thread pool?
+
+* Java Thread pool represents a group of worker threads, which are waiting for the task to be allocated.
+
+* Threads in the thread pool are supervised by the service provider which pulls one thread from the pool and assign a job to it.
+
+* After completion of the given task, thread again came to the thread pool.
+
+* The size of the thread pool depends on the total number of threads kept at reserve for execution.
+
+The advantages of the thread pool are :
+
+* Using a thread pool, performance can be enhanced.
+
+* Using a thread pool, better system stability can occur.
+
+## 34) What are the main components of concurrency API?
+
 Concurrency API can be developed using the class and interfaces of java.util.Concurrent package. There are the following classes and interfaces in java.util.Concurrent package.
 
-Executor
-FarkJoinPool
-ExecutorService
-ScheduledExecutorService
-Future
-TimeUnit(Enum)
-CountDownLatch
-CyclicBarrier
-Semaphore
-ThreadFactory
-BlockingQueue
-DelayQueue
-Locks
-Phaser
+* Executor
 
-35) What is the Executor interface in Concurrency API in Java?
+* FarkJoinPool
+
+* ExecutorService
+
+* ScheduledExecutorService
+
+* Future
+
+* TimeUnit(Enum)
+
+* CountDownLatch
+
+* CyclicBarrier
+
+* Semaphore
+
+* ThreadFactory
+
+* BlockingQueue
+
+* DelayQueue
+
+* Locks
+
+* Phaser
+
+## 35) What is the Executor interface in Concurrency API in Java?
+
 The Executor Interface provided by the package java.util.concurrent is the simple interface used to execute the new task. The execute() method of Executor interface is used to execute some given command. The syntax of the execute() method is given below.
 
+```java
 void execute(Runnable command)
+```
 
 Consider the following example:
 
+```java
 import java.util.concurrent.Executor;  
 import java.util.concurrent.Executors;  
 import java.util.concurrent.ThreadPoolExecutor;  
@@ -1576,16 +1781,21 @@ public class TestThread {
          }  
       }  
    }  
-}     
+} 
+```
+
 Output
 
+```java
 Running Thread!
 Thread Completed
+```
 
-36) What is BlockingQueue?
+## 36) What is BlockingQueue?
+
 The java.util.concurrent.BlockingQueue is the subinterface of Queue that supports the operations such as waiting for the space availability before inserting a new value or waiting for the queue to become non-empty before retrieving an element from it. Consider the following example.
 
-      
+```java      
 import java.util.Random;  
 import java.util.concurrent.ArrayBlockingQueue;  
 import java.util.concurrent.BlockingQueue;  
@@ -1657,19 +1867,24 @@ public class TestThread {
       }  
    }  
 }  
+```
+
 Output
 
+```java
 Added: 96
 Removed: 96
 Added: 8
 Removed: 8
 Added: 5
 Removed: 5
+```
 
-7) How to implement producer-consumer problem by using BlockingQueue?
+## 7) How to implement producer-consumer problem by using BlockingQueue?
+
 The producer-consumer problem can be solved by using BlockingQueue in the following way.
 
-      
+```java      
 import java.util.concurrent.BlockingQueue;  
 import java.util.concurrent.LinkedBlockingQueue;  
 import java.util.logging.Level;  
@@ -1733,8 +1948,11 @@ class Consumer implements Runnable{
         }  
     }  
 }  
+```
+
 Output
 
+```java
 Produced: 0
 Produced: 1
 Produced: 2
@@ -1755,29 +1973,47 @@ Consumed: 6
 Consumed: 7
 Consumed: 8
 Consumed: 9
+```
 
-38) What is the difference between Java Callable interface and Runnable interface?
+## 38) What is the difference between Java Callable interface and Runnable interface?
+
 The Callable interface and Runnable interface both are used by the classes which wanted to execute with multiple threads. However, there are two main differences between the both :
 
-A Callable <V> interface can return a result, whereas the Runnable interface cannot return any result.
-A Callable <V> interface can throw a checked exception, whereas the Runnable interface cannot throw checked exception.
-A Callable <V> interface cannot be used before the Java 5 whereas the Runnable interface can be used.
-39) What is the Atomic action in Concurrency in Java?
-The Atomic action is the operation which can be performed in a single unit of a task without any interference of the other operations.
-The Atomic action cannot be stopped in between the task. Once started it fill stop after the completion of the task only.
-An increment operation such as a++ does not allow an atomic action.
-All reads and writes operation for the primitive variable (except long and double) are the atomic operation.
-All reads and writes operation for the volatile variable (including long and double) are the atomic operation.
-The Atomic methods are available in java.util.Concurrent package.
-40) What is lock interface in Concurrency API in Java?
+* A Callable <V> interface can return a result, whereas the Runnable interface cannot return any result.
+
+* A Callable <V> interface can throw a checked exception, whereas the Runnable interface cannot throw checked exception.
+
+* A Callable <V> interface cannot be used before the Java 5 whereas the Runnable interface can be used.
+
+## 39) What is the Atomic action in Concurrency in Java?
+
+* The Atomic action is the operation which can be performed in a single unit of a task without any interference of the other operations.
+
+* The Atomic action cannot be stopped in between the task. Once started it fill stop after the completion of the task only.
+
+* An increment operation such as a++ does not allow an atomic action.
+
+* All reads and writes operation for the primitive variable (except long and double) are the atomic operation.
+
+* All reads and writes operation for the volatile variable (including long and double) are the atomic operation.
+
+* The Atomic methods are available in java.util.Concurrent package.
+
+## 40) What is lock interface in Concurrency API in Java?
+
 The java.util.concurrent.locks.Lock interface is used as the synchronization mechanism. It works similar to the synchronized block. There are a few differences between the lock and synchronized block that are given below.
 
-Lock interface provides the guarantee of sequence in which the waiting thread will be given the access, whereas the synchronized block doesn't guarantee it.
-Lock interface provides the option of timeout if the lock is not granted whereas the synchronized block doesn't provide that.
-The methods of Lock interface, i.e., Lock() and Unlock() can be called in different methods whereas single synchronized block must be fully contained in a single method.
-41) Explain the ExecutorService Interface.
+* Lock interface provides the guarantee of sequence in which the waiting thread will be given the access, whereas the synchronized block doesn't guarantee it.
+
+* Lock interface provides the option of timeout if the lock is not granted whereas the synchronized block doesn't provide that.
+
+* The methods of Lock interface, i.e., Lock() and Unlock() can be called in different methods whereas single synchronized block must be fully contained in a single method.
+
+## 41) Explain the ExecutorService Interface.
+
 The ExecutorService Interface is the subinterface of Executor interface and adds the features to manage the lifecycle. Consider the following example.
 
+```java
 import java.util.concurrent.ExecutorService;  
 import java.util.concurrent.Executors;  
 import java.util.concurrent.TimeUnit;  
@@ -1817,38 +2053,52 @@ public class TestThread {
       }  
    }         
 }  
+```
+
 Output
 
+```java
 Shutdown executor
 shutdown finished
+```
 
-42) What is the difference between Synchronous programming and Asynchronous programming regarding a thread?
-Synchronous programming: In Synchronous programming model, a thread is assigned to complete a task and hence thread started working on it, and it is only available for other tasks once it will end the assigned task.
+## 42) What is the difference between Synchronous programming and Asynchronous programming regarding a thread?
 
-Asynchronous Programming: In Asynchronous programming, one job can be completed by multiple threads and hence it provides maximum usability of the various threads.
+**Synchronous programming**: In Synchronous programming model, a thread is assigned to complete a task and hence thread started working on it, and it is only available for other tasks once it will end the assigned task.
 
-43) What do you understand by Callable and Future in Java?
-Java Callable interface: In Java5 callable interface was provided by the package java.util.concurrent. It is similar to the Runnable interface but it can return a result, and it can throw an Exception. It also provides a run() method for execution of a thread. Java Callable can return any object as it uses Generic.
+**Asynchronous Programming**: In Asynchronous programming, one job can be completed by multiple threads and hence it provides maximum usability of the various threads.
+
+## 43) What do you understand by Callable and Future in Java?
+
+**Java Callable interface**: In Java5 callable interface was provided by the package java.util.concurrent. It is similar to the Runnable interface but it can return a result, and it can throw an Exception. It also provides a run() method for execution of a thread. Java Callable can return any object as it uses Generic.
 
 Syntax:
 
+```java
 public interface Callable<V>
-
-Java Future interface: Java Future interface gives the result of a concurrent process. The Callable interface returns the object of java.util.concurrent.Future.
+```
+**Java Future interface**: Java Future interface gives the result of a concurrent process. The Callable interface returns the object of java.util.concurrent.Future.
 
 Java Future provides following methods for implementation.
 
-cancel(boolean mayInterruptIfRunning): It is used to cancel the execution of the assigned task.
-get(): It waits for the time if execution not completed and then retrieved the result.
-isCancelled(): It returns the Boolean value as it returns true if the task was canceled before the completion.
-isDone(): It returns true if the job is completed successfully else returns false.
+* **cancel(boolean mayInterruptIfRunning)**: It is used to cancel the execution of the assigned task.
 
-44. What is the difference between ScheduledExecutorService and ExecutorService interface?
+* **get()**: It waits for the time if execution not completed and then retrieved the result.
+
+* **isCancelled()**: It returns the Boolean value as it returns true if the task was canceled before the completion.
+
+* **isDone()**: It returns true if the job is completed successfully else returns false.
+
+## 44. What is the difference between ScheduledExecutorService and ExecutorService interface?
+
 ExecutorServcie and ScheduledExecutorService both are the interfaces of java.util.Concurrent package but scheduledExecutorService provides some additional methods to execute the Runnable and Callable tasks with the delay or every fixed time period.
 
-45) Define FutureTask class in Java?
+## 45) Define FutureTask class in Java?
+
 Java FutureTask class provides a base implementation of the Future interface. The result can only be obtained if the execution of one task is completed, and if the computation is not achieved then get method will be blocked. If the execution is completed, then it cannot be re-started and can't be canceled.
 
 Syntax
 
+```java
 public class FutureTask<V> extends Object implements RunnableFuture<V>
+```
