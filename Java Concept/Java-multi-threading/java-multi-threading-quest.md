@@ -2102,3 +2102,465 @@ Syntax
 ```java
 public class FutureTask<V> extends Object implements RunnableFuture<V>
 ```
+
+## 2. What is the busy spin technique?
+
+Example: 'Busy spin is a technique in which you pause a thread by making it run an empty loop for a certain period. Unlike other methods, like wait() or sleep(), a busy spin does not give up CPU control and therefore preserves CPU cache.'
+
+## 3. What is thread starvation?
+
+Your awareness of thread starvation can be useful for code debugging.
+Example: 'Thread starvation is when there is insufficient CPU capacity to execute a thread. This can happen with low-priority threads or threads that are demoted in favour of other threads.'
+
+## 5. What is a deadlock situation?
+Deadlocks cause code to stall and malfunction. Employers may want to know if you know how to identify and resolve deadlocks.
+Example: 'In a deadlock situation, multiple threads may wait on each other to release shared resources in order to run. This can happen when, for example, a single thread has exclusive priority but needs resources from a waiting thread.'
+
+## What is a timer class in Java?
+
+## Explain what ThreadLocal is.
+
+## Explain how you would stop the execution of a thread in Java.
+
+## Why is it important to override the run() method in a thread class?
+
+
+## How can you achieve thread safety?
+
+## In Java, what does the keyword volatile mean?
+
+## Q2. What are some fundamental advantages of multithreading in Java?
+
+The key benefits of Java multithreading include:
+
+* Multiple threads can share single address spaces
+
+* Threads share the same resources from the library but can execute differently
+
+* Different threads can be made to perform various functions to yield a given result
+
+## 11. What do you understand about Deadlock situations in Java Multithreading?
+
+Deadlock is a situation where each thread is waiting for resources held by other waiting threads. Due to this situation, no threads are executed, causing a pause in program execution and breaking the code at runtime.
+
+## Q12. How do you detect deadlock situations in Java?
+
+Deadlock situations can be detected by running the executable code on cmd and subsequently collecting the thread dump. If deadlock situations are present, the cmd will throw up a message.
+
+## Q13. How can deadlock situations be avoided in Java?
+
+This is one of the most common Java Multithreading interview questions asked in technical interviews. Deadlock situations in Java can be avoided by:
+
+By way of avoiding nested thread locks and providing locks to only one thread at a time
+
+By using thread join - the function helps to wait for threads to execute before other threads are executed, thereby preventing multiple threads from waiting for resources used by other threads.
+
+## Q14. Do individual threads have their respective stacks in Multithreaded programming?
+
+Yes, individual threads have their stacks in multithreaded programming. Each thread is independent of the other and maintains its own stack in the memory.
+
+## Q2. How Can You Create a Thread Instance and Run It?
+
+To create an instance of a thread, you have two options. First, pass a Runnable instance to its constructor and call start(). Runnable is a functional interface, so it can be passed as a lambda expression:
+
+```java
+Thread thread1 = new Thread(() ->
+  System.out.println("Hello World from Runnable!"));
+thread1.start();
+```
+
+Thread also implements Runnable, so another way of starting a thread is to create an anonymous subclass, override its run() method, and then call start():
+
+```java
+Thread thread2 = new Thread() {
+    @Override
+    public void run() {
+        System.out.println("Hello World from subclass!");
+    }
+};
+thread2.start();
+```
+
+## Q6. What Is the Thread’s Interrupt Flag? How Can You Set and Check It? How Does It Relate to the Interruptedexception?
+
+The interrupt flag, or interrupt status, is an internal Thread flag that is set when the thread is interrupted. To set it, simply call thread.interrupt() on the thread object.
+
+If a thread is currently inside one of the methods that throw InterruptedException (wait, join, sleep etc.), then this method immediately throws InterruptedException. The thread is free to process this exception according to its own logic.
+
+If a thread is not inside such method and thread.interrupt() is called, nothing special happens. It is thread’s responsibility to periodically check the interrupt status using static Thread.interrupted() or instance isInterrupted() method. The difference between these methods is that the static Thread.interrupted() clears the interrupt flag, while isInterrupted() does not.
+
+## Q7. What Are Executor and Executorservice? What Are the Differences Between These Interfaces?
+
+Executor and ExecutorService are two related interfaces of java.util.concurrent framework. Executor is a very simple interface with a single execute method accepting Runnable instances for execution. In most cases, this is the interface that your task-executing code should depend on.
+
+ExecutorService extends the Executor interface with multiple methods for handling and checking the lifecycle of a concurrent task execution service (termination of tasks in case of shutdown) and methods for more complex asynchronous task handling including Futures.
+
+For more info on using Executor and ExecutorService, see the article A Guide to Java ExecutorService.
+
+## Q8. What Are the Available Implementations of Executorservice in the Standard Library?
+
+The ExecutorService interface has three standard implementations:
+
+ThreadPoolExecutor — for executing tasks using a pool of threads. Once a thread is finished executing the task, it goes back into the pool. If all threads in the pool are busy, then the task has to wait for its turn.
+ScheduledThreadPoolExecutor allows to schedule task execution instead of running it immediately when a thread is available. It can also schedule tasks with fixed rate or fixed delay.
+ForkJoinPool is a special ExecutorService for dealing with recursive algorithms tasks. If you use a regular ThreadPoolExecutor for a recursive algorithm, you will quickly find all your threads are busy waiting for the lower levels of recursion to finish. The ForkJoinPool implements the so-called work-stealing algorithm that allows it to use available threads more efficiently.
+
+## Q9. What Is Java Memory Model (Jmm)? Describe Its Purpose and Basic Ideas.
+
+Java Memory Model is a part of Java language specification described in Chapter 17.4. It specifies how multiple threads access common memory in a concurrent Java application, and how data changes by one thread are made visible to other threads. While being quite short and concise, JMM may be hard to grasp without strong mathematical background.
+
+The need for memory model arises from the fact that the way your Java code is accessing data is not how it actually happens on the lower levels. Memory writes and reads may be reordered or optimized by the Java compiler, JIT compiler, and even CPU, as long as the observable result of these reads and writes is the same.
+
+This can lead to counter-intuitive results when your application is scaled to multiple threads because most of these optimizations take into account a single thread of execution (the cross-thread optimizers are still extremely hard to implement). Another huge problem is that the memory in modern systems is multilayered: multiple cores of a processor may keep some non-flushed data in their caches or read/write buffers, which also affects the state of the memory observed from other cores.
+
+To make things worse, the existence of different memory access architectures would break the Java’s promise of “write once, run everywhere”. Happily for the programmers, the JMM specifies some guarantees that you may rely upon when designing multithreaded applications. Sticking to these guarantees helps a programmer to write multithreaded code that is stable and portable between various architectures.
+
+The main notions of JMM are:
+
+**Actions** , these are inter-thread actions that can be executed by one thread and detected by another thread, like reading or writing variables, locking/unlocking monitors and so on
+**Synchronization actions**, a certain subset of actions, like reading/writing a volatile variable, or locking/unlocking a monitor
+
+**Program Order (PO)**, the observable total order of actions inside a single thread
+
+**Synchronization Order** (SO), the total order between all synchronization actions — it has to be consistent with Program Order, that is, if two synchronization actions come one before another in PO, they occur in the same order in SO
+
+**synchronizes-with** (SW) relation between certain synchronization actions, like unlocking of monitor and locking of the same monitor (in another or the same thread)
+
+**Happens-before Order** — combines PO with SW (this is called transitive closure in set theory) to create a partial ordering of all actions between threads. If one action happens-before another, then the results of the first action are observable by the second action (for instance, write of a variable in one thread and read in another)
+
+**Happens-before consistency** — a set of actions is HB-consistent if every read observes either the last write to that location in the happens-before order, or some other write via data race
+
+**Execution** — a certain set of ordered actions and consistency rules between them
+
+For a given program, we can observe multiple different executions with various outcomes. But if a program is correctly synchronized, then all of its executions appear to be sequentially consistent, meaning you can reason about the multithreaded program as a set of actions occurring in some sequential order. This saves you the trouble of thinking about under-the-hood reorderings, optimizations or data caching.
+
+## Q10. What Is a Volatile Field and What Guarantees Does the Jmm Hold for Such Field?
+
+A volatile field has special properties according to the Java Memory Model (see Q9). The reads and writes of a volatile variable are synchronization actions, meaning that they have a total ordering (all threads will observe a consistent order of these actions). A read of a volatile variable is guaranteed to observe the last write to this variable, according to this order.
+
+If you have a field that is accessed from multiple threads, with at least one thread writing to it, then you should consider making it volatile, or else there is a little guarantee to what a certain thread would read from this field.
+
+Another guarantee for volatile is atomicity of writing and reading 64-bit values (long and double). Without a volatile modifier, a read of such field could observe a value partly written by another thread.
+
+
+## Q11. Which of the Following Operations Are Atomic?
+
+writing to a non-volatile int;
+
+writing to a volatile int;
+
+writing to a non-volatile long;
+
+writing to a volatile long;
+
+incrementing a volatile long?
+
+A write to an int (32-bit) variable is guaranteed to be atomic, whether it is volatile or not. A long (64-bit) variable could be written in two separate steps, for example, on 32-bit architectures, so by default, there is no atomicity guarantee. However, if you specify the volatile modifier, a long variable is guaranteed to be accessed atomically.
+
+The increment operation is usually done in multiple steps (retrieving a value, changing it and writing back), so it is never guaranteed to be atomic, wether the variable is volatile or not. If you need to implement atomic increment of a value, you should use classes AtomicInteger, AtomicLong etc.
+
+## Q12. What Special Guarantees Does the Jmm Hold for Final Fields of a Class?
+
+JVM basically guarantees that final fields of a class will be initialized before any thread gets hold of the object. Without this guarantee, a reference to an object may be published, i.e. become visible, to another thread before all the fields of this object are initialized, due to reorderings or other optimizations. This could cause racy access to these fields.
+
+This is why, when creating an immutable object, you should always make all its fields final, even if they are not accessible via getter methods.
+
+## Q14. If Two Threads Call a Synchronized Method on Different Object Instances Simultaneously, Could One of These Threads Block? What If the Method Is Static?
+
+If the method is an instance method, then the instance acts as a monitor for the method. Two threads calling the method on different instances acquire different monitors, so none of them gets blocked.
+
+If the method is static, then the monitor is the Class object. For both threads, the monitor is the same, so one of them will probably block and wait for another to exit the synchronized method.
+
+## Q15. What Is the Purpose of the Wait, Notify and Notifyall Methods of the Object Class?
+
+A thread that owns the object’s monitor (for instance, a thread that has entered a synchronized section guarded by the object) may call object.wait() to temporarily release the monitor and give other threads a chance to acquire the monitor. This may be done, for instance, to wait for a certain condition.
+
+When another thread that acquired the monitor fulfills the condition, it may call object.notify() or object.notifyAll() and release the monitor. The notify method awakes a single thread in the waiting state, and the notifyAll method awakes all threads that wait for this monitor, and they all compete for re-acquiring the lock.
+
+The following BlockingQueue implementation shows how multiple threads work together via the wait-notify pattern. If we put an element into an empty queue, all threads that were waiting in the take method wake up and try to receive the value. If we put an element into a full queue, the put method waits for the call to the get method. The get method removes an element and notifies the threads waiting in the put method that the queue has an empty place for a new item.
+
+```java
+public class BlockingQueue<T> {
+
+    private List<T> queue = new LinkedList<T>();
+
+    private int limit = 10;
+
+    public synchronized void put(T item) {
+        while (queue.size() == limit) {
+            try {
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        if (queue.isEmpty()) {
+            notifyAll();
+        }
+        queue.add(item);
+    }
+
+    public synchronized T take() throws InterruptedException {
+        while (queue.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        if (queue.size() == limit) {
+            notifyAll();
+        }
+        return queue.remove(0);
+    }
+    
+}
+```
+
+## Q16. Describe the Conditions of Deadlock, Livelock, and Starvation. Describe the Possible Causes of These Conditions.
+
+Deadlock is a condition within a group of threads that cannot make progress because every thread in the group has to acquire some resource that is already acquired by another thread in the group. The most simple case is when two threads need to lock both of two resources to progress, the first resource is already locked by one thread, and the second by another. These threads will never acquire a lock to both resources and thus will never progress.
+
+Livelock is a case of multiple threads reacting to conditions, or events, generated by themselves. An event occurs in one thread and has to be processed by another thread. During this processing, a new event occurs which has to be processed in the first thread, and so on. Such threads are alive and not blocked, but still, do not make any progress because they overwhelm each other with useless work.
+
+Starvation is a case of a thread unable to acquire resource because other thread (or threads) occupy it for too long or have higher priority. A thread cannot make progress and thus is unable to fulfill useful work.
+
+## Q17. Describe the Purpose and Use-Cases of the Fork/Join Framework.
+
+The fork/join framework allows parallelizing recursive algorithms. The main problem with parallelizing recursion using something like ThreadPoolExecutor is that you may quickly run out of threads because each recursive step would require its own thread, while the threads up the stack would be idle and waiting.
+
+The fork/join framework entry point is the ForkJoinPool class which is an implementation of ExecutorService. It implements the work-stealing algorithm, where idle threads try to “steal” work from busy threads. This allows to spread the calculations between different threads and make progress while using fewer threads than it would require with a usual thread pool.
+
+More information and code samples for the fork/join framework may be found in the article “Guide to the Fork/Join Framework in Java”.
+
+## 30. How can deadlock situations be avoided in Java?
+
+This is one of the most common Java Multithreading interview questions asked in technical interviews. Deadlock situations in Java can be avoided by:
+
+* By way of avoiding nested thread locks and providing locks to only one thread at a time
+
+* By using thread join - the function helps to wait for threads to execute before other threads are executed, thereby preventing multiple threads from waiting for resources used by other threads.
+
+## 32. Can two threads execute two methods (static and non-static concurrently)?
+
+Yes, it is possible. If both the threads acquire locks on different objects, then they can execute concurrently without any problem.
+
+36. What is BlockingQueue?
+
+* BlockingQueue basically represents a queue that is thread-safe.
+
+* The producer thread inserts resource/element into the queue using put() method unless it gets full and consumer thread takes resources from the queue using take() method until it gets empty.
+
+* But if a thread tries to dequeue from an empty queue, then a particular thread will be blocked until some other thread inserts an item into the queue, or if a thread tries to insert an item into a queue that is already full, then a particular thread will be blocked until some threads take away an item from the queue.
+
+* Synchronized Block: In this method, the thread acquires a lock on the object between parentheses after the synchronized keyword, and releases the lock when they leave the block. No other thread can acquire a lock on the locked object unless and until the synchronized block exists. It can be used when one wants to keep other parts of the programs accessible to other threads.
+
+* Synchronized blocks should be preferred more as it boost the performance of a particular program. It only locks a certain part of the program (critical section) rather than the entire method and therefore leads to less contention.
+
+Example
+
+```java
+  package org.arpit.java2blog; 
+ 
+import java.util.concurrent.ArrayBlockingQueue; 
+import java.util.concurrent.BlockingQueue; 
+ 
+public class BlockingQueuePCExample { 
+ 
+   public static void main(String[] args) { 
+ 
+       BlockingQueue queue=new ArrayBlockingQueue<>(5); 
+       Producer producer=new Producer(queue); 
+       Consumer consumer=new Consumer(queue); 
+       Thread producerThread = new Thread(producer); 
+       Thread consumerThread = new Thread(consumer); 
+ 
+       producerThread.start(); 
+       consumerThread.start(); 
+ 
+   } 
+ 
+   static class Producer implements Runnable { 
+ 
+       BlockingQueue queue=null; 
+ 
+       public Producer(BlockingQueue queue) { 
+           super(); 
+           this.queue = queue; 
+       } 
+ 
+       @Override 
+       public void run() { 
+ 
+               try { 
+                   System.out.println("Producing element 1"); 
+                   queue.put("Element 1"); 
+                   Thread.sleep(1000); 
+                   System.out.println("Producing element 2"); 
+                   queue.put("Element 2"); 
+                   Thread.sleep(1000); 
+                   System.out.println("Producing element 3"); 
+                   queue.put("Element 3"); 
+               } catch (InterruptedException e) { 
+ 
+                   e.printStackTrace(); 
+               } 
+       } 
+   } 
+ 
+   static class Consumer implements Runnable { 
+ 
+       BlockingQueue queue=null; 
+ 
+       public Consumer(BlockingQueue queue) { 
+           super(); 
+           this.queue = queue; 
+       } 
+ 
+       @Override 
+       public void run() { 
+ 
+           while(true) 
+           { 
+               try { 
+                   System.out.println("Consumed "+queue.take()); 
+               } catch (InterruptedException e) { 
+                   e.printStackTrace(); 
+               } 
+           } 
+       } 
+ 
+   } 
+} 
+```
+
+## 45. What is ConcurrentHashMap and Hashtable? In java, why is ConcurrentHashMap considered faster than Hashtable?
+
+* ConcurrentHashMap: It was introduced in Java 1.5 to store data using multiple buckets. As the name suggests, it allows concurrent read and writes operations to the map. It only locks a certain portion of the map while doing iteration to provide thread safety so that other readers can still have access to the map without waiting for iteration to complete.
+
+* Hashtable: It is a thread-safe legacy class that was introduced in old versions of java to store key or value pairs using a hash table. It does not provide any lock-free read, unlike ConcurrentHashMap. It just locks the entire map while doing iteration.
+
+* ConcurrentHashMap and Hashtable, both are thread-safe but ConcurrentHashMap generally avoids read locks and improves performance, unlike Hashtable. ConcurrentHashMap also provides lock-free reads, unlike Hashtable. Therefore, ConcurrentHashMap is considered faster than Hashtable especially when the number of readers is more as compared to the number of writers.
+
+## Q: What is a monitor in Java?
+
+A: A monitor is a synchronization construct that allows only one thread at a time to execute a specific block of code. Monitors are used to protect shared resources or data from race conditions and other synchronization problems, and are implemented using the synchronized keyword in Java.
+
+## Q: What is the volatile keyword in Java?
+
+A: The volatile keyword is used to indicate that a variable's value may be modified by multiple threads. When a variable is declared volatile, the compiler and runtime are required to ensure that changes made by one thread are immediately visible to other threads, and that access to the variable is properly synchronized.
+
+## Q: What is a thread pool in Java?
+
+A: A thread pool is a group of pre-initialized threads that are available to perform a set of tasks. Thread pools can improve performance by reducing the overhead of creating and destroying threads for each task, and can also limit the number of threads that are active at any given time.
+
+## State the difference between class lock and object lock.
+
+
+## 18. What is a thread group and why should you not use it?
+
+ThreadGroup is such a class that is generally used to create multiple thread groups in a single object. This group is presented in the form of three structures wherein each thread group (except the initial thread) has its parent. Also, thread groups can comprise other thread groups as well. A thread can only access its own thread group’s information and not that of other thread groups.
+
+With the launch of Java 5 versions, there is Thread.setUncaughtExceptionHandler(UncaughtExceptionHandler). Thus, using thread groups is no longer a necessity as it can work without the groups as well. 
+
+```java
+t1. setUncaughtExceptionHandler (new UncaughtExceptionHandler ( )
+
+{
+
+@Override  
+
+public void uncaughtException (Thread t, Throwable e)
+
+{
+
+System.out.println ("exception occurred: "+e.getMessage ( ) ) ;
+
+}
+
+} ;
+```
+
+## 19. Define the ExecutorService interface.
+
+The ExecutorService interface is a sub-interface of the Executor interface that has extra features or methods to help manage and control the execution of threads. It allows us to ensure asynchronous execution of tasks on threads. 
+
+For instance,
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent/TimeUnit;
+public class TestThread {
+
+public static void main (final String [ ] arguments ) throws InterruptedException {
+ExecutorService e = Executors.newSingleThreadExecutor ( ) ;
+            try {
+                e.submit (new Thread ( ) ) ;
+                  System.out.println ("Shutdown executor") ;
+                   e.shutdown ( ) ;
+                    e.awaitTermination (5, TimeUnit.SECONDS) ;
+} catch (InterruptedException ex) {
+         System.err.println ("tasks interrupted") ;
+         } finally {
+                     If ( !e.isTerminated ( ) ) {
+                         System.err.println ("cancel non-finished tasks") ;
+
+                 }
+                   e.shutdownNow ( ) ;
+                   System.out.println ("shutdown finished") ;
+}
+}
+
+  static class Task implements Runnable {
+        public void run ( ) {
+             try {
+             Long duration = (long) (Math.random ( ) * 20);
+                  System.out.println ("Running Task!") ;
+                   TimeUnit.SECONDS.sleep (duration) ;
+         } catch (InterruptedException ex) {
+                  ex.printStackTrace ( ) ;
+           }
+      }
+  }
+}
+```
+
+The output of this code will be:
+
+```java
+Shutdown executor
+shutdown finished
+```
+
+## 20. State the difference between class lock and object lock.
+
+A class-level lock is known as a unique lock that every class has in Java. Such locks can be accomplished through the ‘static synchronized’ keyword and can be used to make static data thread-safe. Generally, it is used when you wish to prevent multiple threads from entering into a synchronized block. 
+
+For instance:
+
+```java
+public class ClassLevelLockExample 
+{
+   public void classLevelLockMethod()
+   {
+      synchronized (ClassLevelLockExample.class)
+        {
+          //DO your stuff here
+         }
+      }
+}
+```
+
+When it comes to object-level lock, it refers to the unique lock that every object has in Java. Such a lock can be accomplished through the ‘synchronized’ keyword and can be used to safeguard non-static data. Generally, it is used when you wish to synchronize a non-static method or block; thus, the thread will get to execute the code block on the instance of a class.
+
+For instance:
+
+```java
+public class ObjectLevelLockExample
+{
+   public void objectLevelLockMethod()
+   {
+      synchronized (this)
+        {
+           //DO your stuff here
+          }
+       }
+}
+```
