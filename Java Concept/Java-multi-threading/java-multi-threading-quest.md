@@ -2564,3 +2564,52 @@ public class ObjectLevelLockExample
        }
 }
 ```
+
+## How will run() be called if we call start() in multithreading?
+
+When the start() method is called by a program, a new thread is created. The run() method is called after that and all the code inside will be executed. But start() cannot be called twice or else an IllegalStateException will be thrown. But run() can be called as a normal method.
+
+## How to read and write a file using multithreading in Java?
+
+The java FileWriter and FileReader classes are used to read and write files.
+
+## 15) What are numerous ways in which a thread can enter the waiting state?
+A thread can enter the waiting state by the following ways
+
+* Using sleep() method
+
+* Blocking on I/O
+
+* Unsuccessfully trying to acquire an object’s lock
+
+* By invoking an object’s wait() method
+
+## 35) What is the purpose of using the yield method of thread class?
+
+Yield method is the simplest way to request current thread to relinquish CPU so that other thread. It is a static method and only guarantees that the current thread will relinquish the CPU but doesn’t tell anything about which other thread also impacts the CPU.
+
+## 37) Can It is possible to synchronize the constructor of a Java Class?
+
+As Java Standard, constructors cannot be synchronized as other threads cannot see the object before the thread creation process has finished it. There is no need of Java Objects constructor to be synchronized since as it would lock the object being constructed.
+
+## 38) What is transient variable?
+A transient variable is a variable that can’t be serialized during serialization. It is initialized to its default value during the serialization.
+
+## 33) Which JVM parameter is used to control the stack size of a thread?
+To control the stack size of Thread in Java Xss parameter is used.
+
+## 26. Explain volatile variables in Java?
+
+A volatile variable is basically a keyword  used to provide visibility and handling of variable changes  in multi-threaded programming. This keyword cannot be used with classes and methods, but it can be used with variables. It is simply used to achieve thread safety for variables. When you mark a variable as volatile, all  threads can read its value directly from  main memory instead of the CPU cache, so  each thread gets the updated value of the variable.
+
+## Name the method of the thread that is called before the run() method and carries out initialization.
+
+start() method internally invokes the overridden run() method.
+
+## Name the method that is used to register a thread in a thread scheduler.
+
+start()
+
+## 38. What is the type of thread priority in Java?
+
+Integer is return type of thread priority.
