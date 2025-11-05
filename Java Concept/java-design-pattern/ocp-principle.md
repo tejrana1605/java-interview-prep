@@ -211,3 +211,5 @@ Common Open-Closed Principle (OCP) violations occur when code is repeatedly modi
 ### Summary Table
 
 |Violation	|Description	|Fix Approach|
+
+**[Back To SOLID Principle](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/solid-principle.md#solid-principle)**

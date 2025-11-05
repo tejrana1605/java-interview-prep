@@ -374,3 +374,5 @@ class HumanWorker {
 Constructor injection is generally preferred for required dependencies due to better immutability and fail-fast behavior, while property injection suits optional or changeable dependencies.
 
 This helps managing role interfaces flexibly while maintaining clean, decoupled code.
+
+**[Back To SOLID Principle](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/solid-principle.md#solid-principle)**

@@ -141,3 +141,5 @@ mySwitch.operate();
 ```
 
 In brief, DIP is the "what" (principle), and DI is the "how" (pattern to achieve it).
+
+**[Back To SOLID Principle](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/solid-principle.md#solid-principle)**
