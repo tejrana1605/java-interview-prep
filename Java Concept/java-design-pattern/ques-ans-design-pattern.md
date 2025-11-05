@@ -62,6 +62,8 @@ class WindowsFactory implements GUIFactory {
 
 - **Abstract Factory:** Use for families of products (multiple hierarchies), encapsulates creation of interrelated products so that families are always used together and can be swapped easily.
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # When should I choose Abstract Factory over Factory Method
 
 Choose the Abstract Factory pattern over the Factory Method pattern when your application needs to create families of related or dependent objects that must be used together, and you want to ensure their compatibility and interchangeability.
@@ -91,6 +93,8 @@ If you only need to create one type of product and just want to delegate which s
 - Choose Abstract Factory when you need to create multiple related objects as a family and those families may need to vary.
 
 - Choose Factory Method when only a single product type needs to be varied or determined by subclass.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # Simple Example of Factory Method
 
@@ -137,6 +141,7 @@ public class FactoryMethodDemo {
     }
 }
 ```
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # Simple Abstract Factory Example
 Suppose you have two animal families: land animals and sea animals, each with different variants.
@@ -208,6 +213,8 @@ public class AbstractFactoryDemo {
 
 Both patterns control object creation, but Factory Method is for one product at a time (single hierarchy), while Abstract Factory creates multiple related products at once (multiple hierarchies).
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # Show a minimal Java Builder pattern example
 Here is a minimal Java Builder pattern example, illustrating the core concept with compact code:
 
@@ -265,6 +272,8 @@ public class Main {
 
 - The builder hides object construction logic and lets you specify only what you need.
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # When to use Builder vs Factory in Java
 Choose between Builder and Factory patterns in Java based on the complexity of object creation and flexibility needs:
 
@@ -297,6 +306,8 @@ Choose between Builder and Factory patterns in Java based on the complexity of o
 |Usage Examples|Building a customizable House or Computer|Creating different Button or Animal subtypes|
 
 **In practice, Builder is for complex objects needing flexible construction, Factory is for simpler polymorphic creations.**
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # How to implement immutable objects with Builder
 To implement immutable objects using the Builder pattern in Java, the typical approach is:
@@ -362,6 +373,8 @@ Person person = new Person.Builder()
 - The object state cannot be changed after creation.​
 
 This pattern gives both immutability and readable, flexible construction of complex objects with many optional parameters.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # How to implement thread-safe immutable builders for concurrency
 
@@ -438,6 +451,8 @@ public final class Person {
 - Proper use of defensive copies ensures no external mutable state escapes.
 
 - This pattern balances flexibility in complex object creation with safe concurrency.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # Provide a concrete Java example of a thread-safe builder producing immutable objects
 Here is a concrete Java example demonstrating a thread-safe Builder pattern producing immutable objects:
@@ -520,6 +535,8 @@ public class Main {
 }
 ```
 This approach ensures you can safely build complex immutable objects that are safe to use in concurrent programs while maintaining a readable and maintainable construction API.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # Add validation and fluent error reporting to the thread-safe builder
 
@@ -631,6 +648,8 @@ public class Main {
 
 This pattern is a straightforward way to add robust, fluent validation to thread-safe builders for immutable objects.
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # Provide a Java example using deep cloning for Prototype
 
 Here is a concrete Java example illustrating deep cloning in the Prototype Design Pattern. This shows how to implement deep copy so that nested mutable objects are cloned properly:
@@ -724,6 +743,8 @@ public class PrototypeDeepCloneExample {
 
 - This pattern is a common way to implement Prototype with deep cloning in Java.
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # Show a thread-safe deep-clone implementation for Prototype
 Here is a thread-safe deep-clone implementation using the Prototype pattern in Java, combining deep copying with immutability and thread safety by using copy constructors and ensuring no shared mutable state leaks:
 
@@ -811,6 +832,8 @@ public class ThreadSafeDeepClonePrototype {
 - The clone() method is thread-safe because it does not modify existing instances; it returns new instances.
 
 This pattern offers a thread-safe way to implement deep cloning with Prototype in Java.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
 
 # Show a Java example of a thread-safe deep-clone using Cloneable
 
