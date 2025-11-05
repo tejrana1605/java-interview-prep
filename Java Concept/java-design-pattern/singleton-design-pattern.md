@@ -453,3 +453,5 @@ Adding synchronization (e.g., synchronizing the getInstance() method or using a 
 To avoid these issues, techniques such as eager initialization, static inner class holder, or enum-based singletons provide simpler, safer thread-safe lazy or eager initialization.
 
 In short, lazy initialization itself is not thread-safe unless combined with synchronization or Java concurrency features. Without these, multithreaded access risks creating multiple instances or using incompletely constructed objects.
+
+**[Back To Creational Design Patterns](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/creational-design-pattern.md#creational-design-patterns)**

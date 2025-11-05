@@ -1,19 +1,26 @@
 # Table of Contents
 | Sr.No.        | Question      | 
 | ------------- |-------------| 
-| 1             |[Explain differences between Abstract Factory and Factory Method?](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#explain-differences-between-abstract-factory-and-factory-method) | 
-| 2             |[When should I choose Abstract Factory over Factory Method?](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#when-should-i-choose-abstract-factory-over-factory-method) |
-| 3             |[Simple Example of Factory Method](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#simple-example-of-factory-method) |
-| 4             |[Simple Abstract Factory Example](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#simple-abstract-factory-example) |
-| 5             |[Show a minimal Java Builder pattern example](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#show-a-minimal-java-builder-pattern-example) |
-| 6             |[When to use Builder vs Factory in Java](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#when-to-use-builder-vs-factory-in-java) | 
-| 7             |[How to implement immutable objects with Builder](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#how-to-implement-immutable-objects-with-builder) |
-| 8             |[How to implement thread-safe immutable builders for concurrency](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#how-to-implement-thread-safe-immutable-builders-for-concurrency) |
-| 9             |[Provide a concrete Java example of a thread-safe builder producing immutable objects](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#provide-a-concrete-java-example-of-a-thread-safe-builder-producing-immutable-objects) |
-| 10             |[Add validation and fluent error reporting to the thread-safe builder](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#add-validation-and-fluent-error-reporting-to-the-thread-safe-builder) |
-| 11             |[Provide a Java example using deep cloning for Prototype](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#provide-a-java-example-using-deep-cloning-for-prototype) |
-| 12             |[Show a thread-safe deep-clone implementation for Prototype](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#show-a-thread-safe-deep-clone-implementation-for-Prototype) |
-| 13             |[Show a Java example of a thread-safe deep-clone using Cloneable](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#show-a-java-example-of-a-thread-safe-deep-clone-using-Cloneable) |
+| 1             |[What are new Java8 Features?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#1-new-java8-features) | 
+| 2             |[Difference between GET & POST METHODS?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#2-difference-between-get--post-methods) |
+| 3             |[Difference between forward() method & SendRedirect() method?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#3-difference-between-forward-method--sendredirect-method) |
+| 4             |[Difference between HashMap and HashTable?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#4-difference-between-hashmap-and-hashtable) |
+| 5             |[Difference between HashSet and TreeSet?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#5-difference-between-hashset-and-treeset) |
+| 6             |[What is meant by Collections in Java?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#6-what-is-meant-by-collections-in-java) | 
+| 7             |[What is meant by Ordered and Sorted in collections?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#7-what-is-meant-by-ordered-and-sorted-in-collections) |
+| 8             |[Explain about Set and their types in a collection?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#8-explain-about-set-and-their-types-in-a-collection) |
+| 9             |[What is the final keyword in Java?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#9-what-is-the-final-keyword-in-java) |
+| 10             |[What is a Thread?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#10-what-is-a-thread) |
+| 11             |[Explain thread life cycle in Java](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#11explain-thread-life-cycle-in-java) |
+| 12             |[Which methods are used during the Serialization and Deserialization process?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#12-which-methods-are-used-during-the-serialization-and-deserialization-process) |
+| 13             |[When to use Runnable interface Vs Thread class in Java?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#13-when-to-use-runnable-interface-vs-thread-class-in-java) |
+| 14             |[What is the life-cycle of a servlet?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#14-what-is-the-life-cycle-of-a-servlet) |
+| 15             |[Differences between ServletContext vs ServletConfig?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#15-differences-between-servletcontext-vs-servletconfig) |
+| 16             |[Difference between SPRING CORE & SPRING BOOT?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#16difference-between-spring-core--spring-boot) |
+| 17             |[REST API? What’s the benefit of using JSON over XML?](https://github.com/aatul/Java-Interview-Questions-Answers/edit/master/README.md#17rest-api-whats-the-benefit-of-using-json-over-xml) |
+| 18             |[What are the different methods of session management in servlets?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#18what-are-the-different-methods-of-session-management-in-servlets) |
+| 19             |[Let's talk about SOLID design principles. Could you quickly explain what are the main design principles in the current project?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#19-lets-talk-about-solid-design-principles-could-you-quickly-explain-what-are-the-main-design-principles-in-the-current-project) |
+| 20             |[Difference between wait and notify() work in Java?](https://github.com/aatul/Java-Interview-Questions-Answers/blob/master/README.md#20difference-between-wait-and-notify-work-in-java) |
 
 
 # Explain differences between Abstract Factory and Factory Method
@@ -901,4 +908,4 @@ public class ThreadSafeDeepClonePrototype {
 
 This pattern guarantees thread safety, immutability, and deep cloning in concurrent environments.
 
-**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+**[Back To Creational Design Patterns](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/creational-design-pattern.md#creational-design-patterns)**
