@@ -924,4 +924,89 @@ public class ThreadSafeDeepClonePrototype {
 
 This pattern guarantees thread safety, immutability, and deep cloning in concurrent environments.
 
+# Example Scenario for flyweight
+We’ll model a simple example:
+Drawing circles of different colors on a canvas.
+
+- Circles with the same color will be shared (flyweights).
+
+- Each circle has intrinsic state (color — shared) and extrinsic state (x, y coordinates and radius — unique per use).
+
+```java
+// Flyweight interface
+interface Shape {
+    void draw(int x, int y, int radius);
+}
+
+// Concrete Flyweight
+class Circle implements Shape {
+    private final String color; // Intrinsic state (shared)
+
+    public Circle(String color) {
+        this.color = color;
+    }
+
+    @Override
+    public void draw(int x, int y, int radius) {
+        System.out.println("Drawing a " + color + " circle at (" + x + "," + y + 
+                           ") with radius " + radius);
+    }
+}
+
+// Flyweight Factory
+import java.util.HashMap;
+import java.util.Map;
+
+class ShapeFactory {
+    private static final Map<String, Shape> circleMap = new HashMap<>();
+
+    public static Shape getCircle(String color) {
+        Circle circle = (Circle) circleMap.get(color);
+
+        if (circle == null) {
+            circle = new Circle(color);
+            circleMap.put(color, circle);
+            System.out.println("Created new circle of color: " + color);
+        }
+        return circle;
+    }
+
+    public static int getTotalCirclesMade() {
+        return circleMap.size();
+    }
+}
+
+// Client
+public class FlyweightDemo {
+    private static final String[] colors = {"Red", "Green", "Blue", "White", "Black"};
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; ++i) {
+            String color = colors[(int) (Math.random() * colors.length)];
+            Circle circle = (Circle) ShapeFactory.getCircle(color);
+            circle.draw((int) (Math.random() * 100), 
+                        (int) (Math.random() * 100), 
+                        (int) (Math.random() * 50));
+        }
+
+        System.out.println("\nTotal unique Circle objects created: " + ShapeFactory.getTotalCirclesMade());
+    }
+}
+
+Output
+
+Created new circle of color: Green
+Drawing a Green circle at (10,25) with radius 30
+Created new circle of color: Blue
+Drawing a Blue circle at (50,45) with radius 20
+Created new circle of color: Red
+Drawing a Red circle at (70,60) with radius 10
+Drawing a Red circle at (25,15) with radius 40
+Drawing a Green circle at (80,70) with radius 15
+...
+
+Total unique Circle objects created: 5
+
+```
+
 **[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
