@@ -13,8 +13,14 @@
 | 10             |[Add validation and fluent error reporting to the thread-safe builder](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#add-validation-and-fluent-error-reporting-to-the-thread-safe-builder) |
 | 11             |[Provide a Java example using deep cloning for Prototype](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#provide-a-java-example-using-deep-cloning-for-prototype) |
 | 12             |[Show a thread-safe deep-clone implementation for Prototype](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#show-a-thread-safe-deep-clone-implementation-for-Prototype) |
-| 13             |[Show a Java example of a thread-safe deep-clone using Cloneable](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#show-a-java-example-of-a-thread-safe-deep-clone-using-Cloneable) |
+| 13             |[Example Scenario for flyweight](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#example-scenario-for-flyweight)|
 
+| 14             |[Example of Composite Design Pattern](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#example-of-composite-design-pattern) |
+| 15             |[Composite Design Pattern Example in Spring Boot Project](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#composite-design-pattern-example-in-spring-boot-project) |
+
+| 16             |[Decorator Design Pattern example.](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#decorator-design-pattern-example.) |
+
+| 17             |[Decorator Design Pattern Real-World Example in Spring Boot](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#decorator-design-pattern-real-World-example-in-spring-boot) |
 
 # Explain differences between Abstract Factory and Factory Method
 The Abstract Factory and Factory Method design patterns are both creational patterns used to encapsulate object creation, but they differ in scope, complexity, and use case.
@@ -924,6 +930,8 @@ public class ThreadSafeDeepClonePrototype {
 
 This pattern guarantees thread safety, immutability, and deep cloning in concurrent environments.
 
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
 # Example Scenario for flyweight
 We’ll model a simple example:
 Drawing circles of different colors on a canvas.
@@ -1007,6 +1015,439 @@ Drawing a Green circle at (80,70) with radius 15
 
 Total unique Circle objects created: 5
 
+```
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Example of Composite Design Pattern
+
+### 1. Real-Life Project Scenario: Company Employee Hierarchy
+
+Imagine an organization structure in an HR application:
+
+- The CEO manages department heads.
+
+- Each department head manages team leads.
+
+- Team leads manage developers.
+
+Each of these (CEO, manager, developer) is an Employee, but some employees manage others — a perfect fit for the Composite Pattern.
+
+#### Implementation
+
+Common interface — the Component
+```java
+interface Employee {
+    void showEmployeeDetails();
+}
+
+```
+
+Leaf nodes — individual objects
+
+```java
+class Developer implements Employee {
+    private final String name;
+    private final String position;
+
+    public Developer(String name, String position) {
+        this.name = name;
+        this.position = position;
+    }
+
+    @Override
+    public void showEmployeeDetails() {
+        System.out.println("👨‍💻 " + position + ": " + name);
+    }
+}
+
+
+class Designer implements Employee {
+    private final String name;
+    private final String position;
+
+    public Designer(String name, String position) {
+        this.name = name;
+        this.position = position;
+    }
+
+    @Override
+    public void showEmployeeDetails() {
+        System.out.println("🎨 " + position + ": " + name);
+    }
+}
+
+```
+
+Composite node — manages children
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+class Manager implements Employee {
+    private final String name;
+    private final String position;
+    private final List<Employee> subordinates = new ArrayList<>();
+
+    public Manager(String name, String position) {
+        this.name = name;
+        this.position = position;
+    }
+
+    public void add(Employee emp) {
+        subordinates.add(emp);
+    }
+
+    public void remove(Employee emp) {
+        subordinates.remove(emp);
+    }
+
+    @Override
+    public void showEmployeeDetails() {
+        System.out.println("👔 " + position + ": " + name);
+        for (Employee e : subordinates) {
+            e.showEmployeeDetails();
+        }
+    }
+}
+```
+
+Client Code
+
+```java
+public class CompanyStructure {
+    public static void main(String[] args) {
+        Employee dev1 = new Developer("Alice", "Frontend Developer");
+        Employee dev2 = new Developer("Bob", "Backend Developer");
+        Employee designer = new Designer("Eve", "UI/UX Designer");
+
+        Manager engManager = new Manager("John", "Engineering Manager");
+        engManager.add(dev1);
+        engManager.add(dev2);
+        engManager.add(designer);
+
+        Manager ceo = new Manager("Sarah", "CEO");
+        ceo.add(engManager);
+
+        ceo.showEmployeeDetails();
+    }
+}
+```
+
+```java
+Output
+
+👔 CEO: Sarah
+👔 Engineering Manager: John
+👨‍💻 Frontend Developer: Alice
+👨‍💻 Backend Developer: Bob
+🎨 UI/UX Designer: Eve
+```
+
+#### Explanation
+| **Role**                  | **Class**               | **Purpose**                                  |
+| ------------------------- | ----------------------- | -------------------------------------------- |
+| **Component (interface)** | `Employee`              | Common interface for both leaf and composite |
+| **Leaf**                  | `Developer`, `Designer` | End objects — don’t contain other objects    |
+| **Composite**             | `Manager`               | Contains child `Employee` objects            |
+| **Client**                | `CompanyStructure`      | Uses all through the same interface          |
+
+
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Composite Design Pattern Example in Spring Boot Project
+Imagine a Category Management API for an e-commerce app.
+Each Category can contain subcategories — and all share the same operations.
+
+```java
+@Entity
+public class Category {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+
+    @ManyToOne
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> subcategories = new ArrayList<>();
+
+    // composite methods
+    public void addSubcategory(Category child) {
+        subcategories.add(child);
+        child.setParent(this);
+    }
+
+    public void showCategoryHierarchy(String indent) {
+        System.out.println(indent + "📦 " + name);
+        for (Category c : subcategories) {
+            c.showCategoryHierarchy(indent + "  ");
+        }
+    }
+}
+```
+
+This entity model is a Composite Pattern stored in a database.
+
+In your service layer:
+```java
+categoryRepository.save(parentCategory);
+categoryRepository.save(subCategory);
+```
+When you call:
+```java
+categoryService.getRootCategory().showCategoryHierarchy("");
+```
+
+You’d see:
+
+```java
+📦 Electronics
+  📦 Laptops
+    📦 Gaming Laptops
+  📦 Mobiles
+
+```
+
+This pattern allows flexible hierarchical data modeling — used in:
+
+- Product categories
+
+- Organizational structures
+
+- Nested comments
+
+- Menu builders
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Decorator Design Pattern example.
+
+### Real-Life Analogy
+Think of a coffee shop:
+
+- You start with a base coffee ☕
+
+- You can add milk, sugar, or whipped cream — each adds cost and flavor.
+
+You don’t create separate subclasses like MilkCoffee, SugarCoffee, MilkSugarCoffee, etc.
+
+Instead, you decorate the base coffee with multiple layers.
+
+### Example: Coffee Order System
+Step 1️⃣ — Component Interface
+```java
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+```
+
+Step 2️⃣ — Concrete Component
+```java
+class SimpleCoffee implements Coffee {
+    @Override
+    public String getDescription() {
+        return "Simple Coffee";
+    }
+
+    @Override
+    public double getCost() {
+        return 5.0;
+    }
+}
+```
+
+Step 3️⃣ — Abstract Decorator
+```java
+abstract class CoffeeDecorator implements Coffee {
+    protected final Coffee decoratedCoffee;
+
+    protected CoffeeDecorator(Coffee coffee) {
+        this.decoratedCoffee = coffee;
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost();
+    }
+}
+```
+
+Step 4️⃣ — Concrete Decorators
+
+```java
+class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + ", Milk";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 1.5;
+    }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + ", Sugar";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 0.5;
+    }
+}
+
+```
+
+Step 5️⃣ — Client Code
+
+```java
+public class DecoratorDemo {
+    public static void main(String[] args) {
+        Coffee coffee = new SimpleCoffee();
+        System.out.println(coffee.getDescription() + " $" + coffee.getCost());
+
+        Coffee milkCoffee = new MilkDecorator(coffee);
+        System.out.println(milkCoffee.getDescription() + " $" + milkCoffee.getCost());
+
+        Coffee milkSugarCoffee = new SugarDecorator(milkCoffee);
+        System.out.println(milkSugarCoffee.getDescription() + " $" + milkSugarCoffee.getCost());
+    }
+}
+```
+
+Output
+
+```java
+Simple Coffee $5.0
+Simple Coffee, Milk $6.5
+Simple Coffee, Milk, Sugar $7.0
+
+```
+
+### Explanation 
+| **Role**                     | **Class**                         | **Responsibility**                           |
+| ---------------------------- | --------------------------------- | -------------------------------------------- |
+| **Component Interface**      | `Coffee`                          | Defines operations (getDescription, getCost) |
+| **Concrete Component**       | `SimpleCoffee`                    | The base implementation                      |
+| **Decorator Abstract Class** | `CoffeeDecorator`                 | Wraps another Coffee                         |
+| **Concrete Decorators**      | `MilkDecorator`, `SugarDecorator` | Add new behavior dynamically                 |
+| **Client**                   | `DecoratorDemo`                   | Combines objects at runtime                  |
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Decorator Design Pattern Real-World Example in Spring Boot
+Imagine an order processing system — you want to log or validate an order without modifying the main service.
+
+Step 1️⃣ — Base service
+
+```java
+public interface OrderService {
+    void placeOrder(String product);
+}
+
+```
+
+Step 2️⃣ — Core implementation
+
+```java
+@Service
+public class BasicOrderService implements OrderService {
+    @Override
+    public void placeOrder(String product) {
+        System.out.println("Order placed for: " + product);
+    }
+}
+```
+
+Step 3️⃣ — Decorators
+
+```java
+@Service
+@Primary
+public class LoggingOrderService implements OrderService {
+
+    private final OrderService delegate;
+
+    public LoggingOrderService(BasicOrderService delegate) {
+        this.delegate = delegate;
+    }
+
+    @Override
+    public void placeOrder(String product) {
+        System.out.println("📝 Logging: placing order for " + product);
+        delegate.placeOrder(product);
+    }
+}
+```
+
+You can chain decorators:
+
+```java
+@Service
+public class ValidationOrderService implements OrderService {
+
+    private final OrderService delegate;
+
+    public ValidationOrderService(LoggingOrderService delegate) {
+        this.delegate = delegate;
+    }
+
+    @Override
+    public void placeOrder(String product) {
+        if (product == null || product.isBlank()) {
+            System.out.println("❌ Invalid product!");
+            return;
+        }
+        System.out.println("✅ Valid product: " + product);
+        delegate.placeOrder(product);
+    }
+}
+```
+
+Step 4️⃣ — Client (Spring Boot runner)
+
+```java
+@Component
+public class OrderRunner implements CommandLineRunner {
+    private final OrderService orderService;
+
+    public OrderRunner(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @Override
+    public void run(String... args) {
+        orderService.placeOrder("Laptop");
+    }
+}
+```
+
+🧾 Output
+
+```java
+✅ Valid product: Laptop
+📝 Logging: placing order for Laptop
+Order placed for: Laptop
 ```
 
 **[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**

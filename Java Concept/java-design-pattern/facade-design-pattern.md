@@ -93,4 +93,4 @@ public class Main {
 In summary, the Facade pattern is a strategic way to make large, complex systems more accessible and easier to maintain by providing a unified, simplified interface.
 
 
-**[Back To Creational Design Patterns](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/structural-design-pattern.md#structural-design-patterns)**
+**[Back To Structural Design Patterns](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/structural-design-pattern.md#structural-design-patterns)**

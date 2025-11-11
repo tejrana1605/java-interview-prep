@@ -1,8 +1,27 @@
 # Structural Design Patterns
 
-Structural Design Patterns are software design solutions focused on how classes and objects are composed or organized to form larger, functional structures. These patterns simplify relationships between entities, enabling flexible, efficient, and maintainable software architectures.
+Structural Design Patterns are software design solutions focused on how classes and objects are composed or organized to form larger, functional structures. These patterns simplify the relationships between entities, making flexible, efficient, and maintainable software architectures possible.
 
-Key Points:
+**OR**
+
+Structural Design Patterns are a category of design patterns that deal with the composition of classes and objects —
+that is, how to combine objects and classes to form larger, more flexible, and efficient structures.
+
+These patterns focus on how classes and objects are connected or related to make the system easier to extend, maintain, and scale.
+
+### Why They’re Called “Structural”
+
+Because they describe the structure — the blueprint of how objects fit together, similar to how architecture describes how parts of a building connect.
+
+For example:
+
+- Wrapping an object with another (like a decorator),
+
+- Reusing shared objects (like a flyweight),
+
+- Bridging abstraction and implementation (like a bridge).
+
+### Key Points:
 - These design patterns concern class and object composition. 
 - decoupling Interfaces & implementation.
 - Concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionalities.
@@ -21,13 +40,13 @@ Composes objects into tree structures to represent part-whole hierarchies, letti
 ### 4. [Decorator:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/decorator-design-pattern.md/#decorator-design-pattern) 
 Adds new responsibilities to objects dynamically without altering their structure.
 
-### 5. [Facade:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/facade-design-patterns.md/#facade-design-patterns) 
+### 5. [Facade:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/facade-design-pattern.md/#facade-design-pattern) 
 Provides a simplified interface to a complex subsystem.
 
-### 6. [Flyweight:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/flyweight-design-patterns.md/#flyweight-design-patterns) 
+### 6. [Flyweight:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/flyweight-design-patterns.md/#flyweight-design-pattern) 
 Shares common parts of objects to reduce memory usage for large numbers of fine-grained objects.
 
-### 7. [Proxy:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/proxy-design-patterns.md/#proxy-design-patterns) 
+### 7. [Proxy:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/proxy-design-pattern.md/#proxy-design-pattern) 
 Provides a surrogate or placeholder controlling access to another object.
 
 ## Example Scenario

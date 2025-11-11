@@ -3,6 +3,10 @@ The Adapter design pattern in Java is a way to make two objects with different i
 
 The adapter pattern acts as a middleman or wrapper between these two objects. It takes the calls made to one object and translates them into a format that the other object can understand. This way, the two objects can collaborate seamlessly, even though they have incompatible interfaces.
 
+**OR**
+
+The Adapter Design Pattern is one of the most commonly used structural design patterns in Java, especially when integrating incompatible interfaces (e.g., connecting legacy code, third-party APIs, or different data formats).
+
 ### Components:
 **Target Interface:** The interface expected by the client.
 

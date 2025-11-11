@@ -1,6 +1,15 @@
 # Decorator Design Pattern
 The Decorator Design Pattern is a structural pattern that allows behavior to be added to individual objects, either statically or dynamically, without affecting the behavior of other objects from the same class. It provides a flexible alternative to subclassing for extending functionality.
 
+**OR**
+the Decorator Design Pattern is one of the most flexible and useful structural design patterns in Java, especially when you want to **add new behavior dynamically** to an object — without modifying its existing class.
+
+“Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.”
+
+### In simple terms
+
+Decorator pattern lets you wrap an object with another object that adds extra behavior, without changing the original class.
+
 ### Core Components:
 
 **Component Interface:** Declares the interface for objects that can have responsibilities added to them dynamically.

@@ -1,6 +1,9 @@
 # Composite Design Pattern
 The Composite Design Pattern is a structural design pattern that allows you to compose objects into tree structures and treat both individual objects (leaves) and compositions of objects (composites) uniformly. This pattern facilitates representing part-whole hierarchies and simplifies client code by treating individual and composite objects the same way.
 
+**OR**
+In short Composite pattern lets you treat a group of objects and a single object in the same way.
+
 ### Features of Composite Design Pattern:
 
 **Components:** 
@@ -294,5 +297,17 @@ Phase 1 Tasks:
 - Filesystem directory trees with files and folders.
 
 - Organization charts with employees and departments.
+
+### Real-Life Analogy: File System (Folders & Files)
+
+Think about how your operating system works:
+
+- A File is a single object.
+
+- A Folder can contain multiple files and other folders.
+
+- But whether you open, delete, or move a File or a Folder, the operation feels the same.
+
+Both File and Folder share a common interface. That’s Composite Design Pattern in action.
 
 **[Back To Creational Design Patterns](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/structural-design-pattern.md#structural-design-patterns)**
