@@ -43,7 +43,7 @@ Adds new responsibilities to objects dynamically without altering their structur
 ### 5. [Facade:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/facade-design-pattern.md/#facade-design-pattern) 
 Provides a simplified interface to a complex subsystem.
 
-### 6. [Flyweight:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/flyweight-design-patterns.md/#flyweight-design-pattern) 
+### 6. [Flyweight:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/flyweight-design-pattern.md/#flyweight-design-pattern) 
 Shares common parts of objects to reduce memory usage for large numbers of fine-grained objects.
 
 ### 7. [Proxy:](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/proxy-design-pattern.md/#proxy-design-pattern) 

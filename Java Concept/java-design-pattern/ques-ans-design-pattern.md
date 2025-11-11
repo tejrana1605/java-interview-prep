@@ -22,6 +22,13 @@
 
 | 17             |[Decorator Design Pattern Real-World Example in Spring Boot](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#decorator-design-pattern-real-World-example-in-spring-boot) |
 
+| 18             |[Facade Design Pattern Real-World Project Example: E-Commerce Checkout Process](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#facade-design-pattern-real-World-project-example-e-commerce-checkout-process) |
+
+| 19             |[Facade Design Pattern exple in Spring Boot Application](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#facade-design-pattern-exple-in-spring-boot-application) |
+
+| 20             |[Spring Boot microservice example where a Facade acts as an API Gateway calling multiple microservices (like Inventory + Payment + Notification)?](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#spring-boot-microservice-example-where-a-facade-acts-as-an-api-gateway-calling-multiple-microservices) | 
+
+
 # Explain differences between Abstract Factory and Factory Method
 The Abstract Factory and Factory Method design patterns are both creational patterns used to encapsulate object creation, but they differ in scope, complexity, and use case.
 
@@ -1451,3 +1458,358 @@ Order placed for: Laptop
 ```
 
 **[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Facade Design Pattern Real-World Project Example  E-Commerce Checkout Process
+
+Let’s simulate an online store’s Order Facade.
+
+When a user places an order, many systems are involved:
+
+- InventoryService → check stock
+
+- PaymentService → process payment
+
+- ShippingService → prepare shipment
+
+- NotificationService → send confirmation
+
+Instead of calling each separately, we use a Facade.
+
+Step 1️⃣ — Subsystem Services
+
+```java
+class InventoryService {
+    void checkStock(String item) {
+        System.out.println("Checking stock for " + item);
+    }
+}
+
+class PaymentService {
+    void makePayment(String paymentType) {
+        System.out.println("Processing payment via " + paymentType);
+    }
+}
+
+class ShippingService {
+    void shipProduct(String item) {
+        System.out.println("Shipping " + item + " to customer");
+    }
+}
+
+class NotificationService {
+    void sendConfirmation(String item) {
+        System.out.println("Sending order confirmation for " + item);
+    }
+}
+```
+
+Step 2️⃣ — Facade
+
+```java
+class OrderFacade {
+    private final InventoryService inventory = new InventoryService();
+    private final PaymentService payment = new PaymentService();
+    private final ShippingService shipping = new ShippingService();
+    private final NotificationService notification = new NotificationService();
+
+    public void placeOrder(String item, String paymentType) {
+        System.out.println("\n--- Starting order process ---");
+        inventory.checkStock(item);
+        payment.makePayment(paymentType);
+        shipping.shipProduct(item);
+        notification.sendConfirmation(item);
+        System.out.println("--- Order placed successfully! ---");
+    }
+}
+```
+
+Step 3️⃣ — Client
+
+```java
+public class ECommerceApp {
+    public static void main(String[] args) {
+        OrderFacade orderFacade = new OrderFacade();
+        orderFacade.placeOrder("Laptop", "Credit Card");
+    }
+}
+```
+
+```java
+Output
+
+--- Starting order process ---
+Checking stock for Laptop
+Processing payment via Credit Card
+Shipping Laptop to customer
+Sending order confirmation for Laptop
+--- Order placed successfully! ---
+```
+
+The client doesn’t need to know about all services.
+It just calls one method: placeOrder().
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Facade Design Pattern exple in Spring Boot Application
+
+Suppose you’re building a Flight Booking System ✈️
+
+You have these services:
+
+- FlightSearchService
+
+- PaymentService
+
+- BookingService
+
+- EmailService
+
+Instead of the controller calling each separately, create a Facade.
+
+Step 1️⃣ — Facade in Spring
+
+```java
+@Service
+public class BookingFacade {
+
+    private final FlightSearchService flightService;
+    private final PaymentService paymentService;
+    private final BookingService bookingService;
+    private final EmailService emailService;
+
+    public BookingFacade(FlightSearchService flightService, PaymentService paymentService,
+                         BookingService bookingService, EmailService emailService) {
+        this.flightService = flightService;
+        this.paymentService = paymentService;
+        this.bookingService = bookingService;
+        this.emailService = emailService;
+    }
+
+    public void bookFlight(String flightId, String userEmail) {
+        flightService.checkAvailability(flightId);
+        paymentService.processPayment(userEmail);
+        bookingService.confirmBooking(flightId, userEmail);
+        emailService.sendTicket(userEmail);
+        System.out.println("✅ Flight booked successfully!");
+    }
+}
+```
+
+Step 2️⃣ — Controller
+
+```java
+@RestController
+@RequestMapping("/api/flights")
+public class BookingController {
+    private final BookingFacade bookingFacade;
+
+    public BookingController(BookingFacade bookingFacade) {
+        this.bookingFacade = bookingFacade;
+    }
+
+    @PostMapping("/book")
+    public ResponseEntity<String> bookFlight(@RequestParam String flightId, @RequestParam String email) {
+        bookingFacade.bookFlight(flightId, email);
+        return ResponseEntity.ok("Booking complete!");
+    }
+}
+```
+
+The controller interacts with only one class — BookingFacade,
+even though multiple services work behind the scenes.
+
+**[Back To Top](https://github.com/tejrana1605/java-interview-prep/tree/main/Java%20Concept/java-design-pattern/ques-ans-design-pattern.md/#table-of-contents)**
+
+# Spring Boot microservice example where a Facade acts as an API Gateway calling multiple microservices (like Inventory + Payment + Notification)?
+
+a real-world Spring Boot microservice example of the Facade Design Pattern, specifically how it works as an API Gateway or Orchestrator between multiple backend microservices (like Inventory, Payment, and Notification).
+
+### Real-World Scenario: E-Commerce Order Placement
+
+When a user places an order 🛒, the system must:
+
+1. Check inventory (is the product available?)
+
+2. Process payment (via a payment service)
+
+3. Create the order record
+
+4. Send a notification/email
+
+Each of these is handled by a different microservice.
+Instead of the controller calling all of them directly, we use a Facade.
+
+### High-Level Architecture
+
+```java
+          ┌────────────────────────┐
+          │   REST Controller      │
+          │  (OrderController)     │
+          └──────────┬─────────────┘
+                     │
+                     ▼
+          ┌────────────────────────┐
+          │   OrderFacade (Facade) │
+          │  — Orchestrates calls  │
+          └──────────┬─────────────┘
+                     │
+      ┌──────────────┼────────────────┬────────────────┐
+      ▼              ▼                ▼                ▼
+┌────────────┐ ┌──────────────┐ ┌────────────┐ ┌────────────────┐
+│InventorySvc│ │PaymentSvc    │ │OrderSvc    │ │NotificationSvc │
+└────────────┘ └──────────────┘ └────────────┘ └────────────────┘
+```
+The Facade (OrderFacade) is the single entry point that talks to all subsystems.
+
+### Implementation Example (Spring Boot)
+
+Step 1️⃣ — Subsystem Services
+
+InventoryService
+
+```java
+@Service
+public class InventoryService {
+    public boolean checkStock(String productId) {
+        System.out.println("Checking stock for product: " + productId);
+        // Simulate inventory check
+        return true;
+    }
+}
+```
+
+PaymentService
+
+```java
+@Service
+public class PaymentService {
+    public boolean processPayment(String userId, double amount) {
+        System.out.println("Processing payment of $" + amount + " for user: " + userId);
+        // Simulate successful payment
+        return true;
+    }
+}
+```
+
+OrderService
+
+```java
+@Service
+public class OrderService {
+    public void createOrder(String productId, String userId) {
+        System.out.println("Creating order for product: " + productId + " and user: " + userId);
+    }
+}
+```
+
+NotificationService
+
+```java
+@Service
+public class NotificationService {
+    public void sendEmail(String userId, String message) {
+        System.out.println("Sending email to " + userId + ": " + message);
+    }
+}
+```
+
+Step 2️⃣ — Facade Layer (OrderFacade)
+
+This is the core of the pattern.
+It coordinates the subsystem services and provides a single high-level API for the controller.
+
+```java
+@Service
+public class OrderFacade {
+
+    private final InventoryService inventoryService;
+    private final PaymentService paymentService;
+    private final OrderService orderService;
+    private final NotificationService notificationService;
+
+    public OrderFacade(InventoryService inventoryService,
+                       PaymentService paymentService,
+                       OrderService orderService,
+                       NotificationService notificationService) {
+        this.inventoryService = inventoryService;
+        this.paymentService = paymentService;
+        this.orderService = orderService;
+        this.notificationService = notificationService;
+    }
+
+    public String placeOrder(String productId, String userId, double amount) {
+        System.out.println("\n--- Starting Order Placement ---");
+
+        if (!inventoryService.checkStock(productId)) {
+            return "❌ Product not available";
+        }
+
+        if (!paymentService.processPayment(userId, amount)) {
+            return "❌ Payment failed";
+        }
+
+        orderService.createOrder(productId, userId);
+        notificationService.sendEmail(userId, "Your order has been placed successfully!");
+
+        System.out.println("--- Order process completed successfully ---");
+        return "✅ Order placed successfully!";
+    }
+}
+```
+
+Step 3️⃣ — REST Controller (Client)
+
+```java
+@RestController
+@RequestMapping("/api/orders")
+public class OrderController {
+
+    private final OrderFacade orderFacade;
+
+    public OrderController(OrderFacade orderFacade) {
+        this.orderFacade = orderFacade;
+    }
+
+    @PostMapping("/place")
+    public ResponseEntity<String> placeOrder(
+            @RequestParam String productId,
+            @RequestParam String userId,
+            @RequestParam double amount) {
+
+        String result = orderFacade.placeOrder(productId, userId, amount);
+        return ResponseEntity.ok(result);
+    }
+}
+```
+
+### Example Request
+
+POST → /api/orders/place?productId=P123&userId=U456&amount=499.99
+
+### Output in Console
+
+```java
+--- Starting Order Placement ---
+Checking stock for product: P123
+Processing payment of $499.99 for user: U456
+Creating order for product: P123 and user: U456
+Sending email to U456: Your order has been placed successfully!
+--- Order process completed successfully ---
+```
+
+### Response to client:
+
+```java
+✅ Order placed successfully!
+```
+
+### Explanation
+
+| **Component**         | **Responsibility**                               |
+| --------------------- | ------------------------------------------------ |
+| `InventoryService`    | Checks stock availability                        |
+| `PaymentService`      | Handles payment transaction                      |
+| `OrderService`        | Creates order record                             |
+| `NotificationService` | Sends confirmation email                         |
+| **`OrderFacade`**     | Simplifies and coordinates the workflow          |
+| `OrderController`     | Client layer that interacts only with the Facade |
