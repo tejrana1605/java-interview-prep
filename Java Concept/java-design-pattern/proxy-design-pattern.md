@@ -1,5 +1,5 @@
 
-# Flyweight Design Pattern
+# Proxy Design Pattern
 The Proxy Pattern is a structural design pattern that provides a surrogate (substitute) or placeholder for another object to control access to it. It enables additional behavior such as lazy initialization, access control, logging, or caching without changing the original object's code.
 
 Think of it like a gatekeeper that:
@@ -7,6 +7,12 @@ Think of it like a gatekeeper that:
 - Controls access to a real object,
 - Adds extra behavior (like logging, access control, caching, etc.),
 - But exposes the same interface as the real object.
+
+### Key Idea
+
+- The client calls the Proxy instead of the real object.
+
+- The Proxy decides whether to forward the request to the real object, delay it, cache it, or block it.
 
 ### Real-World Analogy
 
