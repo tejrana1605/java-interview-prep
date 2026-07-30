@@ -1,6 +1,4 @@
-# Callable and Future in java
-
-## Table of Contents
+# Table of Contents
 
 - [Callable and Future in java](#callable-and-future-in-java)
   - [The need for Callable interface](#the-need-for-callable-interface)
@@ -84,7 +82,7 @@
 
 ---
 
-
+# Callable and Future in java
 To create a thread in java we have two ways, one is the **Runnable interface**, and another is **Thread class**. The **Runnable interface** has some limitations in a multithreading environment. So, Java introduced **Callable** and **Future** interfaces to remove the limitations. In this topic, we will learn these advanced topics of **concurrency in java** and show how these are useful. We believe all of you have a basic understanding of threads. If you haven’t the basic idea, then read **multithreading in java**.
 
 1. The need for Callable interface?
