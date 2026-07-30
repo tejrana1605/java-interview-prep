@@ -1,7 +1,39 @@
 # Java 8 Lambda Streams Coding Examples
+
+## Table of Contents
+
+- [Java 8 Lambda Streams Coding Examples](#java-8-lambda-streams-coding-examples)
+  - [Java 8 Lambda Streams Coding Examples :](#java-8-lambda-streams-coding-examples-2)
+    - [1) Creation of streams](#1-creation-of-streams)
+    - [2) Iteration](#2-iteration)
+    - [3) Sorting](#3-sorting)
+    - [4) Filtering](#4-filtering)
+    - [5) Removing duplicates](#5-removing-duplicates)
+    - [6) Limiting](#6-limiting)
+    - [7) Skipping](#7-skipping)
+    - [8) Transforming](#8-transforming)
+    - [9) Flattening](#9-flattening)
+    - [10) Counting](#10-counting)
+    - [11) Minimum And Maximum](#11-minimum-and-maximum)
+    - [12) anyMatch, allMatch, noneMatch](#12-anymatch-allmatch-nonematch)
+    - [13) findFirst, findAny](#13-findfirst-findany)
+    - [14) Reducing](#14-reducing)
+    - [15) Collecting](#15-collecting)
+    - [16) Grouping](#16-grouping)
+    - [17) Partitioning](#17-partitioning)
+    - [18) Summarizing the numbers](#18-summarizing-the-numbers)
+    - [19) Creating Runnable And Thread](#19-creating-runnable-and-thread)
+    - [20) takeWhile, dropWhile](#20-takewhile-dropwhile)
+
+---
+
 ![alt text](image-10.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## Java 8 Lambda Streams Coding Examples :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Creation of streams
 
@@ -47,6 +79,8 @@ Stream<String> lines = Files.lines(Paths.get("Sample.txt"));
 Stream<Path> list = Files.list(Path.of("C:\\"));
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2) Iteration
 
 forEach() method provides most convenient, concise and readable way to iterate over the elements of a collection type or a stream. forEach() is a default method introduced in Java 8 to Iterable interface which serves as a base interface for all collection types. It takes Consumer type which is a functional interface as an argument either passed as lambda expression or as method reference. forEach() method performs given action on each element of a source.
@@ -76,6 +110,8 @@ codeToLocationsMap.put(555, "Beijing");
 //Iterating a map
 codeToLocationsMap.forEach((key, value) -> System.out.println(key+" : "+value));
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3) Sorting
 
@@ -155,6 +191,8 @@ idToNameMap.entrySet().stream()
 //213 : Azhar
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 4) Filtering
 
 filter() method is used to filter the elements according to supplied Predicate.
@@ -181,6 +219,8 @@ strings.stream().filter(string -> string.contains("o")).forEach(System.out::prin
 //Output : London, Python
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5) Removing duplicates
 distinct() method removes duplicates from the input source. It is an intermediate operation which consumes a stream and returns a stream of only distinct elements.
 
@@ -196,6 +236,8 @@ List<String> names = Arrays.asList("Arun", "Henry", "Suvarna", "Arun", "Mansi", 
 names.stream().distinct().forEach(System.out::println);
 //Output : Arun, Henry, Suvarna, Mansi
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 6) Limiting
 
@@ -213,6 +255,8 @@ numberList.stream().limit(5).forEach(System.out::println);
 //Output : 83, 21, 77, 38, 56
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 7) Skipping
 
 skip() method skips first ‘n’ elements and returns remaining elements of a stream.
@@ -228,6 +272,8 @@ numberList.stream().skip(3).forEach(System.out::println);
 numberList.stream().skip(5).forEach(System.out::println);
 //Output : 44, 91, 17, 67
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 8) Transforming
 map() method is used to transform the elements of a stream by applying the given function to each element of a stream.
@@ -245,6 +291,8 @@ List<Integer> numbers = Arrays.asList(11, 32, 23, 47, 75, 63);
 numbers.stream().map(Math::negateExact).forEach(System.out::println);
 //Output : -11, -32, -23, -47, -75, -63
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 9) Flattening
 flatMap() method is used to transform Stream<stream<T>> to Stream<R>. It removes an extra nested layer around the elements.
@@ -266,6 +314,8 @@ System.out.println(names);
 //Output : [Anvi, Ira, Suvarna, Satya, Ibrahim, Joe, Somy, Hema, Ben]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 10) Counting
 
 count() returns number of elements in a stream. It is a terminal operation.
@@ -277,6 +327,8 @@ Long itemCount = Arrays.stream(intArray).count();
 		
 System.out.println(itemCount);    //Output : 7
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 11) Minimum And Maximum
 
@@ -293,6 +345,8 @@ decimals.stream().min(Comparator.naturalOrder()).ifPresent(System.out::println);
 decimals.stream().max(Comparator.naturalOrder()).ifPresent(System.out::println);
 //Output : 87.23
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 12) anyMatch, allMatch, noneMatch
 anyMatch(), allMatch() and noneMatch() methods take Predicate as an argument and returns boolean (true or false) as a result. anyMatch() returns true if any one element of a stream matches with given predicate, allMatch() returns true if all elements of a stream match with given predicate and noneMatch() returns true if none of the elements of a stream matches with given predicate.
@@ -316,6 +370,8 @@ System.out.println(result);
 //Output : false
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 13) findFirst, findAny
 
 findFirst() returns first element of a stream and findAny() returns any element of a stream. Both methods return value enclosed in an Optional object.
@@ -333,6 +389,8 @@ Optional<String> anyElement = locations.stream().findAny();
 anyElement.ifPresent(System.out::println);
 //Output : London
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 14) Reducing
 
@@ -352,6 +410,8 @@ String resultString = locations.stream().reduce("", String::concat);
 System.out.println(resultString);
 //Output : LondonSingaporeChennaiColomboDubaiMumbai
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 15) Collecting
 
@@ -378,6 +438,8 @@ System.out.println(distinctOddNumbers);
 //Output : [21, 55, 17, 3]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 16) Grouping
 Collectors.groupingBy() method groups the elements of a stream according to supplied classifier function. Collectors is an utility class which contain many reduction operations like groupingBy, partitioningBy, joining, summing, averaging, summarizing etc…
 
@@ -399,6 +461,8 @@ System.out.println(namesGroupedByLength);
 //Output : {3=[Ben], 4=[Somy], 5=[Sanya, Satya, Bhima], 6=[Nayana, Rahman]}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 17) Partitioning
 
 Collectors.partitioningBy() method partitions the stream according to supplied Predicate.
@@ -413,6 +477,8 @@ Map<Boolean, List<Integer>> numbersPartitionedByMultiplesOf10
 System.out.println(numbersPartitionedByMultiplesOf10);
 //Output : {false=[25, 32, 11, 17, 89], true=[50, 70, 10, 40]}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 18) Summarizing the numbers
 
@@ -437,6 +503,8 @@ System.out.println("Average : "+numbersSummary.getAverage());
 //Average : 38.22
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 19) Creating Runnable And Thread
 
 ```java
@@ -447,6 +515,8 @@ new Thread(task).start();
 //Creating Thread
 new Thread(() -> System.out.println("Runnnnnn....")).start();
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 20) takeWhile, dropWhile
 
@@ -463,3 +533,4 @@ numbers.stream().takeWhile(number -> number <= 5).forEach(System.out::println);
 numbers.stream().dropWhile(number -> number <= 5).forEach(System.out::println);
 //Output : 6, 7, 8, 9
 ```
+[⬆ Back to top](#table-of-contents)
