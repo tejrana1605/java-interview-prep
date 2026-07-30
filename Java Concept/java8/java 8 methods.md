@@ -1,6 +1,4 @@
-# Functional Interfaces
-
-## Table of Contents
+# Table of Contents
 
 - [Functional Interfaces](#functional-interfaces)
 - [Java 8 Streams](#java-8-streams)
@@ -274,7 +272,7 @@
 
 ---
 
-
+# Functional Interfaces
 All Java 8 functional interfaces are organised in java.util.function package.
 
 ![alt text](image.png)
