@@ -1,5 +1,180 @@
 # String
 
+## Table of Contents
+
+- [String](#string)
+  - [CharArrayToString](#chararraytostring)
+  - [DuplicateString](#duplicatestring)
+  - [DuplicateNumber](#duplicatenumber)
+  - [Employee Real Time Queries](#employee-real-time-queries)
+  - [Functional Interface](#functional-interface)
+  - [Merge Two Maps](#merge-two-maps)
+    - [Java8MergeTwoMaps](#java8mergetwomaps)
+    - [Java8MergeTwoMapsConcat](#java8mergetwomapsconcat)
+    - [Java8MergeTwoMapsOfAndFlatMap](#java8mergetwomapsofandflatmap)
+    - [Java8MergeTwoMapsPilpline](#java8mergetwomapspilpline)
+  - [methodReference](#methodreference)
+    - [ConstructorReference](#constructorreference)
+    - [InstanceMethodReference](#instancemethodreference)
+    - [InstanceMethodReference2](#instancemethodreference2)
+    - [InstanceMethodReference3](#instancemethodreference3)
+    - [MethodReference](#methodreference-2)
+    - [MethodReference2](#methodreference2)
+  - [MethodReference3](#methodreference3)
+    - [MethodReference4](#methodreference4)
+  - [countOfFruits](#countoffruits)
+  - [StreamExamples](#streamexamples)
+  - [synchronization](#synchronization)
+    - [DeadLockInJava](#deadlockinjava)
+    - [DeadlockThreadsInJava](#deadlockthreadsinjava)
+    - [JavaThreadLifeCycle](#javathreadlifecycle)
+    - [JavaThreadLifeCycleRunnable](#javathreadlifecyclerunnable)
+    - [Odd Even Thread](#odd-even-thread)
+    - [ThreadsInJava](#threadsinjava)
+    - [ThreadsInJavaBlocked](#threadsinjavablocked)
+    - [ThreadsInJavaSleepOrWaitOrJoin](#threadsinjavasleeporwaitorjoin)
+    - [ThreadsInJavaTerminated](#threadsinjavaterminated)
+    - [ThreadsInJavaWaitOrJoin](#threadsinjavawaitorjoin)
+    - [ThreadsStatesInJava](#threadsstatesinjava)
+  - [FutureExample](#futureexample)
+  - [ExecutorService](#executorservice)
+    - [ParallelRequestSender](#parallelrequestsender)
+    - [ParallelRequestSenderCmpletable](#parallelrequestsendercmpletable)
+  - [Date](#date)
+    - [LocalDateExample3](#localdateexample3)
+    - [LocalDateExample4](#localdateexample4)
+  - [Sorting](#sorting)
+    - [ListSorting](#listsorting)
+    - [ListSortingTWO](#listsortingtwo)
+    - [Student Sorting Programs](#student-sorting-programs)
+    - [MainClassSecondLargest Number](#mainclasssecondlargest-number)
+    - [MainClassThree](#mainclassthree)
+    - [MainClassTwo](#mainclasstwo)
+    - [MergeArrayProgram](#mergearrayprogram)
+    - [MergeArrayProgramTwo](#mergearrayprogramtwo)
+    - [MergeTwoArraysAndRemoveDuplicatesProgram](#mergetwoarraysandremoveduplicatesprogram)
+    - [MergeTwoArraysAndRemoveDuplicatesProgramTwo](#mergetwoarraysandremoveduplicatesprogramtwo)
+  - [sortMapJava8](#sortmapjava8)
+    - [ReverseTheString](#reversethestring)
+    - [SortMapByKeysProgram](#sortmapbykeysprogram)
+    - [SortMapByKeysProgramEight](#sortmapbykeysprogrameight)
+    - [SortMapByKeysProgramFive](#sortmapbykeysprogramfive)
+    - [SortMapByKeysProgramFour](#sortmapbykeysprogramfour)
+    - [SortMapByKeysProgramSeven](#sortmapbykeysprogramseven)
+    - [SortMapByKeysProgramSix](#sortmapbykeysprogramsix)
+    - [SortMapByKeysProgramThree](#sortmapbykeysprogramthree)
+    - [SortMapByKeysProgramTwo](#sortmapbykeysprogramtwo)
+    - [SortMapByValuesProgram](#sortmapbyvaluesprogram)
+    - [SortMapByValuesProgramFive](#sortmapbyvaluesprogramfive)
+    - [SortMapByValuesProgramFour](#sortmapbyvaluesprogramfour)
+    - [SortMapByValuesProgramThree](#sortmapbyvaluesprogramthree)
+    - [SortMapByValuesProgramTwo](#sortmapbyvaluesprogramtwo)
+  - [ArrayReverseExample](#arrayreverseexample)
+  - [CommonCharsOfTwoStrings](#commoncharsoftwostrings)
+  - [CommonElements](#commonelements)
+  - [CommonElementsTwo](#commonelementstwo)
+  - [ExampleFive](#examplefive)
+  - [ExampleOne](#exampleone)
+  - [FibonacciSeries](#fibonacciseries)
+  - [HashMapExampleFour](#hashmapexamplefour)
+  - [HashMapExampleNine](#hashmapexamplenine)
+  - [HashMapExampleThree](#hashmapexamplethree)
+  - [JavaHashMapExample](#javahashmapexample)
+  - [JavaHashMapExampleEleven](#javahashmapexampleeleven)
+  - [JavaHashMapExampleFourtyinth](#javahashmapexamplefourtyinth)
+  - [JavaHashMapExampleSeven](#javahashmapexampleseven)
+  - [JavaHashMapPrograms](#javahashmapprograms)
+  - [JavaHashMapProgramsSix](#javahashmapprogramssix)
+  - [JavaHashMapProgramsTen](#javahashmapprogramsten)
+  - [JavaHashMapProgramsTwelve](#javahashmapprogramstwelve)
+  - [LongestSubStringWithoutRepeating](#longestsubstringwithoutrepeating)
+  - [MainClass](#mainclass)
+  - [MainClassLongeshSubStringWithoutRepeatingCharacter](#mainclasslongeshsubstringwithoutrepeatingcharacter)
+  - [MainClassPercentageOfAlphaNumeric](#mainclasspercentageofalphanumeric)
+  - [MainClassRandomFour](#mainclassrandomfour)
+  - [MainClassRandomOne](#mainclassrandomone)
+  - [MainClassRandomThree](#mainclassrandomthree)
+  - [MainClassRandomTwo](#mainclassrandomtwo)
+  - [MainClassRemoveVowels](#mainclassremovevowels)
+  - [MainClassRepeatingOrNonRepeating](#mainclassrepeatingornonrepeating)
+  - [MainClassReverseStringTwoPreservingSpace](#mainclassreversestringtwopreservingspace)
+  - [MostFrequentElementProgram](#mostfrequentelementprogram)
+  - [PairsOfElementsInArray](#pairsofelementsinarray)
+  - [PairsOfElementsInArrayTwo](#pairsofelementsinarraytwo)
+  - [PalindromeProgram](#palindromeprogram)
+  - [PermutationsOfString](#permutationsofstring)
+  - [RemoveDuplicatesJavaExample](#removeduplicatesjavaexample)
+  - [RemoveDuplicatesJavaExampleTwo](#removeduplicatesjavaexampletwo)
+  - [RemoveWhiteSpaces](#removewhitespaces)
+  - [RemoveWhiteSpacesTwo](#removewhitespacestwo)
+  - [ReverseAddPalindrome](#reverseaddpalindrome)
+  - [ReverseEachWord](#reverseeachword)
+  - [ReverseStringWordByWordProgram](#reversestringwordbywordprogram)
+  - [SubArrayWhoseSumIsNumber](#subarraywhosesumisnumber)
+  - [SubArrayWhoseSumIsNumberTwo](#subarraywhosesumisnumbertwo)
+  - [SwapTwoStrings](#swaptwostrings)
+  - [TextFileModificationProgram](#textfilemodificationprogram)
+  - [concuracy](#concuracy)
+    - [AtomicIntegerExample](#atomicintegerexample)
+    - [BlockingQueueExample](#blockingqueueexample)
+    - [CallableTest](#callabletest)
+    - [CopyOnWriteCollections](#copyonwritecollections)
+  - [DataRace](#datarace)
+    - [Deadlock](#deadlock)
+    - [FixRaceWithLock](#fixracewithlock)
+    - [FixRaceWithSynchronized](#fixracewithsynchronized)
+    - [RaceCondition](#racecondition)
+    - [RunnableTest](#runnabletest)
+    - [ScheduledExecutors](#scheduledexecutors)
+    - [SkipListCollections](#skiplistcollections)
+    - [SubmittingTaskCollections](#submittingtaskcollections)
+    - [SynchronizedCollection](#synchronizedcollection)
+    - [TheProblem](#theproblem)
+  - [CompletableFuture](#completablefuture)
+    - [ExceptionUtil](#exceptionutil)
+    - [QueryResult](#queryresult)
+  - [completable](#completable)
+    - [CompletableFutureExample](#completablefutureexample)
+    - [CompletableFutureExample1](#completablefutureexample1)
+    - [DZoneCompleatableExamples](#dzonecompleatableexamples)
+    - [GFG](#gfg)
+    - [GFGCombine](#gfgcombine)
+    - [GFGExceptinHandling](#gfgexceptinhandling)
+  - [Collector](#collector)
+    - [CollectorOperation](#collectoroperation)
+    - [Student](#student)
+  - [Character](#character)
+    - [ConvertingCharArrayToListInJava](#convertingchararraytolistinjava)
+  - [airlinetest](#airlinetest)
+    - [CeilingExample](#ceilingexample)
+    - [ColorSlots](#colorslots)
+    - [ColorSlotsLinkedList](#colorslotslinkedlist)
+    - [FindDuplicates](#findduplicates)
+    - [FirstLastPositionInSortedArray](#firstlastpositioninsortedarray)
+    - [FlightStatusTracker](#flightstatustracker)
+    - [FlipImage](#flipimage)
+    - [FloorExample](#floorexample)
+    - [GiftExchange](#giftexchange)
+    - [IndexPairsForSum](#indexpairsforsum)
+    - [LargestElementSmallerThanOrEqualToTarget](#largestelementsmallerthanorequaltotarget)
+    - [LightsSwitching](#lightsswitching)
+    - [MissingNumber](#missingnumber)
+    - [MoveNonZerosToEnd](#movenonzerostoend)
+    - [MoveZeros](#movezeros)
+    - [NumbersGreaterThanAllToRight](#numbersgreaterthanalltoright)
+    - [PeakIndexInMountainArray](#peakindexinmountainarray)
+    - [PowerOfTwoChecker](#poweroftwochecker)
+    - [RichestCustomerWealth](#richestcustomerwealth)
+    - [RotationCountOfArray](#rotationcountofarray)
+    - [SmallestElementGreaterThanOrEqualToTarget](#smallestelementgreaterthanorequaltotarget)
+    - [SmallestLetterGreaterThanTarget](#smallestlettergreaterthantarget)
+    - [ConvertingCharArrayToListInJava](#convertingchararraytolistinjava-2)
+
+---
+
+
+[⬆ Back to top](#table-of-contents)
+
 ## CharArrayToString
 
 ```java
@@ -46,6 +221,8 @@ public class CharArrayToString {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## DuplicateString
 
@@ -221,6 +398,8 @@ public class DuplicateString {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## DuplicateNumber
 
 ```java
@@ -320,6 +499,8 @@ public class DuplicateNumber {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## Employee Real Time Queries
 
@@ -874,6 +1055,8 @@ public class RealTimeQueries {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Functional Interface
 
 ```java
@@ -958,7 +1141,11 @@ public class FunctionalInterface {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Merge Two Maps
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java8MergeTwoMaps
 
@@ -1006,6 +1193,8 @@ public class Java8MergeTwoMaps
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java8MergeTwoMapsConcat
 
@@ -1056,6 +1245,8 @@ public class Java8MergeTwoMapsConcat
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java8MergeTwoMapsOfAndFlatMap
 
@@ -1108,6 +1299,8 @@ public class Java8MergeTwoMapsOfAndFlatMap
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Java8MergeTwoMapsPilpline
 
 ```java
@@ -1158,7 +1351,11 @@ public class Java8MergeTwoMapsPilpline
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## methodReference
+
+[⬆ Back to top](#table-of-contents)
 
 ### ConstructorReference
 
@@ -1181,6 +1378,8 @@ public class ConstructorReference {
 }  
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### InstanceMethodReference
 
@@ -1208,6 +1407,8 @@ public class InstanceMethodReference {
 }  
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### InstanceMethodReference2
 
 ```java
@@ -1223,6 +1424,8 @@ public class InstanceMethodReference2 {
     }  
 }  
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### InstanceMethodReference3
 
@@ -1243,6 +1446,8 @@ public class InstanceMethodReference3 {
     }
 }  
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MethodReference
 
@@ -1265,6 +1470,8 @@ public class MethodReference {
 }  
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MethodReference2
 
 ```java
@@ -1280,6 +1487,8 @@ public class MethodReference2 {
     }  
 }  
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MethodReference3
 
@@ -1300,6 +1509,8 @@ public class MethodReference3 {
     }
 }  
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MethodReference4
 
@@ -1333,6 +1544,8 @@ public class MethodReference4 {
     }
 } 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## countOfFruits
 
@@ -1396,6 +1609,8 @@ class Fruits{
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## StreamExamples
 
@@ -1548,7 +1763,11 @@ public class StreamExamples {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## synchronization
+
+[⬆ Back to top](#table-of-contents)
 
 ### DeadLockInJava
 
@@ -1615,6 +1834,8 @@ public class DeadLockInJava
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### DeadlockThreadsInJava
 
@@ -1739,6 +1960,8 @@ public class DeadlockThreadsInJava
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### JavaThreadLifeCycle
 
 ```java
@@ -1758,6 +1981,8 @@ public class JavaThreadLifeCycle
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### JavaThreadLifeCycleRunnable
 
 ```java
@@ -1775,6 +2000,8 @@ public class JavaThreadLifeCycleRunnable {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Odd Even Thread
 
@@ -1942,6 +2169,8 @@ public class MainClass
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### ThreadsInJava
 
 ```java
@@ -1992,6 +2221,8 @@ public class ThreadsInJava
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ThreadsInJavaBlocked
 
@@ -2076,6 +2307,8 @@ public class ThreadsInJavaBlocked
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### ThreadsInJavaSleepOrWaitOrJoin
 
 ```java
@@ -2118,6 +2351,8 @@ public class ThreadsInJavaSleepOrWaitOrJoin
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### ThreadsInJavaTerminated
 
 ```java
@@ -2156,6 +2391,8 @@ public class ThreadsInJavaTerminated
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ThreadsInJavaWaitOrJoin
 
@@ -2216,6 +2453,8 @@ public class ThreadsInJavaWaitOrJoin
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### ThreadsStatesInJava
 
 ```java
@@ -2234,6 +2473,8 @@ public class ThreadsStatesInJava
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## FutureExample
 
@@ -2271,7 +2512,11 @@ public class FutureExample {
 } 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## ExecutorService
+
+[⬆ Back to top](#table-of-contents)
 
 ### ParallelRequestSender
 
@@ -2321,6 +2566,8 @@ public class ParallelRequestSender {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ParallelRequestSenderCmpletable
 
@@ -2391,7 +2638,11 @@ public class ParallelRequestSenderCmpletable {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Date
+
+[⬆ Back to top](#table-of-contents)
 
 ### LocalDateExample3
 ```java
@@ -2412,6 +2663,8 @@ public class LocalDateExample3 {
   }  
 }  
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### LocalDateExample4
 
@@ -2441,7 +2694,11 @@ public class LocalDateExample4
 }  
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Sorting
+
+[⬆ Back to top](#table-of-contents)
 
 ### ListSorting
 
@@ -2488,6 +2745,8 @@ public class ListSorting
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### ListSortingTWO
 
 ```java
@@ -2532,6 +2791,8 @@ public class ListSortingTWO
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Student Sorting Programs
 
@@ -2610,6 +2871,8 @@ public class MainClass
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MainClassSecondLargest Number
 
 ```java
@@ -2676,6 +2939,8 @@ public class MainClassSecondLargest
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MainClassThree
 
 ```java
@@ -2718,6 +2983,8 @@ public class MainClassThree
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MainClassTwo
 
@@ -2808,6 +3075,8 @@ public class MainClassTwo
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MergeArrayProgram
 
 ```java
@@ -2854,6 +3123,8 @@ public class MergeArrayProgram
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MergeArrayProgramTwo
 
@@ -2911,6 +3182,8 @@ public class MergeArrayProgramTwo
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MergeTwoArraysAndRemoveDuplicatesProgram
 
@@ -3014,6 +3287,8 @@ public class MergeTwoArraysAndRemoveDuplicatesProgram
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MergeTwoArraysAndRemoveDuplicatesProgramTwo
 
 ```java
@@ -3053,7 +3328,11 @@ public class MergeTwoArraysAndRemoveDuplicatesProgramTwo
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## sortMapJava8
+
+[⬆ Back to top](#table-of-contents)
 
 ### ReverseTheString
 
@@ -3102,6 +3381,8 @@ public class ReverseTheString
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByKeysProgram
 
 ```java
@@ -3136,6 +3417,8 @@ public class SortMapByKeysProgram
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### SortMapByKeysProgramEight
 
@@ -3183,6 +3466,8 @@ public class SortMapByKeysProgramEight
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByKeysProgramFive
 
 ```java
@@ -3223,6 +3508,8 @@ public class SortMapByKeysProgramFive
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### SortMapByKeysProgramFour
 
@@ -3280,6 +3567,8 @@ public class SortMapByKeysProgramFour
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByKeysProgramSeven
 
 ```java
@@ -3320,6 +3609,8 @@ public class SortMapByKeysProgramSeven
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### SortMapByKeysProgramSix
 
@@ -3368,6 +3659,8 @@ public class SortMapByKeysProgramSix
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByKeysProgramThree
 
 ```java
@@ -3413,6 +3706,8 @@ public class SortMapByKeysProgramThree
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByKeysProgramTwo
 
 ```java
@@ -3450,6 +3745,8 @@ public class SortMapByKeysProgramTwo
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByValuesProgram
 
 ```java
@@ -3518,6 +3815,8 @@ public class SortMapByValuesProgram
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByValuesProgramFive
 
 ```java
@@ -3572,6 +3871,8 @@ public class SortMapByValuesProgramFive
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByValuesProgramFour
 
 ```java
@@ -3620,6 +3921,8 @@ public class SortMapByValuesProgramFour
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### SortMapByValuesProgramThree
 
@@ -3677,6 +3980,8 @@ public class SortMapByValuesProgramThree
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SortMapByValuesProgramTwo
 
 ```java
@@ -3727,6 +4032,8 @@ public class SortMapByValuesProgramTwo
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## ArrayReverseExample
 
 ```java
@@ -3768,6 +4075,8 @@ public class ArrayReverseExample
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## CommonCharsOfTwoStrings
 
@@ -3820,6 +4129,8 @@ public class CommonCharsOfTwoStrings
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## CommonElements
 
 ```java
@@ -3853,6 +4164,8 @@ class CommonElements
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## CommonElementsTwo
 
 ```java
@@ -3879,6 +4192,8 @@ class CommonElementsTwo
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## ExampleFive
 
@@ -3916,6 +4231,8 @@ public class ExampleFive
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## ExampleOne
 
 ```java
@@ -3945,6 +4262,8 @@ public class ExampleOne
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## FibonacciSeries
 
@@ -3990,6 +4309,8 @@ public class FibonacciSeries
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## HashMapExampleFour
 ```java
 package CoreQuestion;
@@ -4022,6 +4343,8 @@ public class HashMapExampleFour
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## HashMapExampleNine
 
@@ -4063,6 +4386,8 @@ public class HashMapExampleNine
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## HashMapExampleThree
 
@@ -4111,6 +4436,8 @@ public class HashMapExampleThree
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## JavaHashMapExample
 
 ```java
@@ -4150,6 +4477,8 @@ public class JavaHashMapExample
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## JavaHashMapExampleEleven
 
@@ -4210,6 +4539,8 @@ public class JavaHashMapExampleEleven
     }   
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ## JavaHashMapExampleFourtyinth
 
 ```java
@@ -4266,6 +4597,8 @@ public class JavaHashMapExampleFourtyinth
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## JavaHashMapExampleSeven
 
 ```java
@@ -4307,6 +4640,8 @@ public class JavaHashMapExampleSeven
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## JavaHashMapPrograms
 
@@ -4374,6 +4709,8 @@ public class JavaHashMapPrograms
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## JavaHashMapProgramsSix
 
 ```java
@@ -4407,6 +4744,8 @@ public class JavaHashMapProgramsSix
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## JavaHashMapProgramsTen
 
@@ -4449,6 +4788,8 @@ public class JavaHashMapProgramsTen
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## JavaHashMapProgramsTwelve
 
@@ -4505,6 +4846,8 @@ public class JavaHashMapProgramsTwelve
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## LongestSubStringWithoutRepeating
 
@@ -4590,6 +4933,8 @@ public class LongestSubStringWithoutRepeating
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## MainClass
 
 ```java
@@ -4645,6 +4990,8 @@ public class MainClass
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MainClassLongeshSubStringWithoutRepeatingCharacter
 
@@ -4720,6 +5067,8 @@ public class MainClassLongeshSubStringWithoutRepeatingCharacter
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MainClassPercentageOfAlphaNumeric
 
@@ -4819,6 +5168,8 @@ public class MainClassPercentageOfAlphaNumeric
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## MainClassRandomFour
 
 ```java
@@ -4863,6 +5214,8 @@ public class MainClassRandomFour
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## MainClassRandomOne
 
 ```java
@@ -4904,6 +5257,8 @@ public class MainClassRandomOne
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## MainClassRandomThree
 
 ```java
@@ -4943,6 +5298,8 @@ public class MainClassRandomThree
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## MainClassRandomTwo
 
 ```java
@@ -4961,6 +5318,8 @@ public class MainClassRandomTwo
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MainClassRemoveVowels
 
@@ -4989,6 +5348,8 @@ public class MainClassRemoveVowels
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MainClassRepeatingOrNonRepeating
 
@@ -5058,6 +5419,8 @@ public class MainClassRepeatingOrNonRepeating
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ## MainClassReverseStringTwoPreservingSpace
 
 ```java
@@ -5126,6 +5489,8 @@ public class MainClassReverseStringTwoPreservingSpace
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## MostFrequentElementProgram
 
@@ -5212,6 +5577,8 @@ public class MostFrequentElementProgram
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## PairsOfElementsInArray
 
 ```java
@@ -5242,6 +5609,8 @@ public class PairsOfElementsInArray {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## PairsOfElementsInArrayTwo
 
@@ -5323,6 +5692,8 @@ public class PairsOfElementsInArrayTwo
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## PalindromeProgram
 
 ```java
@@ -5395,6 +5766,8 @@ public class PalindromeProgram
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## PermutationsOfString
 
 ```java
@@ -5428,6 +5801,8 @@ public class PermutationsOfString
     }   
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## RemoveDuplicatesJavaExample
 
@@ -5509,6 +5884,8 @@ public class RemoveDuplicatesJavaExample
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## RemoveDuplicatesJavaExampleTwo
 
 ```java
@@ -5568,6 +5945,8 @@ public class RemoveDuplicatesJavaExampleTwo
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## RemoveWhiteSpaces
 
 ```java
@@ -5594,6 +5973,8 @@ public class RemoveWhiteSpaces
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## RemoveWhiteSpacesTwo
 
@@ -5632,6 +6013,8 @@ public class RemoveWhiteSpacesTwo
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## ReverseAddPalindrome
 
@@ -5714,6 +6097,8 @@ public class ReverseAddPalindrome
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## ReverseEachWord
 
 ```java
@@ -5758,6 +6143,8 @@ public class ReverseEachWord
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## ReverseStringWordByWordProgram
 
 ```java
@@ -5796,6 +6183,8 @@ public class ReverseStringWordByWordProgram
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## SubArrayWhoseSumIsNumber
 
@@ -5865,6 +6254,8 @@ public class SubArrayWhoseSumIsNumber
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## SubArrayWhoseSumIsNumberTwo
 
@@ -5937,6 +6328,8 @@ public class SubArrayWhoseSumIsNumberTwo
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## SwapTwoStrings
 
 ```java
@@ -5983,6 +6376,8 @@ public class SwapTwoStrings
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## TextFileModificationProgram
 
@@ -6062,7 +6457,11 @@ public class TextFileModificationProgram
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## concuracy
+
+[⬆ Back to top](#table-of-contents)
 
 ### AtomicIntegerExample
 
@@ -6089,6 +6488,8 @@ public class AtomicIntegerExample {
 }
 // 2 5 3 1 4 6 7 8 9 10 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### BlockingQueueExample
 
@@ -6125,6 +6526,8 @@ public class BlockingQueueExample {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### CallableTest
 
@@ -6164,6 +6567,8 @@ public class CallableTest {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### CopyOnWriteCollections
 
@@ -6210,6 +6615,8 @@ public class CopyOnWriteCollections {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## DataRace
 
 ```java
@@ -6232,6 +6639,8 @@ public class DataRace {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Deadlock
 
@@ -6283,6 +6692,8 @@ public class Deadlock {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### FixRaceWithLock
 
 ```java
@@ -6321,6 +6732,8 @@ public class FixRaceWithLock {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### FixRaceWithSynchronized
 
@@ -6377,6 +6790,8 @@ public class FixRaceWithSynchronized {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### RaceCondition
 
@@ -6468,6 +6883,8 @@ public class RaceCondition implements Runnable {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### RunnableTest
 
 ```java
@@ -6491,6 +6908,8 @@ public class RunnableTest {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ScheduledExecutors
 
@@ -6548,6 +6967,8 @@ public class ScheduledExecutors {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SkipListCollections
 
 ```java
@@ -6583,6 +7004,8 @@ public class SkipListCollections {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### SubmittingTaskCollections
 
@@ -6655,6 +7078,8 @@ public class SubmittingTaskCollections {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SynchronizedCollection
 
 ```java
@@ -6677,6 +7102,8 @@ public class SynchronizedCollection {
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### TheProblem
 
@@ -6722,7 +7149,11 @@ public class TheProblem {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## CompletableFuture
+
+[⬆ Back to top](#table-of-contents)
 
 ### ExceptionUtil
 
@@ -6803,6 +7234,8 @@ public class ExceptionUtil {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### QueryResult
 
 ```java
@@ -6875,7 +7308,11 @@ public final class QueryResult implements Serializable {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## completable
+
+[⬆ Back to top](#table-of-contents)
 
 ### CompletableFutureExample
 
@@ -6979,6 +7416,8 @@ public class CompletableFutureExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### CompletableFutureExample1
 
 ```java
@@ -7007,6 +7446,8 @@ public class CompletableFutureExample1 {
     }
 } 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### DZoneCompleatableExamples
 
@@ -7066,6 +7507,8 @@ public class DZoneCompleatableExamples {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### GFG
 
 ```java
@@ -7086,6 +7529,8 @@ class GFG {
     } 
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### GFGCombine
 
@@ -7111,6 +7556,8 @@ class GFGCombine {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### GFGExceptinHandling
 
 ```java
@@ -7132,7 +7579,11 @@ class GFGExceptinHandling {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Collector
+
+[⬆ Back to top](#table-of-contents)
 
 ### CollectorOperation
 
@@ -7379,6 +7830,8 @@ public class CollectorOperation {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Student
 
 ```java
@@ -7430,7 +7883,11 @@ class Student
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Character
+
+[⬆ Back to top](#table-of-contents)
 
 ### ConvertingCharArrayToListInJava
 
@@ -7502,7 +7959,11 @@ public class ConvertingCharArrayToListInJava {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## airlinetest
+
+[⬆ Back to top](#table-of-contents)
 
 ### CeilingExample
 
@@ -7524,6 +7985,8 @@ public class CeilingExample {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ColorSlots
 
@@ -7557,6 +8020,8 @@ public class ColorSlots {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ColorSlotsLinkedList
 
@@ -7619,6 +8084,8 @@ public class ColorSlotsLinkedList {
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### FindDuplicates
 
 ```java
@@ -7659,6 +8126,8 @@ public class FindDuplicates {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### FirstLastPositionInSortedArray
 
@@ -7723,6 +8192,8 @@ public class FirstLastPositionInSortedArray {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### FlightStatusTracker
 
 ```java
@@ -7750,6 +8221,8 @@ public class FlightStatusTracker {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### FlipImage
 
@@ -7815,6 +8288,8 @@ public class FlipImage {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### FloorExample
 
 ```java
@@ -7834,6 +8309,8 @@ public class FloorExample {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### GiftExchange
 
@@ -7872,6 +8349,8 @@ public class GiftExchange {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### IndexPairsForSum
 
@@ -7926,6 +8405,8 @@ public class IndexPairsForSum {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### LargestElementSmallerThanOrEqualToTarget
 package airlinetest;
 
@@ -7969,6 +8450,8 @@ public class LargestElementSmallerThanOrEqualToTarget {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### LightsSwitching
 
@@ -8026,6 +8509,8 @@ public class LightsSwitching {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MissingNumber
 
 ```java
@@ -8059,6 +8544,8 @@ public class MissingNumber {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### MoveNonZerosToEnd
 
@@ -8099,6 +8586,8 @@ public class MoveNonZerosToEnd {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### MoveZeros
 
 ```java
@@ -8137,6 +8626,8 @@ public class MoveZeros {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### NumbersGreaterThanAllToRight
 
@@ -8187,6 +8678,8 @@ public class NumbersGreaterThanAllToRight {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### PeakIndexInMountainArray
 ```java
 package airlinetest;
@@ -8224,6 +8717,8 @@ public class PeakIndexInMountainArray {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### PowerOfTwoChecker
 
 ```java
@@ -8246,6 +8741,8 @@ public class PowerOfTwoChecker {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### RichestCustomerWealth
 
@@ -8282,6 +8779,8 @@ public class RichestCustomerWealth {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### RotationCountOfArray
 
@@ -8329,6 +8828,8 @@ public class RotationCountOfArray {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SmallestElementGreaterThanOrEqualToTarget
 
 ```java
@@ -8375,6 +8876,8 @@ public class SmallestElementGreaterThanOrEqualToTarget {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### SmallestLetterGreaterThanTarget
 ```java
 package airlinetest;
@@ -8409,6 +8912,8 @@ public class SmallestLetterGreaterThanTarget {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### ConvertingCharArrayToListInJava
 
@@ -8480,3 +8985,4 @@ public class ConvertingCharArrayToListInJava {
 }
 
 ```
+[⬆ Back to top](#table-of-contents)
