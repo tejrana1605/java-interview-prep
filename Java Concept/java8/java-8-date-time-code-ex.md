@@ -1,6 +1,46 @@
 # Java 8 Date Time API : Coding Examples
 
+## Table of Contents
+
+- [Java 8 Date Time API : Coding Examples](#java-8-date-time-api-coding-examples)
+  - [Java 8 Date Time API :](#java-8-date-time-api)
+    - [Important Methods :](#important-methods)
+  - [Java 8 Date Time API : Coding Examples](#java-8-date-time-api-coding-examples-2)
+    - [1) How do you create date and time objects using Java 8 Date Time API?](#1-how-do-you-create-date-and-time-objects-using-java-8-date-time-api)
+    - [2) How do you get current date and time?](#2-how-do-you-get-current-date-and-time)
+    - [3) What is the time right now at New Delhi, London, Singapore, New York and Sydney?](#3-what-is-the-time-right-now-at-new-delhi-london-singapore-new-york-and-sydney)
+    - [4) How do you get all available time zones?](#4-how-do-you-get-all-available-time-zones)
+    - [5) How do you get date after 1 week or before 1 week or after 1 month or before 1 month or after 1 year or before 1 year?](#5-how-do-you-get-date-after-1-week-or-before-1-week-or-after-1-month-or-before-1-month-or-after-1-year-or-before-1-year)
+    - [6) How do you find the day of the week of the given date?](#6-how-do-you-find-the-day-of-the-week-of-the-given-date)
+    - [7) What was the day of the week on today’s date last year?](#7-what-was-the-day-of-the-week-on-todays-date-last-year)
+    - [8) When is the first MONDAY of next month?](#8-when-is-the-first-monday-of-next-month)
+    - [9) How do you find the first FRIDAY of next year?](#9-how-do-you-find-the-first-friday-of-next-year)
+    - [10) When was the last SUNDAY of year 1997?](#10-when-was-the-last-sunday-of-year-1997)
+    - [11) When is the 2nd and 4th saturday of next month?](#11-when-is-the-2nd-and-4th-saturday-of-next-month)
+    - [12) Print date of all SUNDAYs of NOVEMBER 2031?](#12-print-date-of-all-sundays-of-november-2031)
+    - [13) How do you convert time from 24hr format to 12hr format or vice-versa?](#13-how-do-you-convert-time-from-24hr-format-to-12hr-format-or-vice-versa)
+    - [14) Given a date of birth, find the age in years, months and days?](#14-given-a-date-of-birth-find-the-age-in-years-months-and-days)
+    - [15) Given a date of birth, find which day of the week he/she was born?](#15-given-a-date-of-birth-find-which-day-of-the-week-heshe-was-born)
+    - [16) Given a date, check whether it falls on a weekend?](#16-given-a-date-check-whether-it-falls-on-a-weekend)
+    - [17) When is the first working day of next year?](#17-when-is-the-first-working-day-of-next-year)
+    - [When was the last working day of last year?](#when-was-the-last-working-day-of-last-year)
+    - [18) In hotel management system, calculate the duration between check-in and check-out time of a guest? If the check-out time exceeds by 4 hours, count it as one full day?](#18-in-hotel-management-system-calculate-the-duration-between-check-in-and-check-out-time-of-a-guest-if-the-check-out-time-exceeds-by-4-hours-count-it-as-one-full-day)
+    - [19) In a flight ticket booking system, display arrival and departure times in time zones of respective cities?](#19-in-a-flight-ticket-booking-system-display-arrival-and-departure-times-in-time-zones-of-respective-cities)
+    - [20) Calculate the travel time between two cities of different time zones?](#20-calculate-the-travel-time-between-two-cities-of-different-time-zones)
+    - [21) Multi-zone meeting scheduler](#21-multi-zone-meeting-scheduler)
+    - [22) Subscription Status Check](#22-subscription-status-check)
+    - [23) A company is launching a new product. Display count down timer of launch date in days, hours and minutes? It should update every minute.](#23-a-company-is-launching-a-new-product-display-count-down-timer-of-launch-date-in-days-hours-and-minutes-it-should-update-every-minute)
+    - [24) Execute a task every third MONDAY at 2:30 PM of every MONTH starting from next year?](#24-execute-a-task-every-third-monday-at-230-pm-of-every-month-starting-from-next-year)
+    - [25) Given a list students with their login time to an online competitive exam, invalidate those students who have logged in before 10:00 AM , 7 April 2025 and after 6:00 PM, 12 April 2025?](#25-given-a-list-students-with-their-login-time-to-an-online-competitive-exam-invalidate-those-students-who-have-logged-in-before-1000-am-7-april-2025-and-after-600-pm-12-april-2025)
+    - [26) Customer birthday special offer for 15 days.](#26-customer-birthday-special-offer-for-15-days)
+    - [27) Employee Total Experience Calculation](#27-employee-total-experience-calculation)
+
+---
+
+
 Java 8 Date Time API is one such Java 8 feature which do wonder while working with date and time queries in real time. Earlier to Java 8, java.util.Date and java.util. Calendar classes are used to work with date and time. They find it difficult to solve some complex real time queries regarding date and time. Using Java 8 Date Time API, you can solve any complex queries with ease. On top of that, Java 8 Date Time API classes are immutable and thread-safe. You can use them in a multithread environment without any worries.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Java 8 Date Time API :
 Important Classes :
@@ -18,6 +58,8 @@ Important Classes :
 * TemporalAdjuster : Strategy for altering a date or time.
 * TemporalAdjusters : Contains many static utility methods which can be used to compose a strategy for altering a date or time.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Important Methods :
 
 * of() : Creates specific date time objects.
@@ -32,7 +74,11 @@ Important Classes :
 
 ![alt text](image-11.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## Java 8 Date Time API : Coding Examples
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) How do you create date and time objects using Java 8 Date Time API?
 Using of() method of LocalDate, LocalTime, LocalDateTime and ZonedDateTime.
@@ -52,6 +98,8 @@ ZoneId zoneId = ZoneId.of("Europe/London");
 ZonedDateTime zonedDateTime = ZonedDateTime.of(2025, 10, 5, 10, 30, 45, 0, zoneId);  //5 October 2025, 10:30:45:0 AM [Europe/London]
 
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### 2) How do you get current date and time?
 Using now() method.
 ```java
@@ -68,6 +116,8 @@ LocalDateTime dateTime = LocalDateTime.now();
 ZoneId zoneId = ZoneId.of("Europe/London");
 ZonedDateTime zonedDateTime = ZonedDateTime.now(zoneId);
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### 3) What is the time right now at New Delhi, London, Singapore, New York and Sydney?
 To find out the current date and time at different time zones, use now() method of ZonedDateTime which takes ZoneId as parameter.
 
@@ -105,6 +155,8 @@ public class Java8DateTimeAPIExample
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 4) How do you get all available time zones?
 
 Using getAvailableZoneIds() of ZoneId class.
@@ -112,6 +164,8 @@ Using getAvailableZoneIds() of ZoneId class.
 	
 ZoneId.getAvailableZoneIds().forEach(zoneId -> System.out.println(zoneId));
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5) How do you get date after 1 week or before 1 week or after 1 month or before 1 month or after 1 year or before 1 year?
 
@@ -179,6 +233,8 @@ After 1 Year : 17 Jun 2026
 Before 1 Year : 17 Jun 2024
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 6) How do you find the day of the week of the given date?
 Using getDayOfWeek() method.
 ```java
@@ -195,6 +251,8 @@ public class Java8DateTimeAPIExample
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 7) What was the day of the week on today’s date last year?
 
 To get the day of the week on today’s date last year, first get today’s date – LocalDate.now(), subtract 1 year – minusYears(1) and call getDayOfWeek().
@@ -203,6 +261,8 @@ To get the day of the week on today’s date last year, first get today’s date
 LocalDate.now().minusYears(1).getDayOfWeek();
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 8) When is the first MONDAY of next month?
 
@@ -242,6 +302,8 @@ Today : 18 Jun 2025
 First Monday Of Next Month : 07 Jul 2025
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 9) How do you find the first FRIDAY of next year?
 
 First get today’s date – LocalDate.now(), then get first day of next year – today.with(TemporalAdjusters.firstDayOfNextYear()) and then call firstDayOfNextYear.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY)) to get first FRIDAY of next year.
@@ -278,6 +340,8 @@ Today : 18 Jun 2025
 First FRIDAY Of Next Year : 02 Jan 2026
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 10) When was the last SUNDAY of year 1997?
 
 ```java
@@ -299,6 +363,8 @@ public class Java8DateTimeAPIExample
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 11) When is the 2nd and 4th saturday of next month?
 
@@ -339,6 +405,8 @@ Today : 18-06-2025
 Second saturday of next month : 12-07-2025
 Fourth saturday of next month : 26-07-2025
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 12) Print date of all SUNDAYs of NOVEMBER 2031?
 
@@ -381,6 +449,8 @@ All SUNDAYs of NOVEMBER 2031 :
 30-11-2031
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 13) How do you convert time from 24hr format to 12hr format or vice-versa?
 
 By using ofPattern() method of DateTimeFormatter class. Pattern "HH:mm" will return time in 24hr format where as pattern "hh:mm" will give you time in 12hr format.
@@ -407,6 +477,8 @@ Output :
 Current Date And Time In 24hr Format : 18 Jun 2025, 15:43 pm
 Current Date And Time In 12hr Format : 18 Jun 2025, 03:43 pm
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 14) Given a date of birth, find the age in years, months and days?
 
@@ -444,6 +516,8 @@ Current Age : 30 years 6 months 26 days
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 15) Given a date of birth, find which day of the week he/she was born?
 
 ```java
@@ -459,6 +533,8 @@ public class Java8DateTimeAPIExample
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 16) Given a date, check whether it falls on a weekend?
 
@@ -488,9 +564,13 @@ Output :
 It is a weekend. Choose another day
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 17) When is the first working day of next year?
 
 **OR**
+
+[⬆ Back to top](#table-of-contents)
 
 ### When was the last working day of last year?
 
@@ -588,6 +668,8 @@ Last Working Day Of Last Year : 31-12-2024
 
 **Note :** Public holidays are not considered in the above example.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 18) In hotel management system, calculate the duration between check-in and check-out time of a guest? If the check-out time exceeds by 4 hours, count it as one full day?
 
 For such scenarios where time period between two events is to be calculated in terms of days, hours and minutes, we use Duration.between().
@@ -646,6 +728,8 @@ As check-out time exceeded by 10 hours, counting it as one full day.
 So, number of billing days : 4
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 19) In a flight ticket booking system, display arrival and departure times in time zones of respective cities?
 
 Here, we use withZoneSameInstant() method of ZonedDateTime which converts same time instant to multiple time zones. First we create source ZonedDateTime object with ZoneId of source city and with departure time. Then we convert this source ZonedDateTime object to destination ZonedDateTime object by calling withZoneSameInstant() with ZoneId of destination city after adding travel time to it.
@@ -699,6 +783,8 @@ London Departure : 12 Aug 2025 08:45 am BST
 New York Arrival : 12 Aug 2025 12:15 pm GMT-04:00
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 20) Calculate the travel time between two cities of different time zones?
 
 ```java
@@ -735,6 +821,8 @@ Departure From New Delhi : 12 Jul 2025 02:45 pm IST
 Arrival In London : 12 Jul 2025 08:35 pm BST
 Travel Time : 10 hours 20 minutes
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 21) Multi-zone meeting scheduler
 An MNC company wants to schedule a meeting for it’s employees residing in different cities across the world like Bangalore, New York, London, Dubai etc… Display meeting time for each participants in their time zone.
@@ -792,6 +880,8 @@ Meeting Date And Time In New York : 21 Aug 2025, 07:00 am GMT-04:00
 Meeting Date And Time In Singapore : 21 Aug 2025, 07:00 pm GMT+08:00
 Meeting Date And Time In Dubai : 21 Aug 2025, 03:00 pm GST
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 22) Subscription Status Check
 
@@ -884,6 +974,8 @@ Dear Dhruvi Sharma, Your subscription has expired 2 days ago.
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 23) A company is launching a new product. Display count down timer of launch date in days, hours and minutes? It should update every minute.
 
 ```java
@@ -917,6 +1009,8 @@ public class Java8DateTimeAPIExample
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 24) Execute a task every third MONDAY at 2:30 PM of every MONTH starting from next year?
 
@@ -970,6 +1064,8 @@ public class Java8DateTimeAPIExample
 }
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 25) Given a list students with their login time to an online competitive exam, invalidate those students who have logged in before 10:00 AM , 7 April 2025 and after 6:00 PM, 12 April 2025?
 
@@ -1048,6 +1144,8 @@ Rahul More (09 Apr 2025, 01:45 pm),
 Maru Sangli (12 Apr 2025, 03:30 pm)]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 26) Customer birthday special offer for 15 days.
 
 A company is offering a special offer for it’s customers on their birthday. This offer lasts for 15 days starting from customer birthday. Alert the customer about this offer and offer end date?
@@ -1083,6 +1181,8 @@ Happy Birth Day !!!
 On this special day, we are offering you a special offer.
 This offer ends on 05 Jul 2025
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 27) Employee Total Experience Calculation
 
@@ -1145,3 +1245,5 @@ Work experience in current company : 2 years 2 months and 15 days
 Total Work Experience : 12 years 0 months and 9 days
 ```
 
+
+[⬆ Back to top](#table-of-contents)

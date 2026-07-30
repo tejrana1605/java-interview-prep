@@ -1,9 +1,27 @@
 # What’s a CompletableFuture?
+
+## Table of Contents
+
+- [What’s a CompletableFuture?](#whats-a-completablefuture)
+  - [Future vs CompletableFuture](#future-vs-completablefuture)
+    - [Limitations of Future](#limitations-of-future)
+  - [Creating a CompletableFuture](#creating-a-completablefuture)
+    - [A note about Executor and Thread Pool -](#a-note-about-executor-and-thread-pool)
+  - [Transforming and acting on a CompletableFuture](#transforming-and-acting-on-a-completablefuture)
+    - [A note about async callback methods -](#a-note-about-async-callback-methods)
+  - [Combining two CompletableFutures together](#combining-two-completablefutures-together)
+  - [Combining multiple CompletableFutures together](#combining-multiple-completablefutures-together)
+  - [CompletableFuture Exception Handling](#completablefuture-exception-handling)
+
+---
+
 CompletableFuture is used for asynchronous programming in Java. Asynchronous programming is a means of writing non-blocking code by running a task on a separate thread than the main application thread and notifying the main thread about its progress, completion or failure.
 
 This way, your main thread does not block/wait for the completion of the task and it can execute other tasks in parallel.
 
 Having this kind of parallelism greatly improves the performance of your programs.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Future vs CompletableFuture
 
@@ -12,6 +30,8 @@ CompletableFuture is an extension to Java’s Future API which was introduced in
 A Future is used as a reference to the result of an asynchronous computation. It provides an isDone() method to check whether the computation is done or not, and a get() method to retrieve the result of the computation when it is done.
 
 Future API was a good step towards asynchronous programming in Java but it lacked some important and useful features -
+
+[⬆ Back to top](#table-of-contents)
 
 ### Limitations of Future
 
@@ -46,6 +66,8 @@ Future API does not have any exception handling construct.
 So many limitations right? Well, That’s why we have CompletableFuture. You can achieve all of the above with CompletableFuture.
 
 CompletableFuture implements **Future** and **CompletionStage** interfaces and provides a huge set of convenience methods for creating, chaining and combining multiple Futures. It also has a very comprehensive exception handling support.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Creating a CompletableFuture
 
@@ -153,6 +175,8 @@ CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
     return "Result of the asynchronous computation";
 });
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### A note about Executor and Thread Pool -
 
 You might be wondering that - Well, I know that the runAsync() and supplyAsync() methods execute their tasks in a separate thread. But, we never created a thread right?
@@ -184,6 +208,8 @@ CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
     return "Result of the asynchronous computation";
 }, executor);
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## Transforming and acting on a CompletableFuture
 
@@ -265,6 +291,8 @@ CompletableFuture.supplyAsync(() -> {
 });
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### A note about async callback methods -
 
 All the callback methods provided by CompletableFuture have two async variants -
@@ -321,6 +349,8 @@ CompletableFuture.supplyAsync(() -> {
     return "Processed Result"
 }, executor);
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## Combining two CompletableFutures together
 
@@ -398,6 +428,8 @@ System.out.println("Your BMI is - " + combinedFuture.get());
 ```
 
 The callback function passed to **thenCombine()** will be called when both the Futures are complete.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Combining multiple CompletableFutures together
 
@@ -511,6 +543,8 @@ In the above example, the **anyOfFuture** is completed when any of the three Com
 
 **CompletableFuture.anyOf()** takes a varargs of Futures and returns **CompletableFuture<Object>**. The problem with **CompletableFuture.anyOf()** is that if you have CompletableFutures that return results of different types, then you won’t know the type of your final CompletableFuture.
 
+[⬆ Back to top](#table-of-contents)
+
 ## CompletableFuture Exception Handling
 
 We explored How to create CompletableFuture, transform them, and combine multiple CompletableFutures. Now let’s understand what to do when anything goes wrong.
@@ -586,3 +620,4 @@ System.out.println("Maturity : " + maturityFuture.get());
 ```
 
 If an exception occurs, then the **res** argument will be null, otherwise, the **ex** argument will be null.
+[⬆ Back to top](#table-of-contents)

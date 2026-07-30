@@ -1,10 +1,27 @@
 # How ConcurrentHashMap Works Internally After Java 8?
+
+## Table of Contents
+
+- [How ConcurrentHashMap Works Internally After Java 8?](#how-concurrenthashmap-works-internally-after-java-8)
+  - [ConcurrentHashMap Internal Structure After Java 8 :](#concurrenthashmap-internal-structure-after-java-8)
+    - [1) Core Internal Data Structures](#1-core-internal-data-structures)
+    - [2) Locking System](#2-locking-system)
+  - [How ConcurrentHashMap Works Internally After Java 8 :](#how-concurrenthashmap-works-internally-after-java-8-2)
+    - [2) Writing : put, remove, replace…](#2-writing-put-remove-replace)
+    - [3) Reading : get, containsKey, size…](#3-reading-get-containskey-size)
+
+---
+
 ConcurrentHashMap is a thread-safe implementation of Map interface. You can also say that ConcurrentHashMap is a thread-safe version of HashMap. ConcurrentHashMap is specially designed for use in highly multi threaded environment where frequent read/write operations are to be executed simultaneously. In this post, we will see ConcurrentHashMap internal structure after Java 8, ConcurrentHashMap internal locking system and how ConcurrentHashMap works internally after Java 8?
+
+[⬆ Back to top](#table-of-contents)
 
 ## ConcurrentHashMap Internal Structure After Java 8 :
 ConcurrentHashMap internally structured same as HashMap. ConcurrentHashMap also internally maintains an array of buckets where each bucket contains key-value pairs stored as linked list or as binary tree (Java 8+) if the number of key-value pairs in a bucket exceed TREEIFY_THRESHOLD.
 
 With addition to these things, ConcurrentHashMap maintains bucket level locking system to achieve the thread safeness. In the bucket level locking system, each bucket is locked. Any thread wants to perform write operations on a bucket, has to acquire the lock of that bucket and enter into it. Only one thread can enter into a bucket at any given time. Other threads which want to write on the same bucket have to wait. But, read operations are lock free. Any thread wants to read from a bucket, it can do so without acquiring the lock of that bucket.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Core Internal Data Structures
 ConcurrentHashMap internally maintains an array of Node<K, V> called table[] same as in HashMap. But here, table[] is declared as volatile which makes sure that any changes made to it by one thread are immediately visible to other threads.
@@ -19,6 +36,8 @@ transient volatile Node<K,V>[] table;
 * If it is binary tree, key-value pairs will be stored as instances of TreeNode<K, V> which is the subclass of Node<K, V>.
 
 The core internal data structure of ConcurrentHashMap is same as HashMap.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 2) Locking System
 After Java 8, ConcurrentHashMap uses two techniques to achieve the synchronization – CAS (Compare And Swap) technique and Fine Grained Locking System.
@@ -49,6 +68,8 @@ Below image best describes the ConcurrentHashMap Internal Structure after Java 8
 
 ![alt text](image-15.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## How ConcurrentHashMap Works Internally After Java 8 :
 
 **1) Resizing :**
@@ -72,6 +93,8 @@ sizeCtl, MIN_TRANSFER_STRIDE and transferIndex are three fields which are used b
 
 **Step 4 :** After all the buckets are transferred from old table to new table, new table replaces old table and old table is vanished.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2) Writing : put, remove, replace…
 Below is step by step process of write operations on a bucket.
 
@@ -93,5 +116,8 @@ If matching key is not found, a new node is inserted into linked list or a binar
 
 **Step 7 :** Finally, a thread releases the lock of the bucket.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3) Reading : get, containsKey, size…
 All read operations on ConcurrentHashMap are lock-free and non-blocking. Threads don’t need lock of a bucket to read. Read operations on a ConcurrentHashMap are volatile reads. Volatile reads extract recently written value from the memory. This makes sure that the threads will always get to see the most up-to-date value.
+[⬆ Back to top](#table-of-contents)

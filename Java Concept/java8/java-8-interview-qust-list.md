@@ -1,3 +1,455 @@
+## Table of Contents
+
+  - [**1. Functional Interfaces & Lambda Expressions**](#1-functional-interfaces-lambda-expressions)
+  - [**2. Streams API**](#2-streams-api)
+  - [**3. Optional Class**](#3-optional-class)
+  - [**4. Default & Static Methods in Interfaces**](#4-default-static-methods-in-interfaces)
+  - [**5. Method References**](#5-method-references)
+  - [**6. Date & Time API (java.time Package)**](#6-date-time-api-javatime-package)
+  - [**7. Parallel Streams**](#7-parallel-streams)
+  - [**8. Collectors API**](#8-collectors-api)
+  - [**9. CompletableFuture & Concurrency Enhancements**](#9-completablefuture-concurrency-enhancements)
+  - [**10. Miscellaneous**](#10-miscellaneous)
+- [Here are some **Java 8 programming interview questions** that require coding solutions:](#here-are-some-java-8-programming-interview-questions-that-require-coding-solutions)
+  - [**1. Reverse a List Using Java 8 Streams**](#1-reverse-a-list-using-java-8-streams)
+  - [**2. Find Duplicate Elements in a List**](#2-find-duplicate-elements-in-a-list)
+  - [**3. Find the First Non-Repeating Character in a String**](#3-find-the-first-non-repeating-character-in-a-string)
+  - [**4. Convert a List of Strings to Uppercase**](#4-convert-a-list-of-strings-to-uppercase)
+  - [**5. Sum of Even Numbers in a List**](#5-sum-of-even-numbers-in-a-list)
+  - [**6. Find the Second-Highest Number in a List**](#6-find-the-second-highest-number-in-a-list)
+  - [**7. Count the Frequency of Each Character in a String**](#7-count-the-frequency-of-each-character-in-a-string)
+  - [**8. Convert a List to a Map**](#8-convert-a-list-to-a-map)
+  - [**9. Check if a String is a Palindrome**](#9-check-if-a-string-is-a-palindrome)
+  - [**10. Find the Maximum Number in a List**](#10-find-the-maximum-number-in-a-list)
+- [Here are some **complex Java 8 coding interview questions** that require advanced knowledge of **Streams, Lambdas, Optional, Collectors, Parallel Streams, and Functional Programming**. 🚀](#here-are-some-complex-java-8-coding-interview-questions-that-require-advanced-knowledge-of-streams-lambdas-optional-collectors-parallel-streams-and-functional-programming)
+- [**1. Employee Salary Calculation (Grouping & Reduction)**](#1-employee-salary-calculation-grouping-reduction)
+- [**2. Find the Longest Word in a Sentence**](#2-find-the-longest-word-in-a-sentence)
+- [**3. Group Transactions by Currency and Sum Amounts**](#3-group-transactions-by-currency-and-sum-amounts)
+- [**4. Find Kth Largest Element in a List**](#4-find-kth-largest-element-in-a-list)
+- [**5. Convert Nested Lists into a Single Flattened List**](#5-convert-nested-lists-into-a-single-flattened-list)
+- [**6. Find the Most Frequent Word in a List**](#6-find-the-most-frequent-word-in-a-list)
+- [**7. Implement a Custom Comparator Using Lambda**](#7-implement-a-custom-comparator-using-lambda)
+- [**8. Find the First Repeated Character in a String**](#8-find-the-first-repeated-character-in-a-string)
+- [**9. Generate Fibonacci Series Using Stream API**](#9-generate-fibonacci-series-using-stream-api)
+- [**10. Parallel Stream Performance Optimization**](#10-parallel-stream-performance-optimization)
+- [Here is a **comprehensive list** of Java 8 **sorting interview questions**, covering different scenarios and techniques using **Streams, Lambdas, and Comparators**. 🚀](#here-is-a-comprehensive-list-of-java-8-sorting-interview-questions-covering-different-scenarios-and-techniques-using-streams-lambdas-and-comparators)
+- [**1. Sort a List of Integers in Ascending and Descending Order**](#1-sort-a-list-of-integers-in-ascending-and-descending-order)
+- [**2. Sort a List of Strings Alphabetically and by Length**](#2-sort-a-list-of-strings-alphabetically-and-by-length)
+- [**3. Sort a List of Custom Objects (Sorting by Single Field)**](#3-sort-a-list-of-custom-objects-sorting-by-single-field)
+- [**4. Sort a List of Custom Objects by Multiple Fields (Chained Sorting)**](#4-sort-a-list-of-custom-objects-by-multiple-fields-chained-sorting)
+- [**5. Sort a List of Strings Ignoring Case Sensitivity**](#5-sort-a-list-of-strings-ignoring-case-sensitivity)
+- [**6. Sort a Map by Keys and Values Using Java 8**](#6-sort-a-map-by-keys-and-values-using-java-8)
+- [**7. Sort a List in Reverse Order Using Comparator.reverseOrder()**](#7-sort-a-list-in-reverse-order-using-comparatorreverseorder)
+- [**8. Sort a List of Objects with Null Values (Null-Safe Sorting)**](#8-sort-a-list-of-objects-with-null-values-null-safe-sorting)
+- [**9. Sort a List of Dates in Java 8**](#9-sort-a-list-of-dates-in-java-8)
+- [**10. Sort a List Using Parallel Sorting (Efficient Sorting for Large Data)**](#10-sort-a-list-using-parallel-sorting-efficient-sorting-for-large-data)
+- [**11. Custom Sorting Using a Comparator with Lambda**](#11-custom-sorting-using-a-comparator-with-lambda)
+- [**12. Sort a List Using Stream.sorted() with Custom Comparator**](#12-sort-a-list-using-streamsorted-with-custom-comparator)
+- [### **Java 8 `Optional` Class - Coding Interview Questions** 🚀](#java-8-optional-class---coding-interview-questions)
+  - [**1. Convert a `String` to `Optional` and Handle Null Values**](#1-convert-a-string-to-optional-and-handle-null-values)
+  - [**2. Use `Optional` to Avoid `NullPointerException`**](#2-use-optional-to-avoid-nullpointerexception)
+  - [**3. Get Default Value Using `orElse()` and `orElseGet()`**](#3-get-default-value-using-orelse-and-orelseget)
+  - [**4. Find Maximum Value in a List Using `Optional`**](#4-find-maximum-value-in-a-list-using-optional)
+  - [**5. Check If a Value Exists Using `isPresent()`**](#5-check-if-a-value-exists-using-ispresent)
+  - [**6. Use `Optional` with `filter()` to Check a Condition**](#6-use-optional-with-filter-to-check-a-condition)
+  - [**7. Use `Optional` with `map()` and `flatMap()` for Nested Objects**](#7-use-optional-with-map-and-flatmap-for-nested-objects)
+  - [**8. Use `orElseThrow()` to Throw an Exception if Value is Absent**](#8-use-orelsethrow-to-throw-an-exception-if-value-is-absent)
+  - [**9. Find First Non-Empty `Optional` Using `Optional.ofNullable()`**](#9-find-first-non-empty-optional-using-optionalofnullable)
+  - [**10. Use `Optional` in Streams to Avoid `NullPointerException`**](#10-use-optional-in-streams-to-avoid-nullpointerexception)
+- [### **Java 8 Lambda Expressions - Coding Interview Questions** 🚀](#java-8-lambda-expressions---coding-interview-questions)
+- [**1. Implement a Functional Interface Using Lambda**](#1-implement-a-functional-interface-using-lambda)
+- [**2. Sort a List Using Lambda**](#2-sort-a-list-using-lambda)
+- [**3. Find Even Numbers in a List Using Lambda & Streams**](#3-find-even-numbers-in-a-list-using-lambda-streams)
+- [**4. Convert List of Strings to Uppercase Using Lambda**](#4-convert-list-of-strings-to-uppercase-using-lambda)
+- [**5. Find the First Name That Starts with "A" Using Lambda**](#5-find-the-first-name-that-starts-with-a-using-lambda)
+- [**6. Find the Sum of All Numbers in a List Using Lambda**](#6-find-the-sum-of-all-numbers-in-a-list-using-lambda)
+- [**7. Implement Runnable Using Lambda**](#7-implement-runnable-using-lambda)
+- [**8. Remove Null Values from a List Using Lambda**](#8-remove-null-values-from-a-list-using-lambda)
+- [**9. Count Names That Start with "J" Using Lambda**](#9-count-names-that-start-with-j-using-lambda)
+- [**10. Convert a List of Integers to a List of Strings Using Lambda**](#10-convert-a-list-of-integers-to-a-list-of-strings-using-lambda)
+- [**11. Find the Maximum Value in a List Using Lambda**](#11-find-the-maximum-value-in-a-list-using-lambda)
+- [**12. Find the Length of Each String in a List Using Lambda**](#12-find-the-length-of-each-string-in-a-list-using-lambda)
+- [**13. Find Distinct Elements in a List Using Lambda**](#13-find-distinct-elements-in-a-list-using-lambda)
+- [**14. Implement a Custom Comparator Using Lambda**](#14-implement-a-custom-comparator-using-lambda)
+- [**15. Convert a Map to a List Using Lambda**](#15-convert-a-map-to-a-list-using-lambda)
+- [### **Java 8 Functional Interface - Coding Interview Questions** 🚀](#java-8-functional-interface---coding-interview-questions)
+- [**1. Create a Custom Functional Interface**](#1-create-a-custom-functional-interface)
+- [**2. Use `Predicate` to Check If a Number is Even**](#2-use-predicate-to-check-if-a-number-is-even)
+- [**3. Use `Function` to Convert String to Uppercase**](#3-use-function-to-convert-string-to-uppercase)
+- [**4. Use `Consumer` to Print a List of Names**](#4-use-consumer-to-print-a-list-of-names)
+- [**5. Use `Supplier` to Generate a Random Number**](#5-use-supplier-to-generate-a-random-number)
+- [**6. Use `BiFunction` to Multiply Two Numbers**](#6-use-bifunction-to-multiply-two-numbers)
+- [**7. Use `UnaryOperator` to Square a Number**](#7-use-unaryoperator-to-square-a-number)
+- [**8. Use `BinaryOperator` for String Concatenation**](#8-use-binaryoperator-for-string-concatenation)
+- [**9. Implement `Comparator` Using a Functional Interface**](#9-implement-comparator-using-a-functional-interface)
+- [**10. Find Names Starting with "A" Using `Predicate`**](#10-find-names-starting-with-a-using-predicate)
+- [**11. Chain `Predicate` Functions**](#11-chain-predicate-functions)
+- [**12. Chain `Function` to Perform Two Operations**](#12-chain-function-to-perform-two-operations)
+- [**13. Use `Consumer` to Log a Message Before Execution**](#13-use-consumer-to-log-a-message-before-execution)
+- [**14. Use `BiPredicate` to Compare Two Numbers**](#14-use-bipredicate-to-compare-two-numbers)
+- [**15. Implement Custom Functional Interface With Lambda**](#15-implement-custom-functional-interface-with-lambda)
+- [### **Java 8 Streams - Coding Interview Questions** 🚀](#java-8-streams---coding-interview-questions)
+- [**1. Find Even Numbers Using Streams**](#1-find-even-numbers-using-streams)
+- [**2. Find the First Element Greater Than 10**](#2-find-the-first-element-greater-than-10)
+- [**3. Find the Maximum Number in a List**](#3-find-the-maximum-number-in-a-list)
+- [**4. Convert a List of Strings to Uppercase**](#4-convert-a-list-of-strings-to-uppercase-2)
+- [**5. Sort a List of Strings in Descending Order**](#5-sort-a-list-of-strings-in-descending-order)
+- [**6. Count the Number of Strings with Length Greater Than 4**](#6-count-the-number-of-strings-with-length-greater-than-4)
+- [**7. Find the Sum of All Numbers in a List**](#7-find-the-sum-of-all-numbers-in-a-list)
+- [**8. Find Distinct Elements in a List**](#8-find-distinct-elements-in-a-list)
+- [**9. Find Names Starting with "J"**](#9-find-names-starting-with-j)
+- [**10. Find the Average of a List of Numbers**](#10-find-the-average-of-a-list-of-numbers)
+- [**11. Convert a List of Strings to a Single Comma-Separated String**](#11-convert-a-list-of-strings-to-a-single-comma-separated-string)
+- [**12. Find the Second Largest Number in a List**](#12-find-the-second-largest-number-in-a-list)
+- [**13. Convert a List of Objects to a List of Strings Using Streams**](#13-convert-a-list-of-objects-to-a-list-of-strings-using-streams)
+- [**14. Find the First Non-Repeating Character in a String**](#14-find-the-first-non-repeating-character-in-a-string)
+- [**15. Convert a Map to a List of Keys Using Streams**](#15-convert-a-map-to-a-list-of-keys-using-streams)
+- [### **Java 8 Parallel Streams - Coding Interview Questions** 🚀](#java-8-parallel-streams---coding-interview-questions)
+- [**1. Convert a List to Parallel Stream and Filter Even Numbers**](#1-convert-a-list-to-parallel-stream-and-filter-even-numbers)
+- [**2. Find the Maximum Number Using Parallel Stream**](#2-find-the-maximum-number-using-parallel-stream)
+- [**3. Sum of All Elements Using Parallel Stream**](#3-sum-of-all-elements-using-parallel-stream)
+- [**4. Convert a List of Strings to Uppercase Using Parallel Stream**](#4-convert-a-list-of-strings-to-uppercase-using-parallel-stream)
+- [**5. Sort a List in Parallel**](#5-sort-a-list-in-parallel)
+- [**6. Find Distinct Elements Using Parallel Stream**](#6-find-distinct-elements-using-parallel-stream)
+- [**7. Count Elements Greater Than 10 Using Parallel Stream**](#7-count-elements-greater-than-10-using-parallel-stream)
+- [**8. Find the Average of a List of Numbers Using Parallel Stream**](#8-find-the-average-of-a-list-of-numbers-using-parallel-stream)
+- [**9. Convert a List of Strings to a Single Comma-Separated String Using Parallel Stream**](#9-convert-a-list-of-strings-to-a-single-comma-separated-string-using-parallel-stream)
+- [**10. Find the First Element Greater Than 50 Using Parallel Stream**](#10-find-the-first-element-greater-than-50-using-parallel-stream)
+- [**11. Convert a List of Objects to a List of Names Using Parallel Stream**](#11-convert-a-list-of-objects-to-a-list-of-names-using-parallel-stream)
+- [**12. Parallel Stream vs Sequential Stream Performance Test**](#12-parallel-stream-vs-sequential-stream-performance-test)
+- [**13. Use `forEachOrdered` with Parallel Stream**](#13-use-foreachordered-with-parallel-stream)
+- [**14. Convert a Map to a List of Values Using Parallel Stream**](#14-convert-a-map-to-a-list-of-values-using-parallel-stream)
+- [**15. Apply a Function to Each Element and Collect Results Using Parallel Stream**](#15-apply-a-function-to-each-element-and-collect-results-using-parallel-stream)
+- [### **Java 8 Parallel Streams - Coding Interview Questions** 🚀](#java-8-parallel-streams---coding-interview-questions-2)
+- [**1. Convert a List to Parallel Stream and Filter Even Numbers**](#1-convert-a-list-to-parallel-stream-and-filter-even-numbers-2)
+- [**2. Find the Maximum Number Using Parallel Stream**](#2-find-the-maximum-number-using-parallel-stream-2)
+- [**3. Sum of All Elements Using Parallel Stream**](#3-sum-of-all-elements-using-parallel-stream-2)
+- [**4. Convert a List of Strings to Uppercase Using Parallel Stream**](#4-convert-a-list-of-strings-to-uppercase-using-parallel-stream-2)
+- [**5. Sort a List in Parallel**](#5-sort-a-list-in-parallel-2)
+- [**6. Find Distinct Elements Using Parallel Stream**](#6-find-distinct-elements-using-parallel-stream-2)
+- [**7. Count Elements Greater Than 10 Using Parallel Stream**](#7-count-elements-greater-than-10-using-parallel-stream-2)
+- [**8. Find the Average of a List of Numbers Using Parallel Stream**](#8-find-the-average-of-a-list-of-numbers-using-parallel-stream-2)
+- [**9. Convert a List of Strings to a Single Comma-Separated String Using Parallel Stream**](#9-convert-a-list-of-strings-to-a-single-comma-separated-string-using-parallel-stream-2)
+- [**10. Find the First Element Greater Than 50 Using Parallel Stream**](#10-find-the-first-element-greater-than-50-using-parallel-stream-2)
+- [**11. Convert a List of Objects to a List of Names Using Parallel Stream**](#11-convert-a-list-of-objects-to-a-list-of-names-using-parallel-stream-2)
+- [**12. Parallel Stream vs Sequential Stream Performance Test**](#12-parallel-stream-vs-sequential-stream-performance-test-2)
+- [**13. Use `forEachOrdered` with Parallel Stream**](#13-use-foreachordered-with-parallel-stream-2)
+- [**14. Convert a Map to a List of Values Using Parallel Stream**](#14-convert-a-map-to-a-list-of-values-using-parallel-stream-2)
+- [**15. Apply a Function to Each Element and Collect Results Using Parallel Stream**](#15-apply-a-function-to-each-element-and-collect-results-using-parallel-stream-2)
+- [### **Java 8 `map()` Method - Interview Questions** 🚀](#java-8-map-method---interview-questions)
+  - [**1. Convert a List of Integers to Their Squares**](#1-convert-a-list-of-integers-to-their-squares)
+  - [**2. Convert a List of Strings to Uppercase**](#2-convert-a-list-of-strings-to-uppercase)
+  - [**3. Extract Name from a List of Objects**](#3-extract-name-from-a-list-of-objects)
+  - [**4. Convert a List of Strings to Their Lengths**](#4-convert-a-list-of-strings-to-their-lengths)
+  - [**5. Convert a List of Integers to a List of Their Double Values**](#5-convert-a-list-of-integers-to-a-list-of-their-double-values)
+  - [**6. Convert a List of Prices from INR to USD (Assume 1 INR = 0.012 USD)**](#6-convert-a-list-of-prices-from-inr-to-usd-assume-1-inr-0012-usd)
+  - [**7. Convert a List of Strings to a List of First Characters**](#7-convert-a-list-of-strings-to-a-list-of-first-characters)
+  - [**8. Extract Domain Names from Email Addresses**](#8-extract-domain-names-from-email-addresses)
+  - [**9. Convert a Map to a List of Values Using `map()`**](#9-convert-a-map-to-a-list-of-values-using-map)
+  - [**10. Convert a List of Dates to a List of Formatted Strings**](#10-convert-a-list-of-dates-to-a-list-of-formatted-strings)
+  - [**11. Find the Square Root of Numbers Using `map()`**](#11-find-the-square-root-of-numbers-using-map)
+  - [**12. Convert a List of Strings to a List of Integers**](#12-convert-a-list-of-strings-to-a-list-of-integers)
+  - [**13. Extract File Extensions from a List of Filenames**](#13-extract-file-extensions-from-a-list-of-filenames)
+  - [**14. Find the ASCII Values of Characters Using `map()`**](#14-find-the-ascii-values-of-characters-using-map)
+  - [**15. Handle Null Values Safely Using `Optional.map()`**](#15-handle-null-values-safely-using-optionalmap)
+- [### **Java 8 `flatMap()` - Interview Questions** 🚀](#java-8-flatmap---interview-questions)
+- [**1. Difference Between `map()` and `flatMap()`**](#1-difference-between-map-and-flatmap)
+- [**2. Flatten a List of Lists Using `flatMap()`**](#2-flatten-a-list-of-lists-using-flatmap)
+- [**3. Convert a List of Strings to a List of Characters Using `flatMap()`**](#3-convert-a-list-of-strings-to-a-list-of-characters-using-flatmap)
+- [**4. Flatten a List of Sentences Into a List of Words**](#4-flatten-a-list-of-sentences-into-a-list-of-words)
+- [**5. Extract All Unique Words from a List of Sentences Using `flatMap()`**](#5-extract-all-unique-words-from-a-list-of-sentences-using-flatmap)
+- [**6. Extract Phone Numbers from a List of Users Using `flatMap()`**](#6-extract-phone-numbers-from-a-list-of-users-using-flatmap)
+- [**7. Convert a List of `Optional<String>` to a List of Strings Using `flatMap()`**](#7-convert-a-list-of-optionalstring-to-a-list-of-strings-using-flatmap)
+- [**8. Flatten a List of `Optional<Integer>` Values Using `flatMap()`**](#8-flatten-a-list-of-optionalinteger-values-using-flatmap)
+- [**9. Flatten a List of Employee Departments into a Single List Using `flatMap()`**](#9-flatten-a-list-of-employee-departments-into-a-single-list-using-flatmap)
+- [**10. Flatten a Stream of Lists Using `flatMap()`**](#10-flatten-a-stream-of-lists-using-flatmap)
+- [**11. Find All Unique Characters in a List of Words Using `flatMap()`**](#11-find-all-unique-characters-in-a-list-of-words-using-flatmap)
+- [**12. Convert a List of Arrays to a Single Flattened List Using `flatMap()`**](#12-convert-a-list-of-arrays-to-a-single-flattened-list-using-flatmap)
+- [### **Java 8 Functional Interfaces Supporting Primitive Types - Interview Questions** 🚀](#java-8-functional-interfaces-supporting-primitive-types---interview-questions)
+- [**1. Find the Square of an Integer Using `IntFunction<R>`**](#1-find-the-square-of-an-integer-using-intfunctionr)
+- [**2. Convert an Integer to a String Using `IntFunction<String>`**](#2-convert-an-integer-to-a-string-using-intfunctionstring)
+- [**3. Print a List of Integers Using `IntConsumer`**](#3-print-a-list-of-integers-using-intconsumer)
+- [**4. Check If a Number Is Even Using `IntPredicate`**](#4-check-if-a-number-is-even-using-intpredicate)
+- [**5. Generate a Random Number Using `IntSupplier`**](#5-generate-a-random-number-using-intsupplier)
+- [**6. Double a Given Number Using `IntUnaryOperator`**](#6-double-a-given-number-using-intunaryoperator)
+- [**7. Find the Sum of Two Numbers Using `IntBinaryOperator`**](#7-find-the-sum-of-two-numbers-using-intbinaryoperator)
+- [**8. Find Maximum of Two Long Numbers Using `LongBinaryOperator`**](#8-find-maximum-of-two-long-numbers-using-longbinaryoperator)
+- [**9. Convert a Double Value to a String Using `DoubleFunction<String>`**](#9-convert-a-double-value-to-a-string-using-doublefunctionstring)
+- [**10. Filter Even Numbers from a List Using `IntPredicate`**](#10-filter-even-numbers-from-a-list-using-intpredicate)
+- [**11. Find Factorial of a Number Using `IntUnaryOperator`**](#11-find-factorial-of-a-number-using-intunaryoperator)
+- [**12. Check If a Number Is Prime Using `IntPredicate`**](#12-check-if-a-number-is-prime-using-intpredicate)
+- [**13. Convert a List of Integers to Their Squares Using `IntFunction<List<Integer>>`**](#13-convert-a-list-of-integers-to-their-squares-using-intfunctionlistinteger)
+- [**14. Find the Sum of an Array Using `IntBinaryOperator`**](#14-find-the-sum-of-an-array-using-intbinaryoperator)
+- [**15. Generate Fibonacci Sequence Using `IntSupplier`**](#15-generate-fibonacci-sequence-using-intsupplier)
+- [### **Avoiding Boxing and Unboxing with Java 8 Functional Interfaces for Primitives** 🚀](#avoiding-boxing-and-unboxing-with-java-8-functional-interfaces-for-primitives)
+    - [🔹 **What Is Boxing and Unboxing?**](#what-is-boxing-and-unboxing)
+    - [🔹 **Why Is Boxing/Unboxing a Problem?**](#why-is-boxingunboxing-a-problem)
+- [**💡 How Do Primitive Functional Interfaces Help?**](#how-do-primitive-functional-interfaces-help)
+  - [**🚀 Example: Without Primitive Functional Interface (Boxing & Unboxing Overhead)**](#example-without-primitive-functional-interface-boxing-unboxing-overhead)
+    - [❌ **Using `Function<Integer, Integer>` (Causes Boxing & Unboxing)**](#using-functioninteger-integer-causes-boxing-unboxing)
+  - [**🔴 Problem in Above Code**](#problem-in-above-code)
+  - [**✅ Optimized Code Using `IntFunction<R>` (Avoids Boxing & Unboxing)**](#optimized-code-using-intfunctionr-avoids-boxing-unboxing)
+  - [**🔵 Why This Is Better?**](#why-this-is-better)
+- [**✅ Functional Interfaces for Primitives and Their Benefits**](#functional-interfaces-for-primitives-and-their-benefits)
+- [**🚀 More Examples of Avoiding Boxing/Unboxing**](#more-examples-of-avoiding-boxingunboxing)
+  - [**1️⃣ Find Square of a Number Using `IntUnaryOperator` (No Boxing)**](#1-find-square-of-a-number-using-intunaryoperator-no-boxing)
+  - [**2️⃣ Print a List of Integers Using `IntConsumer` (No Boxing)**](#2-print-a-list-of-integers-using-intconsumer-no-boxing)
+  - [**3️⃣ Filter Even Numbers from a List Using `IntPredicate` (No Boxing)**](#3-filter-even-numbers-from-a-list-using-intpredicate-no-boxing)
+- [**🔥 Key Takeaways**](#key-takeaways)
+  - [**🔴 Without Primitive Functional Interface (Causes Boxing & Unboxing)**](#without-primitive-functional-interface-causes-boxing-unboxing)
+  - [**✅ Using `IntUnaryOperator` (Avoids Boxing & Unboxing)**](#using-intunaryoperator-avoids-boxing-unboxing)
+- [### **Java 8 Default Method - Coding Interview Questions** 🚀](#java-8-default-method---coding-interview-questions)
+  - [**1️⃣ Define and Use a Default Method in an Interface**](#1-define-and-use-a-default-method-in-an-interface)
+  - [**2️⃣ Override a Default Method in a Class**](#2-override-a-default-method-in-a-class)
+  - [**3️⃣ Multiple Interfaces with Same Default Method - How to Resolve Conflict?**](#3-multiple-interfaces-with-same-default-method---how-to-resolve-conflict)
+  - [**4️⃣ Call a Default Method from a Subclass**](#4-call-a-default-method-from-a-subclass)
+  - [**5️⃣ Use a Default Method in Functional Interface**](#5-use-a-default-method-in-functional-interface)
+  - [**6️⃣ Modify a Default Method in a Sub-interface**](#6-modify-a-default-method-in-a-sub-interface)
+  - [**7️⃣ Using Default Method in Java 8 Streams**](#7-using-default-method-in-java-8-streams)
+  - [**8️⃣ Prevent a Class from Using a Default Method**](#8-prevent-a-class-from-using-a-default-method)
+  - [**9️⃣ Default Methods in Multiple Inheritance**](#9-default-methods-in-multiple-inheritance)
+  - [**🔟 Default Methods and Static Methods in an Interface**](#default-methods-and-static-methods-in-an-interface)
+- [**🔥 Summary of Java 8 Default Methods Concepts:**](#summary-of-java-8-default-methods-concepts)
+- [### **Java 8 Default Method - Scenario-Based Interview Questions** 🚀](#java-8-default-method---scenario-based-interview-questions)
+- [**🔹 Scenario 1: Adding New Features to an Existing Interface Without Breaking Old Code**](#scenario-1-adding-new-features-to-an-existing-interface-without-breaking-old-code)
+- [**🔹 Scenario 2: Resolving Conflict When Implementing Multiple Interfaces with Same Default Method**](#scenario-2-resolving-conflict-when-implementing-multiple-interfaces-with-same-default-method)
+- [**🔹 Scenario 3: Calling Default Methods from Implementing Class**](#scenario-3-calling-default-methods-from-implementing-class)
+- [**🔹 Scenario 4: Default Method in a Functional Interface**](#scenario-4-default-method-in-a-functional-interface)
+- [**🔹 Scenario 5: Overriding a Default Method in a Sub-interface**](#scenario-5-overriding-a-default-method-in-a-sub-interface)
+- [**🔹 Scenario 6: Preventing a Class from Using a Default Method**](#scenario-6-preventing-a-class-from-using-a-default-method)
+- [**🔹 Scenario 7: Superclass vs. Interface Default Method Conflict**](#scenario-7-superclass-vs-interface-default-method-conflict)
+- [**🔹 Scenario 8: Using Default Methods in Java 8 Streams**](#scenario-8-using-default-methods-in-java-8-streams)
+- [**🔹 Scenario 9: Static vs. Default Methods in Interfaces**](#scenario-9-static-vs-default-methods-in-interfaces)
+- [**🔹 Scenario 10: Can Default Methods Call Other Abstract Methods?**](#scenario-10-can-default-methods-call-other-abstract-methods)
+- [**🔥 Key Takeaways on Java 8 Default Methods:**](#key-takeaways-on-java-8-default-methods)
+- [### **Java 8 `reduce()` - Counting, Average, Max & Min in Streams** 🚀](#java-8-reduce---counting-average-max-min-in-streams)
+- [**🔹 1. Counting Elements Using `reduce()`**](#1-counting-elements-using-reduce)
+  - [**✅ Solution:**](#solution)
+- [**🔹 2. Calculating Average Using `reduce()`**](#2-calculating-average-using-reduce)
+  - [**✅ Solution:**](#solution-2)
+- [**🔹 3. Finding Maximum Using `reduce()`**](#3-finding-maximum-using-reduce)
+  - [**✅ Solution:**](#solution-3)
+- [**🔹 4. Finding Minimum Using `reduce()`**](#4-finding-minimum-using-reduce)
+  - [**✅ Solution:**](#solution-4)
+- [**🔹 5. Sum of Numbers Using `reduce()`**](#5-sum-of-numbers-using-reduce)
+  - [**✅ Solution:**](#solution-5)
+- [**🔹 6. Finding Product of Elements Using `reduce()`**](#6-finding-product-of-elements-using-reduce)
+  - [**✅ Solution:**](#solution-6)
+- [**🔹 7. Concatenating Strings Using `reduce()`**](#7-concatenating-strings-using-reduce)
+  - [**✅ Solution:**](#solution-7)
+- [**🔥 Summary**](#summary)
+- [### **Java 8 `Collector` Interface – All Functions Explained with Examples** 🚀](#java-8-collector-interface-all-functions-explained-with-examples)
+    - [✅ **Key Collector Functions:**](#key-collector-functions)
+- [**1️⃣ Using `Collectors.toList()` – Convert Stream to List**](#1-using-collectorstolist-convert-stream-to-list)
+- [**2️⃣ Using `Collectors.toSet()` – Convert Stream to Set**](#2-using-collectorstoset-convert-stream-to-set)
+- [**3️⃣ Using `Collectors.toMap()` – Convert Stream to Map**](#3-using-collectorstomap-convert-stream-to-map)
+- [**4️⃣ Using `Collectors.joining()` – Concatenating Strings**](#4-using-collectorsjoining-concatenating-strings)
+- [**5️⃣ Using `Collectors.summarizingInt()` – Summary Statistics**](#5-using-collectorssummarizingint-summary-statistics)
+- [**6️⃣ Using `Collectors.partitioningBy()` – Partition Data**](#6-using-collectorspartitioningby-partition-data)
+- [**7️⃣ Using `Collectors.groupingBy()` – Group Data**](#7-using-collectorsgroupingby-group-data)
+- [**8️⃣ Using `Collectors.counting()` – Count Elements**](#8-using-collectorscounting-count-elements)
+- [**🔥 Summary: Collectors Functions**](#summary-collectors-functions)
+- [### **Java `Collector` Interface - Four Core Functions Explained** 🚀](#java-collector-interface---four-core-functions-explained)
+- [**1️⃣ `supplier()` – Creates a New Container**](#1-supplier-creates-a-new-container)
+  - [**Example: Creating a `List`**](#example-creating-a-list)
+- [**2️⃣ `accumulator()` – Adds Elements to the Container**](#2-accumulator-adds-elements-to-the-container)
+  - [**Example: Adding Elements to a `List`**](#example-adding-elements-to-a-list)
+- [**3️⃣ `combiner()` – Merges Two Partial Results**](#3-combiner-merges-two-partial-results)
+  - [**Example: Merging Two Lists**](#example-merging-two-lists)
+- [**4️⃣ `finisher()` – Transforms the Result (Optional)**](#4-finisher-transforms-the-result-optional)
+  - [**Example: Returning an Unmodifiable List**](#example-returning-an-unmodifiable-list)
+- [**📌 Example: Custom Collector Using All Four Functions**](#example-custom-collector-using-all-four-functions)
+  - [**✅ Solution:**](#solution-8)
+- [**🔥 Summary Table**](#summary-table)
+- [### **`Stream.of(T t)` - Creating a Stream with a Single Element** 🚀](#streamoft-t---creating-a-stream-with-a-single-element)
+- [**📌 Syntax**](#syntax)
+- [**✅ Example 1: Creating a Single-Element Stream**](#example-1-creating-a-single-element-stream)
+  - [**📝 Output:**](#output)
+- [**✅ Example 2: Applying Stream Operations on a Single Element**](#example-2-applying-stream-operations-on-a-single-element)
+  - [**📝 Output:**](#output-2)
+- [**✅ Example 3: Using `Stream.of()` with `Optional`**](#example-3-using-streamof-with-optional)
+  - [**📝 Output:**](#output-3)
+- [**🔥 Key Takeaways**](#key-takeaways-2)
+- [### **`Stream.of(Optional<T>.get())` - Explanation with Example** 🚀](#streamofoptionaltget---explanation-with-example)
+  - [**⚠️ Important Warning:**](#important-warning)
+- [**❌ Incorrect Approach: Using `Optional.get()` Directly**](#incorrect-approach-using-optionalget-directly)
+  - [**🛑 Output (Exception)**](#output-exception)
+- [**✅ Correct Approach: Using `Optional.orElse()`**](#correct-approach-using-optionalorelse)
+  - [**📝 Output:**](#output-4)
+- [**✅ Best Approach: Using `optional.stream()` (Preferred)**](#best-approach-using-optionalstream-preferred)
+  - [**📝 Output:**](#output-5)
+  - [**🔥 Key Takeaways**](#key-takeaways-3)
+  - [**🚀 Final Recommendation:** **Always use `optional.stream()` instead of `Stream.of(optional.get())` for safe and functional programming in Java 8+!**](#final-recommendation-always-use-optionalstream-instead-of-streamofoptionalget-for-safe-and-functional-programming-in-java-8)
+- [### **`Collectors.toCollection()` - Explanation with Examples** 🚀](#collectorstocollection---explanation-with-examples)
+- [**📌 Syntax**](#syntax-2)
+- [**✅ 1. Collecting Elements into an `ArrayList`**](#1-collecting-elements-into-an-arraylist)
+- [**✅ 2. Collecting Elements into a `LinkedList`**](#2-collecting-elements-into-a-linkedlist)
+- [**✅ 3. Collecting Elements into a `HashSet`**](#3-collecting-elements-into-a-hashset)
+- [**✅ 4. Collecting Elements into a `TreeSet` (Sorted Order)**](#4-collecting-elements-into-a-treeset-sorted-order)
+- [**✅ 5. Collecting Elements into a `LinkedHashSet` (Maintains Insertion Order)**](#5-collecting-elements-into-a-linkedhashset-maintains-insertion-order)
+- [**✅ 6. Collecting Elements into a `PriorityQueue`**](#6-collecting-elements-into-a-priorityqueue)
+- [**⚠️ Can We Use `Collectors.toCollection()` to Collect into a `Map`?**](#can-we-use-collectorstocollection-to-collect-into-a-map)
+- [**🔥 Summary Table of `Collectors.toCollection()` Usage**](#summary-table-of-collectorstocollection-usage)
+- [**🎯 Key Takeaways**](#key-takeaways-4)
+- [**`Comparator` Class Utility Methods in Java (Up to Java 8)** 🚀](#comparator-class-utility-methods-in-java-up-to-java-8)
+- [**✅ 1. `comparing()` - Creates a Comparator for an Object Field**](#1-comparing---creates-a-comparator-for-an-object-field)
+- [**✅ 2. `comparingInt()`, `comparingLong()`, `comparingDouble()` - Primitive Comparisons**](#2-comparingint-comparinglong-comparingdouble---primitive-comparisons)
+- [**✅ 3. `thenComparing()` - Secondary Sorting**](#3-thencomparing---secondary-sorting)
+- [**✅ 4. `reverseOrder()` - Reverse Natural Ordering**](#4-reverseorder---reverse-natural-ordering)
+- [**✅ 5. `naturalOrder()` - Sorting in Ascending Order**](#5-naturalorder---sorting-in-ascending-order)
+- [**✅ 6. `nullsFirst()` & `nullsLast()` - Handling `null` Values**](#6-nullsfirst-nullslast---handling-null-values)
+- [**🔥 Summary Table**](#summary-table-2)
+- [**🎯 Key Takeaways**](#key-takeaways-5)
+- [**`Comparator.naturalOrder()`**](#comparatornaturalorder)
+- [**`Comparator.reverseOrder()`**](#comparatorreverseorder)
+- [**🚀 Key Differences**](#key-differences)
+- [**🎯 Key Takeaways**](#key-takeaways-6)
+  - [**Java 8 `Collectors` Class - All Utility Methods with Examples** 🚀](#java-8-collectors-class---all-utility-methods-with-examples)
+- [**📌 1. Collecting into a List, Set, or Map**](#1-collecting-into-a-list-set-or-map)
+  - [**✅ `toList()` - Collects Elements into a List**](#tolist---collects-elements-into-a-list)
+  - [**✅ `toSet()` - Collects Elements into a Set**](#toset---collects-elements-into-a-set)
+  - [**✅ `toMap()` - Collects Elements into a Map**](#tomap---collects-elements-into-a-map)
+- [**📌 2. Grouping and Partitioning**](#2-grouping-and-partitioning)
+  - [**✅ `groupingBy()` - Groups Elements by a Key**](#groupingby---groups-elements-by-a-key)
+  - [**✅ `partitioningBy()` - Splits Data into Two Groups (Boolean Predicate)**](#partitioningby---splits-data-into-two-groups-boolean-predicate)
+- [**📌 3. Reducing and Summarizing**](#3-reducing-and-summarizing)
+  - [**✅ `counting()` - Counts the Number of Elements**](#counting---counts-the-number-of-elements)
+  - [**✅ `summarizingInt()` / `summarizingDouble()` / `summarizingLong()` - Summary Statistics**](#summarizingint-summarizingdouble-summarizinglong---summary-statistics)
+  - [**✅ `reducing()` - Custom Reduction**](#reducing---custom-reduction)
+- [**📌 4. Joining Strings**](#4-joining-strings)
+  - [**✅ `joining()` - Concatenates Strings**](#joining---concatenates-strings)
+- [**📌 5. Mapping & Collecting**](#5-mapping-collecting)
+  - [**✅ `mapping()` - Transforms Elements Before Collecting**](#mapping---transforms-elements-before-collecting)
+- [**📌 6. Collecting into Custom Collections**](#6-collecting-into-custom-collections)
+  - [**✅ `toCollection()` - Collecting into a Specific Collection Type**](#tocollection---collecting-into-a-specific-collection-type)
+- [**📌 Summary Table**](#summary-table-3)
+- [**🔥 Key Takeaways**](#key-takeaways-7)
+- [**`Collectors.collectingAndThen()` - Java 8 Explained with Examples** 🚀](#collectorscollectingandthen---java-8-explained-with-examples)
+  - [**📌 What is `collectingAndThen()`?**](#what-is-collectingandthen)
+  - [**📌 Method Signature:**](#method-signature)
+  - [**📌 Key Points:**](#key-points)
+- [**1️⃣ Example: Collect List and Make it Immutable**](#1-example-collect-list-and-make-it-immutable)
+  - [✅ **Use Case: Prevent Modification After Collection**](#use-case-prevent-modification-after-collection)
+- [**2️⃣ Example: Get Maximum Value Using CollectingAndThen**](#2-example-get-maximum-value-using-collectingandthen)
+  - [✅ **Use Case: Find Maximum Element Using a Comparator**](#use-case-find-maximum-element-using-a-comparator)
+- [**3️⃣ Example: Counting Elements and Converting to String**](#3-example-counting-elements-and-converting-to-string)
+  - [✅ **Use Case: Get Number of Elements as String**](#use-case-get-number-of-elements-as-string)
+- [**4️⃣ Example: Collect into a Custom Collection**](#4-example-collect-into-a-custom-collection)
+  - [✅ **Use Case: Collect as `TreeSet` (Sorted Order)**](#use-case-collect-as-treeset-sorted-order)
+- [**5️⃣ Example: Convert List to Comma-Separated String**](#5-example-convert-list-to-comma-separated-string)
+  - [✅ **Use Case: Format List as a String**](#use-case-format-list-as-a-string)
+- [**6️⃣ Example: Convert List to Uppercase After Collection**](#6-example-convert-list-to-uppercase-after-collection)
+  - [✅ **Use Case: Modify List After Collection**](#use-case-modify-list-after-collection)
+- [**🔥 Summary of Use Cases**](#summary-of-use-cases)
+  - [**🚀 Key Takeaways**](#key-takeaways-8)
+- [**🎯 Interview Question**](#interview-question)
+- [## **📌 Complete List of Utility Methods in `Collectors` Class (Java 8+)**](#complete-list-of-utility-methods-in-collectors-class-java-8)
+- [**🔹 List of All Utility Methods in `Collectors`**](#list-of-all-utility-methods-in-collectors)
+  - [**1️⃣ Basic Collection Methods**](#1-basic-collection-methods)
+  - [**2️⃣ Counting and Summarization**](#2-counting-and-summarization)
+  - [**3️⃣ Finding Min & Max**](#3-finding-min-max)
+  - [**4️⃣ String Joining**](#4-string-joining)
+  - [**5️⃣ Grouping and Partitioning**](#5-grouping-and-partitioning)
+  - [**6️⃣ Custom Collection Transformation**](#6-custom-collection-transformation)
+- [**🚀 Example Usage of Each Method**](#example-usage-of-each-method)
+  - [**1️⃣ Collecting into List, Set, and Map**](#1-collecting-into-list-set-and-map)
+  - [**2️⃣ Counting and Summing**](#2-counting-and-summing)
+  - [**3️⃣ Grouping and Partitioning**](#3-grouping-and-partitioning)
+  - [**4️⃣ `collectingAndThen()` - Convert List to Unmodifiable List**](#4-collectingandthen---convert-list-to-unmodifiable-list)
+- [**🔥 Summary Table**](#summary-table-4)
+- [# **📌 `Stream.collect()` Variations Based on Supplied Collector in Java 8+**](#streamcollect-variations-based-on-supplied-collector-in-java-8)
+- [**🚀 Syntax of `collect()`**](#syntax-of-collect)
+- [**🔹 Different `collect()` Variations Based on Supplied `Collector`**](#different-collect-variations-based-on-supplied-collector)
+  - [**1️⃣ Collect Elements into a `List`**](#1-collect-elements-into-a-list)
+  - [**2️⃣ Collect Elements into a `Set`**](#2-collect-elements-into-a-set)
+  - [**3️⃣ Collect Elements into a `Map`**](#3-collect-elements-into-a-map)
+  - [**4️⃣ Collect Elements into an Immutable List**](#4-collect-elements-into-an-immutable-list)
+  - [**5️⃣ Counting Elements in a Stream**](#5-counting-elements-in-a-stream)
+  - [**6️⃣ Joining Strings with a Delimiter**](#6-joining-strings-with-a-delimiter)
+  - [**7️⃣ Finding the Maximum or Minimum Element**](#7-finding-the-maximum-or-minimum-element)
+  - [**8️⃣ Summing or Averaging Numbers**](#8-summing-or-averaging-numbers)
+  - [**9️⃣ Grouping Elements Using `groupingBy()`**](#9-grouping-elements-using-groupingby)
+  - [**🔟 Partitioning Elements Using `partitioningBy()`**](#partitioning-elements-using-partitioningby)
+- [**🔥 Summary of `collect()` Variations**](#summary-of-collect-variations)
+- [## **📌 Complete List of Methods in `Stream` Class (Java 8+)**](#complete-list-of-methods-in-stream-class-java-8)
+- [**🔹 List of All Methods in `Stream` Interface**](#list-of-all-methods-in-stream-interface)
+  - [**1️⃣ Stream Creation**](#1-stream-creation)
+  - [**2️⃣ Filtering & Matching**](#2-filtering-matching)
+  - [**3️⃣ Transforming Elements**](#3-transforming-elements)
+  - [**4️⃣ Sorting & Limiting**](#4-sorting-limiting)
+  - [**5️⃣ Reducing & Collecting**](#5-reducing-collecting)
+  - [**6️⃣ Parallel Processing**](#6-parallel-processing)
+  - [**7️⃣ Terminal Operations (ForEach & Iteration)**](#7-terminal-operations-foreach-iteration)
+  - [**8️⃣ Converting Stream to an Array**](#8-converting-stream-to-an-array)
+  - [**9️⃣ Short-Circuiting Methods**](#9-short-circuiting-methods)
+- [**🚀 Examples for Each Type of Method**](#examples-for-each-type-of-method)
+  - [**1️⃣ Creating Streams**](#1-creating-streams)
+  - [**2️⃣ Filtering & Matching**](#2-filtering-matching-2)
+  - [**3️⃣ Transforming with `map()`**](#3-transforming-with-map)
+  - [**4️⃣ Sorting & Limiting**](#4-sorting-limiting-2)
+  - [**5️⃣ Reducing Elements**](#5-reducing-elements)
+  - [**6️⃣ Collecting into a List**](#6-collecting-into-a-list)
+  - [**7️⃣ Parallel Processing**](#7-parallel-processing)
+- [**🔥 Summary Table of `Stream` Methods**](#summary-table-of-stream-methods)
+- [**Merging Two Maps Using `Map.merge()` and Anonymous Inner Class in Java 8**](#merging-two-maps-using-mapmerge-and-anonymous-inner-class-in-java-8)
+- [**📌 Syntax of `merge()`**](#syntax-of-merge)
+- [**🚀 Example: Merging Two Maps with `Map.merge()` and Anonymous Inner Class**](#example-merging-two-maps-with-mapmerge-and-anonymous-inner-class)
+- [**🔹 Explanation**](#explanation)
+- [**💡 Alternative: Using Lambda Expression**](#alternative-using-lambda-expression)
+- [## **📌 `Collectors.toMap()` - All Variants and Examples in Java 8**](#collectorstomap---all-variants-and-examples-in-java-8)
+- [**📌 1️⃣ Basic Syntax: `toMap(KeyMapper, ValueMapper)`**](#1-basic-syntax-tomapkeymapper-valuemapper)
+  - [**🚀 Example**](#example)
+- [**📌 2️⃣ Handling Duplicate Keys: `toMap(KeyMapper, ValueMapper, MergeFunction)`**](#2-handling-duplicate-keys-tomapkeymapper-valuemapper-mergefunction)
+  - [**🚀 Example (Handling Duplicate Keys)**](#example-handling-duplicate-keys)
+- [**📌 3️⃣ Using a Specific `Map` Type: `toMap(KeyMapper, ValueMapper, MergeFunction, MapSupplier)`**](#3-using-a-specific-map-type-tomapkeymapper-valuemapper-mergefunction-mapsupplier)
+  - [**🚀 Example (Using `LinkedHashMap` for Order)**](#example-using-linkedhashmap-for-order)
+- [**📌 4️⃣ Handling Null Values in `toMap()`**](#4-handling-null-values-in-tomap)
+  - [**🚀 Example (Handling Nulls)**](#example-handling-nulls)
+- [**🔹 Summary Table of `toMap()` Variants**](#summary-table-of-tomap-variants)
+- [**🔥 Key Takeaways**](#key-takeaways-9)
+- [## **📌 `Stream.concat()` in Java 8**](#streamconcat-in-java-8)
+- [**📌 Syntax**](#syntax-3)
+  - [**🔹 Parameters**](#parameters)
+  - [**🔹 Returns**](#returns)
+  - [**🔹 Important Notes**](#important-notes)
+- [**📌 Example 1: Merging Two Streams of Strings**](#example-1-merging-two-streams-of-strings)
+  - [**🔹 Output**](#output-6)
+- [**📌 Example 2: Concatenating Streams with Different Data Types**](#example-2-concatenating-streams-with-different-data-types)
+  - [**🔹 Output**](#output-7)
+- [**📌 Example 3: Handling Empty Streams**](#example-3-handling-empty-streams)
+  - [**🔹 Output**](#output-8)
+- [**📌 Example 4: Using `Stream.concat()` Multiple Times**](#example-4-using-streamconcat-multiple-times)
+  - [**🔹 Output**](#output-9)
+- [**📌 Example 5: Avoiding `IllegalStateException`**](#example-5-avoiding-illegalstateexception)
+- [**📌 Alternative to `Stream.concat()`**](#alternative-to-streamconcat)
+- [**✅ Summary of `Stream.concat()`**](#summary-of-streamconcat)
+- [## **Merging Two Maps Using `Stream.concat()` and Anonymous Inner Class in Java 8**](#merging-two-maps-using-streamconcat-and-anonymous-inner-class-in-java-8)
+- [**📌 Example: Merging Two Maps with `Stream.concat()` and Anonymous Inner Class**](#example-merging-two-maps-with-streamconcat-and-anonymous-inner-class)
+- [**🔹 Explanation**](#explanation-2)
+- [**🔹 Output**](#output-10)
+- [**✅ Alternative Using Lambda (More Concise)**](#alternative-using-lambda-more-concise)
+- [**🚀 Key Takeaways**](#key-takeaways-10)
+- [## **Merging Two Maps Using `Stream.concat()`, `toMap()` with `MapSupplier`, and an Anonymous Inner Class in Java 8**](#merging-two-maps-using-streamconcat-tomap-with-mapsupplier-and-an-anonymous-inner-class-in-java-8)
+  - [**📌 Example: Merging Two Maps into a `LinkedHashMap` (Maintaining Order)**](#example-merging-two-maps-into-a-linkedhashmap-maintaining-order)
+- [**🔹 Explanation**](#explanation-3)
+- [**🔹 Output**](#output-11)
+- [**✅ Alternative Using Lambda for Merge Function**](#alternative-using-lambda-for-merge-function)
+- [**🔥 Key Takeaways**](#key-takeaways-11)
+- [## **Merging Two Maps with Same Keys in Java 8**](#merging-two-maps-with-same-keys-in-java-8)
+- [**📌 Approach 1: Using `Stream.concat()` and `Collectors.toMap()`**](#approach-1-using-streamconcat-and-collectorstomap)
+  - [**🔹 Output**](#output-12)
+- [**📌 Approach 2: Using `Map.merge()`**](#approach-2-using-mapmerge)
+  - [**🔹 Output**](#output-13)
+- [**📌 Approach 3: Using `Collectors.toMap()` with a Custom Map (LinkedHashMap)**](#approach-3-using-collectorstomap-with-a-custom-map-linkedhashmap)
+  - [**🔹 Output**](#output-14)
+- [**📌 Approach 4: Using Java 8 `reduce()`**](#approach-4-using-java-8-reduce)
+  - [**🔹 Output**](#output-15)
+- [**🔥 Comparison of Methods**](#comparison-of-methods)
+- [**✅ Best Choice Based on Use Case**](#best-choice-based-on-use-case)
+- [**🚀 Summary**](#summary-2)
+
+---
+
 Here’s a list of commonly asked **Java 8** interview questions for a verbal interview:  
 
 ---
@@ -11,6 +463,8 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2. Streams API**  
 - What are **Streams** in Java 8?  
 - How is a Stream different from a Collection?  
@@ -23,6 +477,8 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3. Optional Class**  
 - What is the purpose of **Optional** in Java 8?  
 - How do you avoid **NullPointerException** using Optional?  
@@ -30,6 +486,8 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 - What is the purpose of **ifPresent()** in Optional?  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **4. Default & Static Methods in Interfaces**  
 - What are **default methods** in Java 8 interfaces?  
@@ -40,12 +498,16 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **5. Method References**  
 - What are **method references** in Java 8?  
 - What are the different types of method references?  
 - How do you convert a lambda expression into a method reference?  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **6. Date & Time API (java.time Package)**  
 - What are the improvements in Java 8’s Date and Time API?  
@@ -55,12 +517,16 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **7. Parallel Streams**  
 - What is a **parallel stream** in Java 8?  
 - How do parallel streams improve performance?  
 - What are some pitfalls of using parallel streams?  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **8. Collectors API**  
 - What is the **Collectors** utility class?  
@@ -69,6 +535,8 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **9. CompletableFuture & Concurrency Enhancements**  
 - What is **CompletableFuture** in Java 8?  
 - How does **CompletableFuture** improve asynchronous programming?  
@@ -76,14 +544,20 @@ Here’s a list of commonly asked **Java 8** interview questions for a verbal in
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **10. Miscellaneous**  
 - What are the key differences between Java 7 and Java 8?  
 - Why is Java 8 considered a major release?  
 - Can you use Java 8 features in older versions of Java?  
 
+[⬆ Back to top](#table-of-contents)
+
 ## Here are some **Java 8 programming interview questions** that require coding solutions:  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1. Reverse a List Using Java 8 Streams**  
 💡 **Question:** Given a list of integers, reverse the list using Java 8 Streams.  
@@ -95,6 +569,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2. Find Duplicate Elements in a List**  
 💡 **Question:** Given a list of integers, find the duplicate elements using Java 8 Streams.  
 ```java
@@ -104,6 +580,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 2, 3, 6, 7, 8, 1);
 🔹 **Expected Output:** `[1, 2, 3]`  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3. Find the First Non-Repeating Character in a String**  
 💡 **Question:** Given a string, find the first non-repeating character using Java 8 Streams.  
@@ -115,6 +593,8 @@ String input = "swiss";
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4. Convert a List of Strings to Uppercase**  
 💡 **Question:** Given a list of strings, convert each string to uppercase using Java 8 Streams.  
 ```java
@@ -124,6 +604,8 @@ List<String> names = Arrays.asList("apple", "banana", "cherry");
 🔹 **Expected Output:** `["APPLE", "BANANA", "CHERRY"]`  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5. Sum of Even Numbers in a List**  
 💡 **Question:** Given a list of integers, find the sum of all even numbers using Java 8 Streams.  
@@ -135,6 +617,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6. Find the Second-Highest Number in a List**  
 💡 **Question:** Given a list of integers, find the second-highest number using Java 8 Streams.  
 ```java
@@ -144,6 +628,8 @@ List<Integer> numbers = Arrays.asList(5, 8, 12, 7, 19, 21, 19);
 🔹 **Expected Output:** `19`  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7. Count the Frequency of Each Character in a String**  
 💡 **Question:** Given a string, count the occurrences of each character using Java 8 Streams.  
@@ -155,6 +641,8 @@ String input = "hello world";
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **8. Convert a List to a Map**  
 💡 **Question:** Given a list of strings, convert it to a map where the key is the string and the value is its length.  
 ```java
@@ -164,6 +652,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 🔹 **Expected Output:** `{apple=5, banana=6, cherry=6}`  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **9. Check if a String is a Palindrome**  
 💡 **Question:** Given a string, check if it is a palindrome using Java 8 features.  
@@ -175,6 +665,8 @@ String input = "madam";
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **10. Find the Maximum Number in a List**  
 💡 **Question:** Given a list of integers, find the maximum number using Java 8 Streams.  
 ```java
@@ -185,9 +677,13 @@ List<Integer> numbers = Arrays.asList(10, 23, 45, 78, 96, 45, 12);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Here are some **complex Java 8 coding interview questions** that require advanced knowledge of **Streams, Lambdas, Optional, Collectors, Parallel Streams, and Functional Programming**. 🚀  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Employee Salary Calculation (Grouping & Reduction)**
 💡 **Question:**  
@@ -226,6 +722,8 @@ Finance -> 6000
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2. Find the Longest Word in a Sentence**
 💡 **Question:**  
 Given a sentence, find the **longest word** using Java 8 Streams.
@@ -240,6 +738,8 @@ programming
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3. Group Transactions by Currency and Sum Amounts**
 💡 **Question:**  
@@ -276,6 +776,8 @@ GBP -> 700
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4. Find Kth Largest Element in a List**
 💡 **Question:**  
 Given a list of integers, find the **Kth largest element** using Java 8 Streams.
@@ -291,6 +793,8 @@ int k = 3;
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5. Convert Nested Lists into a Single Flattened List**
 💡 **Question:**  
@@ -311,6 +815,8 @@ List<List<Integer>> nestedList = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6. Find the Most Frequent Word in a List**
 💡 **Question:**  
 Given a list of words, find the most frequently occurring word using Java 8 Streams.
@@ -325,6 +831,8 @@ apple
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **7. Implement a Custom Comparator Using Lambda**
 💡 **Question:**  
@@ -359,6 +867,8 @@ Bob (30)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **8. Find the First Repeated Character in a String**
 💡 **Question:**  
 Given a string, find the first character that appears more than once.
@@ -374,6 +884,8 @@ r
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **9. Generate Fibonacci Series Using Stream API**
 💡 **Question:**  
 Write a Java 8 program to generate the **first N Fibonacci numbers** using `Stream.iterate()`.
@@ -388,6 +900,8 @@ int N = 10;
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **10. Parallel Stream Performance Optimization**
 💡 **Question:**  
@@ -405,9 +919,13 @@ Sum = 500000500000
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Here is a **comprehensive list** of Java 8 **sorting interview questions**, covering different scenarios and techniques using **Streams, Lambdas, and Comparators**. 🚀  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Sort a List of Integers in Ascending and Descending Order**  
 💡 **Question:** Given a list of integers, sort it in **ascending** and **descending** order using Java 8 Streams.  
@@ -424,6 +942,8 @@ Descending: [8, 5, 3, 2, 1]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2. Sort a List of Strings Alphabetically and by Length**  
 💡 **Question:** Given a list of strings, sort them **alphabetically** and **by length** using Java 8.  
 
@@ -438,6 +958,8 @@ By Length: [kiwi, apple, cherry, banana]
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3. Sort a List of Custom Objects (Sorting by Single Field)**  
 💡 **Question:** Given a list of `Person` objects, sort them by **age** in ascending order using Java 8.  
@@ -468,6 +990,8 @@ Bob (25), Alice (30), Charlie (35)
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **4. Sort a List of Custom Objects by Multiple Fields (Chained Sorting)**  
 💡 **Question:** Sort a list of `Employee` objects first by **salary (descending)** and then by **name (ascending)**.  
@@ -501,6 +1025,8 @@ Bob (7000), David (6000), Alice (5000), Charlie (5000)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **5. Sort a List of Strings Ignoring Case Sensitivity**  
 💡 **Question:** Sort a list of strings ignoring case sensitivity using Java 8.  
 
@@ -514,6 +1040,8 @@ List<String> words = Arrays.asList("Banana", "apple", "cherry", "Apricot");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **6. Sort a Map by Keys and Values Using Java 8**  
 💡 **Question:** Given a `Map<String, Integer>`, sort it by **keys** and **values**.  
@@ -533,6 +1061,8 @@ Sorted by Value: {Bob=80, Charlie=85, Alice=90}
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7. Sort a List in Reverse Order Using Comparator.reverseOrder()**  
 💡 **Question:** Sort a list of numbers in reverse order using Java 8.  
 
@@ -546,6 +1076,8 @@ List<Integer> numbers = Arrays.asList(5, 2, 8, 1, 3);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **8. Sort a List of Objects with Null Values (Null-Safe Sorting)**  
 💡 **Question:** Sort a list of `Person` objects where some names are `null`.  
@@ -562,6 +1094,8 @@ OR
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **9. Sort a List of Dates in Java 8**  
 💡 **Question:** Given a list of `LocalDate` objects, sort them in ascending order.  
@@ -581,6 +1115,8 @@ List<LocalDate> dates = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **10. Sort a List Using Parallel Sorting (Efficient Sorting for Large Data)**  
 💡 **Question:** Use Java 8's `Arrays.parallelSort()` for large data sorting.  
 
@@ -594,6 +1130,8 @@ int[] numbers = {5, 2, 8, 1, 3};
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **11. Custom Sorting Using a Comparator with Lambda**  
 💡 **Question:** Sort a list of `Product` objects by **price** in **descending** order using a custom `Comparator`.  
@@ -625,6 +1163,8 @@ Laptop (800), Phone (500), Tablet (300)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **12. Sort a List Using Stream.sorted() with Custom Comparator**  
 💡 **Question:** Sort a list of words by the last character of each word.  
 
@@ -639,11 +1179,15 @@ banana, apple, cherry  // Sorted by last character
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 `Optional` Class - Coding Interview Questions** 🚀
 
 Java 8 introduced `Optional` to handle **null values safely** and reduce `NullPointerException`. Here are some **coding interview questions** related to `Optional` with real-world scenarios.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1. Convert a `String` to `Optional` and Handle Null Values**
 💡 **Question:** Given a string, convert it into an `Optional<String>` and print its value. If the string is `null`, print `"Value is absent"`.
@@ -659,6 +1203,8 @@ Hello, Java 8!
 (If `input = null`, output should be `"Value is absent"`)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **2. Use `Optional` to Avoid `NullPointerException`**
 💡 **Question:** Given a `Person` object, retrieve the `address`. If the address is `null`, return `"Address not available"`.
@@ -690,6 +1236,8 @@ Address not available
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3. Get Default Value Using `orElse()` and `orElseGet()`**
 💡 **Question:** Given an `Optional<String>`, return its value if present, otherwise return `"Default Value"`.
 
@@ -703,6 +1251,8 @@ Default Value
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **4. Find Maximum Value in a List Using `Optional`**
 💡 **Question:** Given a list of integers, find the **maximum** value using `Optional`. If the list is empty, return `-1`.
@@ -719,6 +1269,8 @@ List<Integer> numbers = Arrays.asList(10, 25, 30, 5, 15);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **5. Check If a Value Exists Using `isPresent()`**
 💡 **Question:** Given an `Optional<String>`, check if a value exists and print it.
 
@@ -732,6 +1284,8 @@ Value is: Java 8
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **6. Use `Optional` with `filter()` to Check a Condition**
 💡 **Question:** Given an `Optional<Integer>`, check if the value is even. If it is, print it; otherwise, print `"Odd number or not present"`.
@@ -747,6 +1301,8 @@ Even number: 10
 (If the value is `9`, output should be `"Odd number or not present"`)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7. Use `Optional` with `map()` and `flatMap()` for Nested Objects**
 💡 **Question:** Given a `Car` object, get its **engine type** safely using `Optional.map()`.
@@ -789,6 +1345,8 @@ Engine Type: V8
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **8. Use `orElseThrow()` to Throw an Exception if Value is Absent**
 💡 **Question:** Given an `Optional<String>`, return its value. If it's empty, throw an exception.
 
@@ -802,6 +1360,8 @@ java.util.NoSuchElementException: No value present
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **9. Find First Non-Empty `Optional` Using `Optional.ofNullable()`**
 💡 **Question:** Given multiple `Optional<String>` values, return the **first non-empty value**.
@@ -819,6 +1379,8 @@ Hello
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **10. Use `Optional` in Streams to Avoid `NullPointerException`**
 💡 **Question:** Given a list of names, return the **first name that starts with "J"** using Java 8 Streams and `Optional`.
 
@@ -834,11 +1396,15 @@ John
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Lambda Expressions - Coding Interview Questions** 🚀
 
 Java 8 introduced **lambda expressions** to provide a more concise and functional way to write code. Here are some **Lambda Expression** related **coding interview questions** with real-world scenarios.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Implement a Functional Interface Using Lambda**
 💡 **Question:** Create a `Calculator` functional interface with a method `operate(int a, int b)`, and implement addition using a lambda expression.  
@@ -849,6 +1415,8 @@ Sum: 30
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **2. Sort a List Using Lambda**
 💡 **Question:** Given a list of strings, sort them **alphabetically** using a lambda expression.  
@@ -864,6 +1432,8 @@ List<String> words = Arrays.asList("banana", "apple", "cherry", "date");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3. Find Even Numbers in a List Using Lambda & Streams**
 💡 **Question:** Given a list of numbers, filter out only the **even numbers** using Java 8 lambda.  
 
@@ -878,6 +1448,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4. Convert List of Strings to Uppercase Using Lambda**
 💡 **Question:** Given a list of lowercase strings, convert them to **uppercase** using Java 8 lambda.  
 
@@ -891,6 +1463,8 @@ List<String> names = Arrays.asList("java", "lambda", "stream");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5. Find the First Name That Starts with "A" Using Lambda**
 💡 **Question:** Given a list of names, find the **first name that starts with "A"** using Java 8 Streams and lambda.  
@@ -907,6 +1481,8 @@ Alice
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6. Find the Sum of All Numbers in a List Using Lambda**
 💡 **Question:** Given a list of numbers, find their **sum** using Java 8 lambda.  
 
@@ -921,6 +1497,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7. Implement Runnable Using Lambda**
 💡 **Question:** Implement the `Runnable` interface using a lambda expression and start a thread.  
 
@@ -930,6 +1508,8 @@ Thread is running...
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **8. Remove Null Values from a List Using Lambda**
 💡 **Question:** Given a list of names, remove all `null` values using Java 8 Streams and lambda.  
@@ -945,6 +1525,8 @@ List<String> names = Arrays.asList("Alice", null, "Bob", "Charlie", null);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **9. Count Names That Start with "J" Using Lambda**
 💡 **Question:** Given a list of names, count how many names **start with "J"** using Java 8 lambda.  
 
@@ -958,6 +1540,8 @@ List<String> names = Arrays.asList("John", "Jack", "Alice", "Bob", "James");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **10. Convert a List of Integers to a List of Strings Using Lambda**
 💡 **Question:** Given a list of integers, convert them into **strings** using Java 8 lambda.  
@@ -973,6 +1557,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **11. Find the Maximum Value in a List Using Lambda**
 💡 **Question:** Given a list of integers, find the **maximum value** using Java 8 lambda.  
 
@@ -986,6 +1572,8 @@ List<Integer> numbers = Arrays.asList(5, 12, 8, 21, 3);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **12. Find the Length of Each String in a List Using Lambda**
 💡 **Question:** Given a list of strings, return a list containing the **length of each string** using Java 8 lambda.  
@@ -1001,6 +1589,8 @@ List<String> words = Arrays.asList("Java", "Lambda", "Stream");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **13. Find Distinct Elements in a List Using Lambda**
 💡 **Question:** Given a list of integers with duplicates, find the **distinct elements** using Java 8 lambda.  
 
@@ -1014,6 +1604,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **14. Implement a Custom Comparator Using Lambda**
 💡 **Question:** Sort a list of `Person` objects by **age** using a lambda comparator.  
@@ -1045,6 +1637,8 @@ Bob (25), Alice (30), Charlie (35)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **15. Convert a Map to a List Using Lambda**
 💡 **Question:** Convert a `Map<String, Integer>` to a **list of values** using Java 8 lambda.  
 
@@ -1062,11 +1656,15 @@ map.put("C", 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Functional Interface - Coding Interview Questions** 🚀  
 
 Java 8 introduced **Functional Interfaces** to support **Lambda Expressions** and enable functional programming in Java. Below are some **coding interview questions** on Java 8 **Functional Interfaces**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Create a Custom Functional Interface**  
 💡 **Question:** Create a functional interface `Calculator` with a method `calculate(int a, int b)`, and use a **lambda expression** to implement addition.  
@@ -1077,6 +1675,8 @@ Sum: 30
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **2. Use `Predicate` to Check If a Number is Even**  
 💡 **Question:** Use **`Predicate<Integer>`** to check if a number is even.  
@@ -1093,6 +1693,8 @@ int num = 10;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3. Use `Function` to Convert String to Uppercase**  
 💡 **Question:** Use **`Function<String, String>`** to convert a given string to **uppercase**.  
 
@@ -1106,6 +1708,8 @@ HELLO
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **4. Use `Consumer` to Print a List of Names**  
 💡 **Question:** Use **`Consumer<String>`** to print each name from a list.  
@@ -1123,6 +1727,8 @@ Charlie
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **5. Use `Supplier` to Generate a Random Number**  
 💡 **Question:** Use **`Supplier<Integer>`** to generate a **random number**.  
 
@@ -1132,6 +1738,8 @@ Random number: 42  (Example output, varies each time)
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **6. Use `BiFunction` to Multiply Two Numbers**  
 💡 **Question:** Use **`BiFunction<Integer, Integer, Integer>`** to multiply two numbers.  
@@ -1147,6 +1755,8 @@ Product: 30
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7. Use `UnaryOperator` to Square a Number**  
 💡 **Question:** Use **`UnaryOperator<Integer>`** to **square** a given number.  
 
@@ -1160,6 +1770,8 @@ int num = 4;
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **8. Use `BinaryOperator` for String Concatenation**  
 💡 **Question:** Use **`BinaryOperator<String>`** to concatenate two strings.  
@@ -1175,6 +1787,8 @@ HelloWorld
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **9. Implement `Comparator` Using a Functional Interface**  
 💡 **Question:** Use **`Comparator<Integer>`** to sort a list of numbers in **descending order**.  
 
@@ -1188,6 +1802,8 @@ List<Integer> numbers = Arrays.asList(5, 2, 8, 1, 9);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **10. Find Names Starting with "A" Using `Predicate`**  
 💡 **Question:** Use **`Predicate<String>`** to filter out names that **start with "A"** from a list.  
@@ -1203,6 +1819,8 @@ List<String> names = Arrays.asList("Alice", "Bob", "Anna", "Charlie");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **11. Chain `Predicate` Functions**  
 💡 **Question:** Use **two `Predicate` functions** to check if a number is **greater than 10 and even**.  
 
@@ -1216,6 +1834,8 @@ int num = 12;
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **12. Chain `Function` to Perform Two Operations**  
 💡 **Question:** Use **`Function<Integer, Integer>`** to first **double** a number and then **add 10**.  
@@ -1231,6 +1851,8 @@ int num = 5;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **13. Use `Consumer` to Log a Message Before Execution**  
 💡 **Question:** Use **`Consumer<String>`** to log a message **before** executing an action.  
 
@@ -1241,6 +1863,8 @@ Processing request...
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **14. Use `BiPredicate` to Compare Two Numbers**  
 💡 **Question:** Use **`BiPredicate<Integer, Integer>`** to check if one number is a **multiple** of another.  
@@ -1256,6 +1880,8 @@ int a = 20, b = 5;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **15. Implement Custom Functional Interface With Lambda**  
 💡 **Question:** Create a **custom functional interface** `StringProcessor` that reverses a string using a **lambda expression**.  
 
@@ -1270,11 +1896,15 @@ adbmaL
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Streams - Coding Interview Questions** 🚀  
 
 Java 8 introduced **Streams API** to perform operations on collections efficiently using functional programming. Below are some **coding interview questions** on Java 8 **Streams** with real-world scenarios.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Find Even Numbers Using Streams**  
 💡 **Question:** Given a list of numbers, use Java 8 **Streams** to filter and collect only the **even numbers**.  
@@ -1289,6 +1919,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **2. Find the First Element Greater Than 10**  
 💡 **Question:** Use Java 8 **Streams** to find the **first number greater than 10** in a list.  
@@ -1305,6 +1937,8 @@ List<Integer> numbers = Arrays.asList(5, 8, 12, 3, 15);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3. Find the Maximum Number in a List**  
 💡 **Question:** Given a list of numbers, use Java 8 **Streams** to find the **maximum number**.  
 
@@ -1318,6 +1952,8 @@ List<Integer> numbers = Arrays.asList(3, 7, 2, 8, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **4. Convert a List of Strings to Uppercase**  
 💡 **Question:** Use Java 8 **Streams** to convert a list of lowercase strings to **uppercase**.  
@@ -1333,6 +1969,8 @@ List<String> words = Arrays.asList("java", "lambda", "stream");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **5. Sort a List of Strings in Descending Order**  
 💡 **Question:** Given a list of strings, use Java 8 **Streams** to **sort in descending order**.  
 
@@ -1346,6 +1984,8 @@ List<String> words = Arrays.asList("banana", "apple", "cherry", "date");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **6. Count the Number of Strings with Length Greater Than 4**  
 💡 **Question:** Use Java 8 **Streams** to count how many strings have a **length greater than 4**.  
@@ -1361,6 +2001,8 @@ List<String> words = Arrays.asList("Java", "Python", "Go", "Rust", "Kotlin");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7. Find the Sum of All Numbers in a List**  
 💡 **Question:** Use Java 8 **Streams** to find the **sum of all numbers** in a list.  
 
@@ -1374,6 +2016,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **8. Find Distinct Elements in a List**  
 💡 **Question:** Given a list of integers with duplicates, use Java 8 **Streams** to return **only unique elements**.  
@@ -1389,6 +2033,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **9. Find Names Starting with "J"**  
 💡 **Question:** Use Java 8 **Streams** to filter out names that **start with "J"** from a list.  
 
@@ -1402,6 +2048,8 @@ List<String> names = Arrays.asList("John", "Jack", "Alice", "Bob", "James");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **10. Find the Average of a List of Numbers**  
 💡 **Question:** Use Java 8 **Streams** to find the **average of a list of numbers**.  
@@ -1417,6 +2065,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **11. Convert a List of Strings to a Single Comma-Separated String**  
 💡 **Question:** Use Java 8 **Streams** to join a list of strings into a **single comma-separated string**.  
 
@@ -1431,6 +2081,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **12. Find the Second Largest Number in a List**  
 💡 **Question:** Use Java 8 **Streams** to find the **second largest number** in a list.  
 
@@ -1444,6 +2096,8 @@ List<Integer> numbers = Arrays.asList(3, 7, 2, 8, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **13. Convert a List of Objects to a List of Strings Using Streams**  
 💡 **Question:** Given a list of `Person` objects, use Java 8 **Streams** to extract only the names.  
@@ -1474,6 +2128,8 @@ List<Person> people = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **14. Find the First Non-Repeating Character in a String**  
 💡 **Question:** Use Java 8 **Streams** to find the **first non-repeating character** in a given string.  
 
@@ -1488,6 +2144,8 @@ w
 (If all characters repeat, return `"No unique character"`)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **15. Convert a Map to a List of Keys Using Streams**  
 💡 **Question:** Given a `Map<String, Integer>`, use Java 8 **Streams** to extract **all keys** into a list.  
@@ -1506,11 +2164,15 @@ map.put("C", 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Parallel Streams - Coding Interview Questions** 🚀  
 
 Java 8 **Parallel Streams** help leverage multi-core processors to process large data sets in parallel, improving performance. Below are some **coding interview questions** on **Parallel Streams**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Convert a List to Parallel Stream and Filter Even Numbers**  
 💡 **Question:** Given a list of numbers, use **Parallel Stream** to filter only **even numbers**.  
@@ -1526,6 +2188,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2. Find the Maximum Number Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **maximum number** in a list.  
 
@@ -1539,6 +2203,8 @@ List<Integer> numbers = Arrays.asList(3, 7, 2, 8, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3. Sum of All Elements Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to compute the **sum of all elements** in a list.  
@@ -1554,6 +2220,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4. Convert a List of Strings to Uppercase Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to convert a list of **lowercase strings** to **uppercase**.  
 
@@ -1567,6 +2235,8 @@ List<String> words = Arrays.asList("java", "parallel", "stream");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5. Sort a List in Parallel**  
 💡 **Question:** Use **Parallel Stream** to sort a list of numbers **in ascending order**.  
@@ -1582,6 +2252,8 @@ List<Integer> numbers = Arrays.asList(5, 3, 8, 1, 9);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6. Find Distinct Elements Using Parallel Stream**  
 💡 **Question:** Given a list with duplicate numbers, use **Parallel Stream** to return only **unique elements**.  
 
@@ -1595,6 +2267,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **7. Count Elements Greater Than 10 Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to count how many numbers are **greater than 10**.  
@@ -1610,6 +2284,8 @@ List<Integer> numbers = Arrays.asList(5, 15, 20, 8, 25);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **8. Find the Average of a List of Numbers Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **average** of a list of numbers.  
 
@@ -1623,6 +2299,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **9. Convert a List of Strings to a Single Comma-Separated String Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to join a list of strings into a **single comma-separated string**.  
@@ -1638,6 +2316,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **10. Find the First Element Greater Than 50 Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **first number greater than 50**.  
 
@@ -1651,6 +2331,8 @@ List<Integer> numbers = Arrays.asList(30, 20, 60, 80, 10);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **11. Convert a List of Objects to a List of Names Using Parallel Stream**  
 💡 **Question:** Given a list of `Person` objects, use **Parallel Stream** to extract only the **names**.  
@@ -1681,6 +2363,8 @@ List<Person> people = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **12. Parallel Stream vs Sequential Stream Performance Test**  
 💡 **Question:** Write a Java program to compare the **execution time** of **Parallel Stream** vs **Sequential Stream** for a large dataset.  
 
@@ -1697,6 +2381,8 @@ Time taken by Parallel Stream: Y ms
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **13. Use `forEachOrdered` with Parallel Stream**  
 💡 **Question:** Demonstrate how to use **`forEachOrdered()`** with **Parallel Stream** to maintain the order of elements.  
 
@@ -1711,6 +2397,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 (Unlike `forEach()`, which may print in **random order**)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **14. Convert a Map to a List of Values Using Parallel Stream**  
 💡 **Question:** Given a `Map<String, Integer>`, use **Parallel Stream** to extract **all values** into a list.  
@@ -1729,6 +2417,8 @@ map.put("C", 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **15. Apply a Function to Each Element and Collect Results Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to apply a **function** (e.g., multiply each number by 2) to all elements and collect the results.  
 
@@ -1743,11 +2433,15 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Parallel Streams - Coding Interview Questions** 🚀  
 
 Java 8 **Parallel Streams** help leverage multi-core processors to process large data sets in parallel, improving performance. Below are some **coding interview questions** on **Parallel Streams**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Convert a List to Parallel Stream and Filter Even Numbers**  
 💡 **Question:** Given a list of numbers, use **Parallel Stream** to filter only **even numbers**.  
@@ -1763,6 +2457,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2. Find the Maximum Number Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **maximum number** in a list.  
 
@@ -1776,6 +2472,8 @@ List<Integer> numbers = Arrays.asList(3, 7, 2, 8, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3. Sum of All Elements Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to compute the **sum of all elements** in a list.  
@@ -1791,6 +2489,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4. Convert a List of Strings to Uppercase Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to convert a list of **lowercase strings** to **uppercase**.  
 
@@ -1804,6 +2504,8 @@ List<String> words = Arrays.asList("java", "parallel", "stream");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5. Sort a List in Parallel**  
 💡 **Question:** Use **Parallel Stream** to sort a list of numbers **in ascending order**.  
@@ -1819,6 +2521,8 @@ List<Integer> numbers = Arrays.asList(5, 3, 8, 1, 9);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6. Find Distinct Elements Using Parallel Stream**  
 💡 **Question:** Given a list with duplicate numbers, use **Parallel Stream** to return only **unique elements**.  
 
@@ -1832,6 +2536,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **7. Count Elements Greater Than 10 Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to count how many numbers are **greater than 10**.  
@@ -1847,6 +2553,8 @@ List<Integer> numbers = Arrays.asList(5, 15, 20, 8, 25);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **8. Find the Average of a List of Numbers Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **average** of a list of numbers.  
 
@@ -1860,6 +2568,8 @@ List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **9. Convert a List of Strings to a Single Comma-Separated String Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to join a list of strings into a **single comma-separated string**.  
@@ -1875,6 +2585,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **10. Find the First Element Greater Than 50 Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to find the **first number greater than 50**.  
 
@@ -1888,6 +2600,8 @@ List<Integer> numbers = Arrays.asList(30, 20, 60, 80, 10);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **11. Convert a List of Objects to a List of Names Using Parallel Stream**  
 💡 **Question:** Given a list of `Person` objects, use **Parallel Stream** to extract only the **names**.  
@@ -1918,6 +2632,8 @@ List<Person> people = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **12. Parallel Stream vs Sequential Stream Performance Test**  
 💡 **Question:** Write a Java program to compare the **execution time** of **Parallel Stream** vs **Sequential Stream** for a large dataset.  
 
@@ -1934,6 +2650,8 @@ Time taken by Parallel Stream: Y ms
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **13. Use `forEachOrdered` with Parallel Stream**  
 💡 **Question:** Demonstrate how to use **`forEachOrdered()`** with **Parallel Stream** to maintain the order of elements.  
 
@@ -1948,6 +2666,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 (Unlike `forEach()`, which may print in **random order**)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **14. Convert a Map to a List of Values Using Parallel Stream**  
 💡 **Question:** Given a `Map<String, Integer>`, use **Parallel Stream** to extract **all values** into a list.  
@@ -1966,6 +2686,8 @@ map.put("C", 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **15. Apply a Function to Each Element and Collect Results Using Parallel Stream**  
 💡 **Question:** Use **Parallel Stream** to apply a **function** (e.g., multiply each number by 2) to all elements and collect the results.  
 
@@ -1979,12 +2701,16 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## ### **Java 8 `map()` Method - Interview Questions** 🚀  
 
 The `map()` method in Java 8 **Streams API** is used to **transform each element** of a stream into another form using a **Function**. Below are some **interview questions** related to the `map()` method, covering **basic to advanced** scenarios.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1. Convert a List of Integers to Their Squares**  
 💡 **Question:** Given a list of integers, use the **`map()`** method to return a list of their squares.  
@@ -2000,6 +2726,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2. Convert a List of Strings to Uppercase**  
 💡 **Question:** Use **`map()`** to convert a list of **lowercase strings** to **uppercase**.  
 
@@ -2013,6 +2741,8 @@ List<String> words = Arrays.asList("java", "stream", "map");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3. Extract Name from a List of Objects**  
 💡 **Question:** Given a list of `Person` objects, use **`map()`** to extract a list of names.  
@@ -2043,6 +2773,8 @@ List<Person> people = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4. Convert a List of Strings to Their Lengths**  
 💡 **Question:** Use **`map()`** to convert a list of strings to a list of **their lengths**.  
 
@@ -2056,6 +2788,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5. Convert a List of Integers to a List of Their Double Values**  
 💡 **Question:** Given a list of integers, use **`map()`** to convert each number to its **double value**.  
@@ -2071,6 +2805,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6. Convert a List of Prices from INR to USD (Assume 1 INR = 0.012 USD)**  
 💡 **Question:** Use **`map()`** to convert a list of prices from **INR to USD**.  
 
@@ -2084,6 +2820,8 @@ List<Double> pricesInINR = Arrays.asList(100.0, 200.0, 300.0);
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7. Convert a List of Strings to a List of First Characters**  
 💡 **Question:** Use **`map()`** to get the **first character** of each string in a list.  
@@ -2099,6 +2837,8 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **8. Extract Domain Names from Email Addresses**  
 💡 **Question:** Use **`map()`** to extract **domain names** from email addresses.  
 
@@ -2112,6 +2852,8 @@ List<String> emails = Arrays.asList("john@gmail.com", "alice@yahoo.com", "bob@ou
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **9. Convert a Map to a List of Values Using `map()`**  
 💡 **Question:** Given a `Map<String, Integer>`, use **`map()`** to extract **only values** into a list.  
@@ -2130,6 +2872,8 @@ map.put("C", 30);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **10. Convert a List of Dates to a List of Formatted Strings**  
 💡 **Question:** Use **`map()`** to format dates into `"dd-MM-yyyy"` format.  
 
@@ -2143,6 +2887,8 @@ List<LocalDate> dates = Arrays.asList(LocalDate.of(2023, 1, 1), LocalDate.of(202
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **11. Find the Square Root of Numbers Using `map()`**  
 💡 **Question:** Use **`map()`** to find the **square root** of numbers.  
@@ -2158,6 +2904,8 @@ List<Double> numbers = Arrays.asList(4.0, 9.0, 16.0);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **12. Convert a List of Strings to a List of Integers**  
 💡 **Question:** Use **`map()`** to convert a list of **String numbers** to **Integer numbers**.  
 
@@ -2171,6 +2919,8 @@ List<String> numbers = Arrays.asList("1", "2", "3", "4");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **13. Extract File Extensions from a List of Filenames**  
 💡 **Question:** Use **`map()`** to extract file **extensions** from a list of filenames.  
@@ -2186,6 +2936,8 @@ List<String> files = Arrays.asList("data.txt", "image.jpg", "script.js");
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **14. Find the ASCII Values of Characters Using `map()`**  
 💡 **Question:** Use **`map()`** to get the **ASCII values** of characters in a string.  
 
@@ -2199,6 +2951,8 @@ String input = "Java";
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **15. Handle Null Values Safely Using `Optional.map()`**  
 💡 **Question:** Use **`Optional.map()`** to safely transform an `Optional<String>` to uppercase.  
@@ -2215,11 +2969,15 @@ Optional[JAVA]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 `flatMap()` - Interview Questions** 🚀  
 
 The `flatMap()` method in Java 8 **Streams API** is used to **flatten** a **stream of collections** into a single stream. Below are **important interview questions** on `flatMap()` covering **basic to advanced** scenarios.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1. Difference Between `map()` and `flatMap()`**  
 💡 **Question:** What is the difference between `map()` and `flatMap()` in Java 8?  
@@ -2237,6 +2995,8 @@ List<Integer> flatList = nestedList.stream()
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **2. Flatten a List of Lists Using `flatMap()`**  
 💡 **Question:** Given a list of lists, use **`flatMap()`** to return a **flattened list**.  
@@ -2256,6 +3016,8 @@ List<List<Integer>> numbers = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3. Convert a List of Strings to a List of Characters Using `flatMap()`**  
 💡 **Question:** Given a list of words, return a **list of characters** using `flatMap()`.  
 
@@ -2269,6 +3031,8 @@ List<String> words = Arrays.asList("Java", "Stream", "FlatMap");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **4. Flatten a List of Sentences Into a List of Words**  
 💡 **Question:** Given a list of **sentences**, return a **list of words** using `flatMap()`.  
@@ -2284,6 +3048,8 @@ List<String> sentences = Arrays.asList("Hello World", "Java 8 Streams", "FlatMap
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **5. Extract All Unique Words from a List of Sentences Using `flatMap()`**  
 💡 **Question:** Given a list of **sentences**, return a **set of unique words** using `flatMap()`.  
 
@@ -2297,6 +3063,8 @@ List<String> sentences = Arrays.asList("Java is fun", "Java is powerful", "Strea
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **6. Extract Phone Numbers from a List of Users Using `flatMap()`**  
 💡 **Question:** Given a list of `User` objects, each containing multiple phone numbers, use `flatMap()` to get a **list of all phone numbers**.  
@@ -2322,6 +3090,8 @@ List<User> users = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7. Convert a List of `Optional<String>` to a List of Strings Using `flatMap()`**  
 💡 **Question:** Convert a list of **`Optional<String>`** values to a **list of non-empty Strings**.  
 
@@ -2341,6 +3111,8 @@ List<Optional<String>> optionalStrings = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **8. Flatten a List of `Optional<Integer>` Values Using `flatMap()`**  
 💡 **Question:** Given a list of **`Optional<Integer>`**, return a list of **non-empty integers**.  
 
@@ -2359,6 +3131,8 @@ List<Optional<Integer>> optionalNumbers = Arrays.asList(
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **9. Flatten a List of Employee Departments into a Single List Using `flatMap()`**  
 💡 **Question:** Given a list of `Employee` objects, where each employee has multiple departments, use `flatMap()` to return a **flat list of departments**.  
@@ -2384,6 +3158,8 @@ List<Employee> employees = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **10. Flatten a Stream of Lists Using `flatMap()`**  
 💡 **Question:** Given a stream of lists, return a **single stream of elements**.  
 
@@ -2402,6 +3178,8 @@ Stream<List<String>> streamOfLists = Stream.of(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **11. Find All Unique Characters in a List of Words Using `flatMap()`**  
 💡 **Question:** Given a list of words, return a **set of unique characters** using `flatMap()`.  
 
@@ -2415,6 +3193,8 @@ List<String> words = Arrays.asList("hello", "world");
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **12. Convert a List of Arrays to a Single Flattened List Using `flatMap()`**  
 💡 **Question:** Given a list of integer arrays, use `flatMap()` to return a **single list of integers**.  
@@ -2433,6 +3213,8 @@ List<int[]> listOfArrays = Arrays.asList(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Functional Interfaces Supporting Primitive Types - Interview Questions** 🚀  
 
 Java 8 introduced **specialized functional interfaces** for primitive types to **avoid unnecessary boxing/unboxing** and improve performance. These interfaces include:  
@@ -2448,6 +3230,8 @@ Below are **Java 8 interview questions** covering these functional interfaces.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **1. Find the Square of an Integer Using `IntFunction<R>`**  
 💡 **Question:** Use `IntFunction<Integer>` to find the **square** of a number.  
 
@@ -2458,6 +3242,8 @@ Square of 5 is 25
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2. Convert an Integer to a String Using `IntFunction<String>`**  
 💡 **Question:** Use `IntFunction<String>` to convert an **integer** to a **string** representation.  
 
@@ -2467,6 +3253,8 @@ Number 100 as a string: "100"
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3. Print a List of Integers Using `IntConsumer`**  
 💡 **Question:** Use `IntConsumer` to **print** each number in a list.  
@@ -2482,6 +3270,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4. Check If a Number Is Even Using `IntPredicate`**  
 💡 **Question:** Use `IntPredicate` to check if a number is **even**.  
 
@@ -2491,6 +3281,8 @@ Number 10 is even: true
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5. Generate a Random Number Using `IntSupplier`**  
 💡 **Question:** Use `IntSupplier` to generate a **random integer**.  
@@ -2503,6 +3295,8 @@ Generated number: 42
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6. Double a Given Number Using `IntUnaryOperator`**  
 💡 **Question:** Use `IntUnaryOperator` to **double** an integer.  
 
@@ -2512,6 +3306,8 @@ Double of 5 is 10
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **7. Find the Sum of Two Numbers Using `IntBinaryOperator`**  
 💡 **Question:** Use `IntBinaryOperator` to **add two numbers**.  
@@ -2523,6 +3319,8 @@ Sum of 4 and 6 is 10
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **8. Find Maximum of Two Long Numbers Using `LongBinaryOperator`**  
 💡 **Question:** Use `LongBinaryOperator` to find the **maximum** of two long numbers.  
 
@@ -2533,6 +3331,8 @@ Max of 10000000000 and 5000000000 is 10000000000
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **9. Convert a Double Value to a String Using `DoubleFunction<String>`**  
 💡 **Question:** Use `DoubleFunction<String>` to convert a double to a string representation.  
 
@@ -2542,6 +3342,8 @@ Converted double: "3.14159"
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **10. Filter Even Numbers from a List Using `IntPredicate`**  
 💡 **Question:** Given a list of integers, use `IntPredicate` to filter **even numbers**.  
@@ -2557,6 +3359,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **11. Find Factorial of a Number Using `IntUnaryOperator`**  
 💡 **Question:** Use `IntUnaryOperator` to compute the **factorial** of a number.  
 
@@ -2567,6 +3371,8 @@ Factorial of 5 is 120
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **12. Check If a Number Is Prime Using `IntPredicate`**  
 💡 **Question:** Use `IntPredicate` to check if a number is **prime**.  
 
@@ -2576,6 +3382,8 @@ Is 7 prime? true
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **13. Convert a List of Integers to Their Squares Using `IntFunction<List<Integer>>`**  
 💡 **Question:** Given a list of integers, use `IntFunction` to return their **squares**.  
@@ -2591,6 +3399,8 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **14. Find the Sum of an Array Using `IntBinaryOperator`**  
 💡 **Question:** Given an array of integers, use `IntBinaryOperator` to compute the **sum**.  
 
@@ -2605,6 +3415,8 @@ Sum: 15
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **15. Generate Fibonacci Sequence Using `IntSupplier`**  
 💡 **Question:** Use `IntSupplier` to generate a **Fibonacci sequence**.  
 
@@ -2615,13 +3427,19 @@ Sum: 15
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Avoiding Boxing and Unboxing with Java 8 Functional Interfaces for Primitives** 🚀  
+
+[⬆ Back to top](#table-of-contents)
 
 #### 🔹 **What Is Boxing and Unboxing?**  
 - **Boxing:** Converting a **primitive type** (e.g., `int`) into its corresponding **wrapper class** (`Integer`).  
   - Example: `Integer boxed = Integer.valueOf(10);`  
 - **Unboxing:** Converting a **wrapper class** back into a **primitive type**.  
   - Example: `int unboxed = boxed.intValue();`  
+
+[⬆ Back to top](#table-of-contents)
 
 #### 🔹 **Why Is Boxing/Unboxing a Problem?**  
 - **Performance overhead:** Each boxing operation involves creating an **object** in the heap.  
@@ -2630,12 +3448,18 @@ Sum: 15
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **💡 How Do Primitive Functional Interfaces Help?**  
 
 Java 8 introduced **specialized functional interfaces** for **primitive types** (`int`, `long`, `double`).  
 These avoid **auto-boxing/unboxing**, reducing memory usage and increasing performance.  
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🚀 Example: Without Primitive Functional Interface (Boxing & Unboxing Overhead)**  
+[⬆ Back to top](#table-of-contents)
+
 #### ❌ **Using `Function<Integer, Integer>` (Causes Boxing & Unboxing)**
 ```java
 import java.util.function.Function;
@@ -2649,12 +3473,16 @@ public class BoxingExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔴 Problem in Above Code**
 - `5` (primitive `int`) is **boxed** into `Integer`
 - `Integer` is **unboxed** back to `int` when multiplied (`num * num`)
 - **Unnecessary performance overhead**  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Optimized Code Using `IntFunction<R>` (Avoids Boxing & Unboxing)**  
 ```java
@@ -2669,11 +3497,15 @@ public class PrimitiveFunctionExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔵 Why This Is Better?**
 - **`IntFunction<R>` operates directly on `int` values** → No boxing/unboxing needed  
 - **Avoids object creation** → Better performance  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Functional Interfaces for Primitives and Their Benefits**
 | **Standard Interface**       | **Primitive Equivalent**       | **Avoids Boxing/Unboxing?** | **Example** |
@@ -2687,7 +3519,11 @@ public class PrimitiveFunctionExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🚀 More Examples of Avoiding Boxing/Unboxing**
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Find Square of a Number Using `IntUnaryOperator` (No Boxing)**  
 ```java
@@ -2704,6 +3540,8 @@ public class IntUnaryOperatorExample {
 🔹 **`applyAsInt(6)` operates directly on `int` → No boxing/unboxing overhead!**  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **2️⃣ Print a List of Integers Using `IntConsumer` (No Boxing)**  
 ```java
@@ -2725,6 +3563,8 @@ public class IntConsumerExample {
 🔹 **Using `IntConsumer` eliminates unnecessary boxing of `Integer` values.**  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3️⃣ Filter Even Numbers from a List Using `IntPredicate` (No Boxing)**  
 ```java
@@ -2754,6 +3594,8 @@ public class IntPredicateExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Key Takeaways**  
 ✅ **Boxing & Unboxing increases memory usage and CPU overhead.**  
 ✅ **Primitive Functional Interfaces (`IntFunction`, `IntPredicate`, etc.) prevent boxing/unboxing.**  
@@ -2762,10 +3604,14 @@ public class IntPredicateExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🔴 Without Primitive Functional Interface (Causes Boxing & Unboxing)**  
 ```java
 Function<Integer, Integer> square = x -> x * x; // Boxing and Unboxing happens
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Using `IntUnaryOperator` (Avoids Boxing & Unboxing)**  
 ```java
@@ -2774,6 +3620,8 @@ IntUnaryOperator square = x -> x * x; // No Boxing & Unboxing, direct int operat
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Default Method - Coding Interview Questions** 🚀  
 
 Java 8 introduced **default methods** in interfaces, allowing interfaces to have method implementations without breaking existing code. These methods help in extending functionality while maintaining backward compatibility.  
@@ -2781,6 +3629,8 @@ Java 8 introduced **default methods** in interfaces, allowing interfaces to have
 Here are some **coding interview questions** related to **default methods in Java 8**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Define and Use a Default Method in an Interface**
 💡 **Question:**  
@@ -2793,6 +3643,8 @@ Vehicle is starting
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Override a Default Method in a Class**
 💡 **Question:**  
 Create an interface `Device` with a default method `turnOn()`. Implement it in a `Phone` class but override `turnOn()` in `Phone` with a custom implementation.  
@@ -2803,6 +3655,8 @@ Phone is turning on
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3️⃣ Multiple Interfaces with Same Default Method - How to Resolve Conflict?**  
 💡 **Question:**  
@@ -2815,6 +3669,8 @@ What happens if two interfaces have a **default method with the same name**? How
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4️⃣ Call a Default Method from a Subclass**
 💡 **Question:**  
 Modify the `Car` class to explicitly call the default method from the interface using `super`.  
@@ -2826,6 +3682,8 @@ Vehicle is starting
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5️⃣ Use a Default Method in Functional Interface**
 💡 **Question:**  
@@ -2840,6 +3698,8 @@ This is a Calculator
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6️⃣ Modify a Default Method in a Sub-interface**
 💡 **Question:**  
 If interface `A` has a default method `display()`, and interface `B` extends `A`, can `B` modify `display()`?  
@@ -2850,6 +3710,8 @@ Modified display from B
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7️⃣ Using Default Method in Java 8 Streams**
 💡 **Question:**  
@@ -2863,11 +3725,15 @@ Filtered List: [2, 4, 6, 8, 10]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **8️⃣ Prevent a Class from Using a Default Method**
 💡 **Question:**  
 If a class implements an interface with a default method but doesn't want to inherit it, how can it **disable the default method**?  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **9️⃣ Default Methods in Multiple Inheritance**
 💡 **Question:**  
@@ -2879,6 +3745,8 @@ If a class extends a superclass and implements an interface with the same method
 3. Compiler error  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🔟 Default Methods and Static Methods in an Interface**
 💡 **Question:**  
@@ -2892,6 +3760,8 @@ This is a static method in Interface
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary of Java 8 Default Methods Concepts:**
 ✅ **Provide method implementation inside an interface**  
 ✅ **Can be overridden in implementing classes**  
@@ -2900,11 +3770,15 @@ This is a static method in Interface
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 Default Method - Scenario-Based Interview Questions** 🚀  
 
 Java 8 **default methods** allow interfaces to have method implementations without breaking existing code. These **scenario-based interview questions** will test your understanding of default methods in **real-world applications**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔹 Scenario 1: Adding New Features to an Existing Interface Without Breaking Old Code**  
 💡 **Question:**  
@@ -2920,6 +3794,8 @@ Validating transaction using default implementation
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 2: Resolving Conflict When Implementing Multiple Interfaces with Same Default Method**  
 💡 **Question:**  
 You have two interfaces, `Printer` and `Scanner`, both containing a default method `connect()`. A class `MultiFunctionDevice` implements both.  
@@ -2934,6 +3810,8 @@ MultiFunctionDevice: Resolving connect method conflict
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 3: Calling Default Methods from Implementing Class**  
 💡 **Question:**  
 You have an interface `Vehicle` with a default method `start()`, and a class `Car` implements it.  
@@ -2947,6 +3825,8 @@ Vehicle is starting
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔹 Scenario 4: Default Method in a Functional Interface**  
 💡 **Question:**  
@@ -2966,6 +3846,8 @@ This is a Calculator
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 5: Overriding a Default Method in a Sub-interface**  
 💡 **Question:**  
 You have an interface `ParentInterface` with a default method `show()`.  
@@ -2981,6 +3863,8 @@ Modified show method in ChildInterface
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 6: Preventing a Class from Using a Default Method**  
 💡 **Question:**  
 Suppose `InterfaceA` has a default method `logMessage()`.  
@@ -2994,6 +3878,8 @@ MyClass: Overriding logMessage to avoid default method
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔹 Scenario 7: Superclass vs. Interface Default Method Conflict**  
 💡 **Question:**  
@@ -3011,6 +3897,8 @@ Setup method from ElectronicDevice
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 8: Using Default Methods in Java 8 Streams**  
 💡 **Question:**  
 Create an interface `NumberProcessor` with a default method that filters even numbers from a list using Java 8 **Streams**.  
@@ -3024,6 +3912,8 @@ Filtered List: [2, 4, 6, 8, 10]
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔹 Scenario 9: Static vs. Default Methods in Interfaces**  
 💡 **Question:**  
@@ -3041,6 +3931,8 @@ This is a default method in Interface
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Scenario 10: Can Default Methods Call Other Abstract Methods?**  
 💡 **Question:**  
 You have an interface `Logger` with an **abstract method** `log(String message)` and a **default method** `logWithTimestamp()`.  
@@ -3055,6 +3947,8 @@ You have an interface `Logger` with an **abstract method** `log(String message)`
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Key Takeaways on Java 8 Default Methods:**
 ✅ **Used to add new functionality without breaking existing code**  
 ✅ **Can be overridden in implementing classes**  
@@ -3063,6 +3957,8 @@ You have an interface `Logger` with an **abstract method** `log(String message)`
 ✅ **A class always prefers a superclass method over an interface default method**  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## ### **Java 8 `reduce()` - Counting, Average, Max & Min in Streams** 🚀  
 
@@ -3073,9 +3969,13 @@ The **`reduce()`** method in Java 8 **Streams API** is used for **aggregation op
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 1. Counting Elements Using `reduce()`**
 💡 **Question:**  
 How can you use `reduce()` to count the number of elements in a list?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3108,9 +4008,13 @@ long count = numbers.stream().count();
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 2. Calculating Average Using `reduce()`**
 💡 **Question:**  
 How can you calculate the **average** of numbers using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3147,9 +4051,13 @@ double avg = numbers.stream().mapToInt(Integer::intValue).average().orElse(0);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 3. Finding Maximum Using `reduce()`**
 💡 **Question:**  
 How can you find the **maximum number** using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3181,9 +4089,13 @@ int max = numbers.stream().mapToInt(Integer::intValue).max().orElse(Integer.MIN_
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 4. Finding Minimum Using `reduce()`**
 💡 **Question:**  
 How can you find the **minimum number** using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3215,9 +4127,13 @@ int min = numbers.stream().mapToInt(Integer::intValue).min().orElse(Integer.MAX_
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 5. Sum of Numbers Using `reduce()`**
 💡 **Question:**  
 How can you calculate the **sum** of numbers using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3249,9 +4165,13 @@ int sum = numbers.stream().mapToInt(Integer::intValue).sum();
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 6. Finding Product of Elements Using `reduce()`**
 💡 **Question:**  
 How can you find the **product of all numbers** using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3278,9 +4198,13 @@ public class ReduceProductExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 7. Concatenating Strings Using `reduce()`**
 💡 **Question:**  
 How can you **concatenate** a list of strings using `reduce()`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3307,6 +4231,8 @@ public class ReduceStringConcatExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary**
 | **Operation** | **Code Using `reduce()`** |
 |--------------|--------------------------|
@@ -3320,9 +4246,13 @@ public class ReduceStringConcatExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java 8 `Collector` Interface – All Functions Explained with Examples** 🚀  
 
 The `Collector<T, A, R>` interface in Java 8 is used to **accumulate input elements** into a **mutable result container**, such as a list, set, or map.  
+
+[⬆ Back to top](#table-of-contents)
 
 #### ✅ **Key Collector Functions:**  
 1. **toList()** – Collects elements into a `List`.  
@@ -3336,6 +4266,8 @@ The `Collector<T, A, R>` interface in Java 8 is used to **accumulate input eleme
 9. **reducing()** – Performs a reduction operation.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **1️⃣ Using `Collectors.toList()` – Convert Stream to List**
 💡 **Example:** Convert a list of numbers into another list.
@@ -3364,6 +4296,8 @@ Even Numbers: [2, 4]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2️⃣ Using `Collectors.toSet()` – Convert Stream to Set**
 💡 **Example:** Convert a list with duplicate elements into a `Set` (removes duplicates).
 
@@ -3387,6 +4321,8 @@ Unique Numbers: [1, 2, 3, 4, 5]
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **3️⃣ Using `Collectors.toMap()` – Convert Stream to Map**
 💡 **Example:** Convert a list of strings into a `Map` where the key is the word, and the value is its length.
@@ -3414,6 +4350,8 @@ Word Length Map: {apple=5, banana=6, cherry=6}
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4️⃣ Using `Collectors.joining()` – Concatenating Strings**
 💡 **Example:** Join words into a single string with a separator.
 
@@ -3436,6 +4374,8 @@ Joined String: Java, 8, Collectors, Example
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **5️⃣ Using `Collectors.summarizingInt()` – Summary Statistics**
 💡 **Example:** Get count, sum, min, max, and average of numbers.
@@ -3469,6 +4409,8 @@ Average: 30.0
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6️⃣ Using `Collectors.partitioningBy()` – Partition Data**
 💡 **Example:** Split numbers into even and odd groups.
 
@@ -3498,6 +4440,8 @@ Odd Numbers: [1, 3, 5]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **7️⃣ Using `Collectors.groupingBy()` – Group Data**
 💡 **Example:** Group words by their lengths.
 
@@ -3524,6 +4468,8 @@ Words Grouped by Length: {3=[dog], 5=[apple], 6=[banana, cherry], 8=[elephant]}
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **8️⃣ Using `Collectors.counting()` – Count Elements**
 💡 **Example:** Count how many words have more than 5 characters.
@@ -3552,6 +4498,8 @@ Words with more than 5 characters: 2
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary: Collectors Functions**
 | **Collector Function** | **Purpose** |
 |------------------|------------------------|
@@ -3567,6 +4515,8 @@ Words with more than 5 characters: 2
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **Java `Collector` Interface - Four Core Functions Explained** 🚀  
 
 The **`java.util.stream.Collector<T, A, R>`** interface is used in Java 8 **Streams API** for accumulating elements into a **mutable result container** (e.g., List, Set, Map).  
@@ -3579,8 +4529,12 @@ It has **four main functions**:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **1️⃣ `supplier()` – Creates a New Container**
 🔹 This function returns a **supplier** (a factory method) that provides a **mutable container** for accumulating elements.  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **Example: Creating a `List`**
 ```java
@@ -3590,10 +4544,14 @@ Supplier<List<String>> supplier = ArrayList::new;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2️⃣ `accumulator()` – Adds Elements to the Container**
 🔹 This function returns a **BiConsumer<T, A>**, which takes two arguments:  
    - The **mutable container** (`A`)  
    - The **next element** from the stream (`T`)  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **Example: Adding Elements to a `List`**
 ```java
@@ -3603,9 +4561,13 @@ BiConsumer<List<String>, String> accumulator = List::add;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3️⃣ `combiner()` – Merges Two Partial Results**
 🔹 This function is used in **parallel streams** to merge two intermediate containers.  
 🔹 Returns a **BinaryOperator<A>** that merges two accumulators.  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **Example: Merging Two Lists**
 ```java
@@ -3618,9 +4580,13 @@ BinaryOperator<List<String>> combiner = (list1, list2) -> {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4️⃣ `finisher()` – Transforms the Result (Optional)**
 🔹 This function returns a **Function<A, R>**, which converts the **mutable accumulator** (`A`) into a final **immutable result** (`R`).  
 🔹 Often, this is **identity function** (`Function.identity()`) when no transformation is needed.  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **Example: Returning an Unmodifiable List**
 ```java
@@ -3630,8 +4596,12 @@ Function<List<String>, List<String>> finisher = Collections::unmodifiableList;
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 Example: Custom Collector Using All Four Functions**
 💡 **Question:** Can you create a custom collector to collect strings into a `List`?
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ Solution:**
 ```java
@@ -3667,6 +4637,8 @@ Collected Words: [Java, Streams, Collector, Example]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary Table**
 | **Function**  | **Purpose** | **Example** |
 |--------------|------------|------------|
@@ -3677,11 +4649,15 @@ Collected Words: [Java, Streams, Collector, Example]
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **`Stream.of(T t)` - Creating a Stream with a Single Element** 🚀  
 
 The **`Stream.of(T t)`** method in Java 8 **creates a Stream containing only one element** of type `T`. This is useful when you need to process a **single element** in a functional way using Java Streams.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Syntax**
 ```java
@@ -3690,6 +4666,8 @@ Stream<T> singleElementStream = Stream.of(T t);
 Here, `T` is the **type of the element**, and `Stream.of(T t)` creates a **Stream** with just that one element.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Example 1: Creating a Single-Element Stream**
 ```java
@@ -3705,6 +4683,8 @@ public class StreamOfExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📝 Output:**
 ```
 Java 8
@@ -3712,6 +4692,8 @@ Java 8
 ✅ **Explanation:** `Stream.of("Java 8")` creates a **Stream** containing only one element (`"Java 8"`), which is then printed using `.forEach()`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Example 2: Applying Stream Operations on a Single Element**
 ```java
@@ -3727,6 +4709,8 @@ public class StreamOperations {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📝 Output:**
 ```
 20
@@ -3737,6 +4721,8 @@ public class StreamOperations {
 3. `.forEach(System.out::println)` prints the result.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Example 3: Using `Stream.of()` with `Optional`**
 ```java
@@ -3755,6 +4741,8 @@ public class OptionalToStream {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📝 Output:**
 ```
 Hello Java
@@ -3762,6 +4750,8 @@ Hello Java
 ✅ **Explanation:** The `.stream()` method of `Optional` internally **creates a single-element stream** if the value is present.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔥 Key Takeaways**
 | **Method**  | **Description** |
@@ -3772,14 +4762,20 @@ Hello Java
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ### **`Stream.of(Optional<T>.get())` - Explanation with Example** 🚀  
 
 The method **`Optional<T>.get()`** retrieves the value inside an `Optional`, and **`Stream.of(T t)`** creates a **Stream containing that value**.  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **⚠️ Important Warning:**  
 Using `Optional.get()` directly is **unsafe** because it throws a `NoSuchElementException` if the `Optional` is empty. Instead, **use `optional.stream()`**, which safely returns an **empty Stream if the Optional is empty**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **❌ Incorrect Approach: Using `Optional.get()` Directly**
 ```java
@@ -3798,6 +4794,8 @@ public class StreamOfOptionalGetExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🛑 Output (Exception)**
 ```
 Exception in thread "main" java.util.NoSuchElementException: No value present
@@ -3805,6 +4803,8 @@ Exception in thread "main" java.util.NoSuchElementException: No value present
 ✅ **Fix:** Always check if `Optional` contains a value before calling `get()`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Correct Approach: Using `Optional.orElse()`**
 ```java
@@ -3823,6 +4823,8 @@ public class SafeStreamExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📝 Output:**
 ```
 Default Value
@@ -3830,6 +4832,8 @@ Default Value
 ✅ **Explanation:** If `optionalValue` is empty, `orElse("Default Value")` returns `"Default Value"`, which is used inside `Stream.of()`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Best Approach: Using `optional.stream()` (Preferred)**
 💡 **Java 9 introduced `Optional.stream()`, which converts an `Optional<T>` into a Stream<T>** safely.
@@ -3850,6 +4854,8 @@ public class OptionalToStream {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📝 Output:**
 ```
 Hello Java
@@ -3860,6 +4866,8 @@ Hello Java
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🔥 Key Takeaways**
 | **Approach**  | **Safe?** | **Notes** |
 |--------------|---------|------------|
@@ -3869,13 +4877,19 @@ Hello Java
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🚀 Final Recommendation:** **Always use `optional.stream()` instead of `Stream.of(optional.get())` for safe and functional programming in Java 8+!**
+
+[⬆ Back to top](#table-of-contents)
 
 ## ### **`Collectors.toCollection()` - Explanation with Examples** 🚀  
 
 The **`Collectors.toCollection()`** method in Java 8 allows us to **collect Stream elements** into a specific **mutable collection**, such as `ArrayList`, `HashSet`, `LinkedList`, `TreeSet`, etc. It is useful when you want **more control over the type of collection** than `Collectors.toList()` or `Collectors.toSet()`.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Syntax**
 ```java
@@ -3884,6 +4898,8 @@ Collectors.toCollection(Supplier<C> collectionFactory)
 - `collectionFactory`: A **supplier function** that creates the desired collection.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 1. Collecting Elements into an `ArrayList`**
 ```java
@@ -3906,6 +4922,8 @@ Unlike `toList()`, this allows us to specify an `ArrayList` explicitly.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ 2. Collecting Elements into a `LinkedList`**
 ```java
 List<Integer> numbers = Stream.of(1, 2, 3, 4, 5)
@@ -3918,6 +4936,8 @@ System.out.println(numbers);
 - Useful if **frequent insertions/deletions** are required.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 3. Collecting Elements into a `HashSet`**
 ```java
@@ -3932,6 +4952,8 @@ System.out.println(uniqueNames);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ 4. Collecting Elements into a `TreeSet` (Sorted Order)**
 ```java
 Set<Integer> sortedNumbers = Stream.of(5, 3, 8, 1, 2)
@@ -3944,6 +4966,8 @@ System.out.println(sortedNumbers);
 - Stores elements in **sorted order**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 5. Collecting Elements into a `LinkedHashSet` (Maintains Insertion Order)**
 ```java
@@ -3958,6 +4982,8 @@ System.out.println(orderedSet);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ 6. Collecting Elements into a `PriorityQueue`**
 ```java
 Queue<Integer> priorityQueue = Stream.of(7, 1, 4, 9, 2)
@@ -3970,6 +4996,8 @@ System.out.println(priorityQueue);
 - Retrieves elements in **natural order**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **⚠️ Can We Use `Collectors.toCollection()` to Collect into a `Map`?**
 ❌ **No**, because `Collectors.toCollection()` works with **collection types (List, Set, Queue, etc.)**, not `Map`.  
@@ -3993,6 +5021,8 @@ public class ToMapExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary Table of `Collectors.toCollection()` Usage**
 | **Collection Type**  | **Example Code** | **Purpose** |
 |------------|---------------|------------|
@@ -4005,6 +5035,8 @@ public class ToMapExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🎯 Key Takeaways**
 ✅ `Collectors.toCollection()` lets you **control the type of collection** used.  
 ✅ Use it **when `Collectors.toList()` or `Collectors.toSet()` isn't enough**.  
@@ -4012,11 +5044,15 @@ public class ToMapExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **`Comparator` Class Utility Methods in Java (Up to Java 8)** 🚀  
 
 The `Comparator` interface in Java **provides several utility methods** to help with custom sorting. Starting from **Java 8**, new **default and static methods** were added to make comparisons more powerful and flexible.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 1. `comparing()` - Creates a Comparator for an Object Field**
 **📌 Syntax:**  
@@ -4047,6 +5083,8 @@ public class ComparatorExample {
 - Makes sorting more **readable and concise**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 2. `comparingInt()`, `comparingLong()`, `comparingDouble()` - Primitive Comparisons**
 Java 8 introduced specialized comparators for **primitive types** to avoid unnecessary boxing/unboxing.
@@ -4093,6 +5131,8 @@ public class ComparatorPrimitiveExample {
 - **More efficient** than `Comparator.comparing()` with wrapper types.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 3. `thenComparing()` - Secondary Sorting**
 Used for **chained comparisons**, allowing sorting by multiple fields.
@@ -4146,6 +5186,8 @@ public class ThenComparingExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ 4. `reverseOrder()` - Reverse Natural Ordering**
 Used to **sort in descending order** based on natural ordering.
 
@@ -4174,6 +5216,8 @@ public class ReverseOrderExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ 5. `naturalOrder()` - Sorting in Ascending Order**
 Explicitly sorts elements in **natural order**.
 
@@ -4201,6 +5245,8 @@ public class NaturalOrderExample {
 - Explicitly enforces **default sorting order**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ 6. `nullsFirst()` & `nullsLast()` - Handling `null` Values**
 - `nullsFirst()` → **Null values come first**
@@ -4232,6 +5278,8 @@ public class NullHandlingExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary Table**
 | **Method**          | **Purpose** |
 |---------------------|------------|
@@ -4247,6 +5295,8 @@ public class NullHandlingExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🎯 Key Takeaways**
 ✅ Java 8 added **powerful default and static methods** to `Comparator`.  
 ✅ Use `comparing()` for **custom sorting** and `thenComparing()` for **multi-level sorting**.  
@@ -4254,6 +5304,8 @@ public class NullHandlingExample {
 ✅ `comparingInt()`, `comparingLong()`, and `comparingDouble()` are **more efficient for primitives**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **`Comparator.naturalOrder()`**
 - Returns a **Comparator** that sorts elements in their **natural order** (ascending for numbers, lexicographical for strings).
@@ -4279,6 +5331,8 @@ public class NaturalOrderExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **`Comparator.reverseOrder()`**
 - Returns a **Comparator** that sorts elements in **reverse of their natural order**.
 - Equivalent to **"descending order" sorting**.
@@ -4302,6 +5356,8 @@ public class ReverseOrderExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🚀 Key Differences**
 | **Feature**               | **Comparator.naturalOrder()** | **Comparator.reverseOrder()** |
 |---------------------------|------------------------------|------------------------------|
@@ -4311,11 +5367,15 @@ public class ReverseOrderExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🎯 Key Takeaways**
 ✅ **Use `naturalOrder()`** when you need **default (ascending) sorting**.  
 ✅ **Use `reverseOrder()`** when you need **descending sorting**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **Java 8 `Collectors` Class - All Utility Methods with Examples** 🚀  
 
@@ -4323,7 +5383,11 @@ The `java.util.stream.Collectors` class provides **static factory methods** for 
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 1. Collecting into a List, Set, or Map**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `toList()` - Collects Elements into a List**
 ```java
 List<String> names = Stream.of("Alice", "Bob", "Charlie")
@@ -4336,6 +5400,8 @@ System.out.println(names);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `toSet()` - Collects Elements into a Set**
 ```java
 Set<Integer> numbers = Stream.of(1, 2, 2, 3, 4)
@@ -4347,6 +5413,8 @@ System.out.println(numbers);
 - **Returns a `HashSet` by default.**
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ `toMap()` - Collects Elements into a Map**
 ```java
@@ -4361,7 +5429,11 @@ System.out.println(nameLengthMap);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 2. Grouping and Partitioning**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `groupingBy()` - Groups Elements by a Key**
 ```java
 Map<Integer, List<String>> groupedByLength = Stream.of("one", "two", "three", "four", "five")
@@ -4374,6 +5446,8 @@ System.out.println(groupedByLength);
 - You can also specify a downstream collector.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ `partitioningBy()` - Splits Data into Two Groups (Boolean Predicate)**
 ```java
@@ -4388,7 +5462,11 @@ System.out.println(evenOddPartition);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 3. Reducing and Summarizing**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `counting()` - Counts the Number of Elements**
 ```java
 long count = Stream.of("A", "B", "C").collect(Collectors.counting());
@@ -4398,6 +5476,8 @@ System.out.println(count); // Output: 3
 - **Equivalent to `stream.count()` but inside `collect()`**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **✅ `summarizingInt()` / `summarizingDouble()` / `summarizingLong()` - Summary Statistics**
 ```java
@@ -4411,6 +5491,8 @@ System.out.println(stats);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `reducing()` - Custom Reduction**
 ```java
 Optional<Integer> sum = Stream.of(1, 2, 3, 4)
@@ -4422,7 +5504,11 @@ System.out.println(sum.get()); // Output: 10
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 4. Joining Strings**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `joining()` - Concatenates Strings**
 ```java
 String result = Stream.of("Apple", "Banana", "Cherry")
@@ -4436,7 +5522,11 @@ System.out.println(result);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 5. Mapping & Collecting**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `mapping()` - Transforms Elements Before Collecting**
 ```java
 List<Integer> nameLengths = Stream.of("Alice", "Bob", "Charlie")
@@ -4449,7 +5539,11 @@ System.out.println(nameLengths);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 6. Collecting into Custom Collections**
+[⬆ Back to top](#table-of-contents)
+
 ### **✅ `toCollection()` - Collecting into a Specific Collection Type**
 ```java
 LinkedList<String> names = Stream.of("A", "B", "C")
@@ -4461,6 +5555,8 @@ System.out.println(names);
 - **Lets you specify the type of collection (e.g., `LinkedList`, `TreeSet`)**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Summary Table**
 | **Method**              | **Description** | **Returns** |
@@ -4481,6 +5577,8 @@ System.out.println(names);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Key Takeaways**
 ✅ **`Collectors.toList()` and `Collectors.toSet()`** are the most commonly used.  
 ✅ **`groupingBy()` and `partitioningBy()`** are powerful for categorizing data.  
@@ -4490,10 +5588,16 @@ System.out.println(names);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **`Collectors.collectingAndThen()` - Java 8 Explained with Examples** 🚀
+
+[⬆ Back to top](#table-of-contents)
 
 ### **📌 What is `collectingAndThen()`?**
 `Collectors.collectingAndThen()` is a **wrapper collector** that **modifies** the result of another collector using a **finishing function**.
+
+[⬆ Back to top](#table-of-contents)
 
 ### **📌 Method Signature:**
 ```java
@@ -4502,6 +5606,8 @@ public static <T, A, R, RR> Collector<T, A, RR> collectingAndThen(
         Function<R, RR> finisher
 )
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **📌 Key Points:**
 1. **First Collector (`downstream`)** - Collects stream elements (e.g., `toList()`, `toSet()`, etc.).
 2. **Finishing Function (`finisher`)** - Applies transformation on the collected result.
@@ -4509,7 +5615,11 @@ public static <T, A, R, RR> Collector<T, A, RR> collectingAndThen(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **1️⃣ Example: Collect List and Make it Immutable**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Prevent Modification After Collection**
 ```java
 import java.util.*;
@@ -4537,7 +5647,11 @@ public class CollectingAndThenExample1 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **2️⃣ Example: Get Maximum Value Using CollectingAndThen**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Find Maximum Element Using a Comparator**
 ```java
 import java.util.*;
@@ -4562,7 +5676,11 @@ public class CollectingAndThenExample2 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **3️⃣ Example: Counting Elements and Converting to String**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Get Number of Elements as String**
 ```java
 import java.util.*;
@@ -4588,7 +5706,11 @@ public class CollectingAndThenExample3 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **4️⃣ Example: Collect into a Custom Collection**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Collect as `TreeSet` (Sorted Order)**
 ```java
 import java.util.*;
@@ -4616,7 +5738,11 @@ public class CollectingAndThenExample4 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **5️⃣ Example: Convert List to Comma-Separated String**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Format List as a String**
 ```java
 import java.util.*;
@@ -4642,7 +5768,11 @@ public class CollectingAndThenExample5 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **6️⃣ Example: Convert List to Uppercase After Collection**
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Use Case: Modify List After Collection**
 ```java
 import java.util.*;
@@ -4668,6 +5798,8 @@ public class CollectingAndThenExample6 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary of Use Cases**
 | **Use Case** | **Code Example** |
 |-------------|----------------|
@@ -4680,12 +5812,16 @@ public class CollectingAndThenExample6 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🚀 Key Takeaways**
 ✅ `collectingAndThen()` is useful for **post-processing collected data**.  
 ✅ Often used to **make collections immutable** (`unmodifiableList()`, `unmodifiableSet()`).  
 ✅ Can **unwrap Optionals**, **format output**, **apply transformations**, and **convert types**.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🎯 Interview Question**
 **Q:** "How would you collect a stream into a sorted, immutable `Set` using Java 8?"  
@@ -4699,13 +5835,19 @@ Set<Integer> numbers = Stream.of(5, 3, 8, 1)
 ```
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **📌 Complete List of Utility Methods in `Collectors` Class (Java 8+)**  
 
 The `Collectors` class in Java **(java.util.stream.Collectors)** provides **static factory methods** to generate `Collector` instances for reducing and accumulating elements in a `Stream`.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 List of All Utility Methods in `Collectors`**
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Basic Collection Methods**
 | **Method** | **Description** |
@@ -4720,6 +5862,8 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Counting and Summarization**
 | **Method** | **Description** |
 |------------|----------------|
@@ -4733,6 +5877,8 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3️⃣ Finding Min & Max**
 | **Method** | **Description** |
 |------------|----------------|
@@ -4740,6 +5886,8 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 | `minBy(Comparator<T>)` | Finds the **minimum** element using a comparator. |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **4️⃣ String Joining**
 | **Method** | **Description** |
@@ -4749,6 +5897,8 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 | `joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix)` | Concatenates elements with a **delimiter, prefix, and suffix**. |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5️⃣ Grouping and Partitioning**
 | **Method** | **Description** |
@@ -4761,6 +5911,8 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6️⃣ Custom Collection Transformation**
 | **Method** | **Description** |
 |------------|----------------|
@@ -4771,7 +5923,11 @@ The `Collectors` class in Java **(java.util.stream.Collectors)** provides **stat
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🚀 Example Usage of Each Method**
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Collecting into List, Set, and Map**
 ```java
@@ -4801,6 +5957,8 @@ public class CollectExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Counting and Summing**
 ```java
 import java.util.stream.Collectors;
@@ -4820,6 +5978,8 @@ public class CountingExample {
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3️⃣ Grouping and Partitioning**
 ```java
@@ -4844,6 +6004,8 @@ public class GroupingPartitioningExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4️⃣ `collectingAndThen()` - Convert List to Unmodifiable List**
 ```java
 import java.util.List;
@@ -4863,6 +6025,8 @@ public class CollectingAndThenExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary Table**
 | **Method Group** | **Methods** |
 |----------------|------------|
@@ -4875,9 +6039,13 @@ public class CollectingAndThenExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## # **📌 `Stream.collect()` Variations Based on Supplied Collector in Java 8+**
 
 The `collect()` method in Java **streams** is a **terminal operation** used to **accumulate elements** into a result container (like `List`, `Set`, `Map`, or even a custom object). It works by **accepting a `Collector`**, which defines how the stream elements are collected.
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🚀 Syntax of `collect()`**
 ```java
@@ -4890,8 +6058,12 @@ The `collect()` method in Java **streams** is a **terminal operation** used to *
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Different `collect()` Variations Based on Supplied `Collector`**
 Java provides **`Collectors` utility methods** to supply various predefined collectors.
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Collect Elements into a `List`**
 ```java
@@ -4912,6 +6084,8 @@ public class CollectToList {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Collect Elements into a `Set`**
 ```java
 import java.util.Set;
@@ -4930,6 +6104,8 @@ public class CollectToSet {
 ✔ **`toSet()`** → Collects elements into a `Set<T>` (removes duplicates).
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **3️⃣ Collect Elements into a `Map`**
 ```java
@@ -4954,6 +6130,8 @@ public class CollectToMap {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4️⃣ Collect Elements into an Immutable List**
 ```java
 import java.util.List;
@@ -4974,6 +6152,8 @@ public class CollectUnmodifiableList {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **5️⃣ Counting Elements in a Stream**
 ```java
 import java.util.stream.Collectors;
@@ -4992,6 +6172,8 @@ public class CollectCounting {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6️⃣ Joining Strings with a Delimiter**
 ```java
 import java.util.stream.Collectors;
@@ -5009,6 +6191,8 @@ public class CollectJoining {
 ✔ **`joining()`** → Concatenates stream elements into a single string.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7️⃣ Finding the Maximum or Minimum Element**
 ```java
@@ -5029,6 +6213,8 @@ public class CollectMaxMin {
 ✔ **`maxBy()` and `minBy()`** → Finds the maximum/minimum element based on a comparator.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **8️⃣ Summing or Averaging Numbers**
 ```java
@@ -5052,6 +6238,8 @@ public class CollectSummingAveraging {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **9️⃣ Grouping Elements Using `groupingBy()`**
 ```java
 import java.util.List;
@@ -5072,6 +6260,8 @@ public class CollectGroupingBy {
 ✔ **`groupingBy()`** → Groups elements based on a classification function.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🔟 Partitioning Elements Using `partitioningBy()`**
 ```java
@@ -5094,6 +6284,8 @@ public class CollectPartitioningBy {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Summary of `collect()` Variations**
 | **Collector** | **Functionality** |
 |-------------|----------------|
@@ -5111,13 +6303,19 @@ public class CollectPartitioningBy {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **📌 Complete List of Methods in `Stream` Class (Java 8+)**  
 
 The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerous methods for **processing collections** in a functional style.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 List of All Methods in `Stream` Interface**
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Stream Creation**
 | **Method** | **Description** |
@@ -5132,6 +6330,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Filtering & Matching**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5145,6 +6345,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3️⃣ Transforming Elements**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5156,6 +6358,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **4️⃣ Sorting & Limiting**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5165,6 +6369,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 | `skip(long n)` | Skips the first `n` elements. |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5️⃣ Reducing & Collecting**
 | **Method** | **Description** |
@@ -5179,6 +6385,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6️⃣ Parallel Processing**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5189,6 +6397,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **7️⃣ Terminal Operations (ForEach & Iteration)**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5197,6 +6407,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **8️⃣ Converting Stream to an Array**
 | **Method** | **Description** |
 |------------|----------------|
@@ -5204,6 +6416,8 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 | `toArray(IntFunction<A[]> generator)` | Converts the stream into a **custom array type**. |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **9️⃣ Short-Circuiting Methods**
 | **Method** | **Description** |
@@ -5217,7 +6431,11 @@ The `Stream<T>` interface in Java **(java.util.stream.Stream)** provides numerou
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🚀 Examples for Each Type of Method**
+
+[⬆ Back to top](#table-of-contents)
 
 ### **1️⃣ Creating Streams**
 ```java
@@ -5228,6 +6446,8 @@ Stream<Double> stream3 = Stream.generate(Math::random).limit(3);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **2️⃣ Filtering & Matching**
 ```java
 Stream.of("John", "Jane", "Jack")
@@ -5237,6 +6457,8 @@ Stream.of("John", "Jane", "Jack")
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3️⃣ Transforming with `map()`**
 ```java
 Stream.of("hello", "world")
@@ -5245,6 +6467,8 @@ Stream.of("hello", "world")
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **4️⃣ Sorting & Limiting**
 ```java
@@ -5256,6 +6480,8 @@ Stream.of(5, 3, 9, 1, 7)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **5️⃣ Reducing Elements**
 ```java
 int sum = Stream.of(1, 2, 3, 4, 5)
@@ -5265,6 +6491,8 @@ System.out.println(sum);  // Output: 15
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **6️⃣ Collecting into a List**
 ```java
 List<String> list = Stream.of("A", "B", "C")
@@ -5272,6 +6500,8 @@ List<String> list = Stream.of("A", "B", "C")
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **7️⃣ Parallel Processing**
 ```java
@@ -5281,6 +6511,8 @@ Stream.of("A", "B", "C", "D")
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔥 Summary Table of `Stream` Methods**
 | **Category** | **Methods** |
@@ -5297,11 +6529,15 @@ Stream.of("A", "B", "C", "D")
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **Merging Two Maps Using `Map.merge()` and Anonymous Inner Class in Java 8**
 
 In Java 8, the `Map.merge()` method is useful for merging two maps by handling key conflicts with a **custom merging function**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Syntax of `merge()`**
 ```java
@@ -5311,6 +6547,8 @@ V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingF
 - **If the key is present**, it applies the `remappingFunction` to merge values.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🚀 Example: Merging Two Maps with `Map.merge()` and Anonymous Inner Class**
 ```java
@@ -5350,6 +6588,8 @@ public class MergeMapsExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Explanation**
 1. **`map1.put()` and `map2.put()`** - Two maps are created with overlapping keys.
 2. **Looping through `map2.entrySet()`**:
@@ -5367,6 +6607,8 @@ public class MergeMapsExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **💡 Alternative: Using Lambda Expression**
 If you don’t need an anonymous inner class, you can simplify it with a **lambda function**:
 ```java
@@ -5376,11 +6618,15 @@ This is **shorter and more readable**.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **📌 `Collectors.toMap()` - All Variants and Examples in Java 8**
 
 The `Collectors.toMap()` method is used to collect elements from a Stream into a **Map**. It has **four overloaded variations**, allowing different levels of customization.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 1️⃣ Basic Syntax: `toMap(KeyMapper, ValueMapper)`**
 ```java
@@ -5389,6 +6635,8 @@ Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
 ```
 - **KeyMapper**: Function to extract keys.
 - **ValueMapper**: Function to extract values.
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🚀 Example**
 ```java
@@ -5411,6 +6659,8 @@ public class ToMapExample1 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 2️⃣ Handling Duplicate Keys: `toMap(KeyMapper, ValueMapper, MergeFunction)`**
 ```java
 Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
@@ -5420,6 +6670,8 @@ Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
 - **KeyMapper**: Function to extract keys.
 - **ValueMapper**: Function to extract values.
 - **MergeFunction**: Defines how to handle duplicate keys.
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🚀 Example (Handling Duplicate Keys)**
 ```java
@@ -5447,6 +6699,8 @@ public class ToMapExample2 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 3️⃣ Using a Specific `Map` Type: `toMap(KeyMapper, ValueMapper, MergeFunction, MapSupplier)`**
 ```java
 Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
@@ -5458,6 +6712,8 @@ Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
 - **ValueMapper**: Extracts values.
 - **MergeFunction**: Handles duplicate keys.
 - **MapSupplier**: Defines the specific `Map` implementation (e.g., `TreeMap`, `LinkedHashMap`).
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🚀 Example (Using `LinkedHashMap` for Order)**
 ```java
@@ -5487,8 +6743,12 @@ public class ToMapExample3 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 4️⃣ Handling Null Values in `toMap()`**
 `toMap()` does not allow `null` **keys** or **values**. It throws a `NullPointerException`.
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🚀 Example (Handling Nulls)**
 ```java
@@ -5514,6 +6774,8 @@ public class ToMapExample4 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Summary Table of `toMap()` Variants**
 
 | **Syntax** | **Purpose** |
@@ -5524,6 +6786,8 @@ public class ToMapExample4 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Key Takeaways**
 ✔ `Collectors.toMap()` is **immutable** by default.  
 ✔ Handles **duplicate keys** using a merge function.  
@@ -5532,28 +6796,40 @@ public class ToMapExample4 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **📌 `Stream.concat()` in Java 8**  
 
 The `Stream.concat()` method is used to **merge two streams** into a **single continuous stream**. It **does not modify** the original streams but creates a **new combined stream**.  
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 Syntax**  
 ```java
 public static <T> Stream<T> concat(Stream<? extends T> a, Stream<? extends T> b)
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Parameters**  
 - `a` → The first stream  
 - `b` → The second stream  
 
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Returns**  
 - A new **concatenated** stream consisting of all elements from `a`, followed by all elements from `b`.  
+
+[⬆ Back to top](#table-of-contents)
 
 ### **🔹 Important Notes**
 ✔ Streams passed to `Stream.concat()` **must not be reused** after concatenation.  
 ✔ If either `a` or `b` is **null**, it will throw `NullPointerException`.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example 1: Merging Two Streams of Strings**
 ```java
@@ -5570,6 +6846,8 @@ public class StreamConcatExample {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 Apple
@@ -5579,6 +6857,8 @@ Date
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example 2: Concatenating Streams with Different Data Types**
 You can concatenate streams of **subtypes** if they share a common **superclass**.
@@ -5597,6 +6877,8 @@ public class StreamConcatExample2 {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 1
@@ -5609,6 +6891,8 @@ public class StreamConcatExample2 {
 ✔ Since `Integer` and `Double` both extend `Number`, `Stream<Number>` can hold both.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example 3: Handling Empty Streams**
 ```java
@@ -5625,6 +6909,8 @@ public class StreamConcatExample3 {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 Hello
@@ -5633,6 +6919,8 @@ World
 ✔ If one of the streams is **empty**, `Stream.concat()` simply returns the non-empty stream.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example 4: Using `Stream.concat()` Multiple Times**
 You can **chain `Stream.concat()` calls** to merge multiple streams.
@@ -5652,6 +6940,8 @@ public class StreamConcatExample4 {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 ABCDEF
@@ -5659,6 +6949,8 @@ ABCDEF
 ✔ **Nesting** `Stream.concat()` calls allows you to merge multiple streams.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example 5: Avoiding `IllegalStateException`**
 > ⚠ **Once a stream is consumed, it cannot be reused**.  
@@ -5692,6 +6984,8 @@ public class StreamConcatExample5 {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **📌 Alternative to `Stream.concat()`**
 - You can also use `Stream.of()` to merge multiple streams.
 
@@ -5701,6 +6995,8 @@ Stream<String> combinedStream = Stream.of(stream1, stream2, stream3).flatMap(s -
 ✔ **This is more flexible** when merging multiple streams.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Summary of `Stream.concat()`**
 | **Feature**      | **Details** |
@@ -5714,11 +7010,15 @@ Stream<String> combinedStream = Stream.of(stream1, stream2, stream3).flatMap(s -
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **Merging Two Maps Using `Stream.concat()` and Anonymous Inner Class in Java 8**  
 
 You can use **`Stream.concat()`** to merge two maps by converting their entries into a **Stream**, then collecting them back into a `Map`. If there are duplicate keys, we handle them using a **merge function** inside an **anonymous inner class**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Example: Merging Two Maps with `Stream.concat()` and Anonymous Inner Class**
 ```java
@@ -5762,6 +7062,8 @@ public class MergeMapsWithStreamConcat {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Explanation**
 1. **Convert Both Maps into Streams**  
    - `map1.entrySet().stream()` → Converts `map1` into a stream of key-value pairs.
@@ -5786,6 +7088,8 @@ public class MergeMapsWithStreamConcat {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -5795,6 +7099,8 @@ public class MergeMapsWithStreamConcat {
 - `"D"` is added as `25`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Alternative Using Lambda (More Concise)**
 Instead of an anonymous inner class, use a **lambda function**:
@@ -5808,6 +7114,8 @@ Instead of an anonymous inner class, use a **lambda function**:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🚀 Key Takeaways**
 ✔ **`Stream.concat()` merges streams of key-value pairs.**  
 ✔ **`Collectors.toMap()` collects them back into a Map.**  
@@ -5815,6 +7123,8 @@ Instead of an anonymous inner class, use a **lambda function**:
 ✔ **Alternative:** Use a lambda function for conciseness.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## ## **Merging Two Maps Using `Stream.concat()`, `toMap()` with `MapSupplier`, and an Anonymous Inner Class in Java 8**  
 
@@ -5824,6 +7134,8 @@ We will use:
 ✔ **Anonymous Inner Class (`BinaryOperator`)** → To handle key conflicts when merging duplicate keys.  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **📌 Example: Merging Two Maps into a `LinkedHashMap` (Maintaining Order)**
 ```java
@@ -5868,6 +7180,8 @@ public class MergeMapsExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Explanation**
 1. **Convert Both Maps to Streams**  
    - `map1.entrySet().stream()` → Converts `map1` into a stream of key-value pairs.  
@@ -5894,6 +7208,8 @@ public class MergeMapsExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -5903,6 +7219,8 @@ public class MergeMapsExample {
 - `"D"`: Added as `25` since it is only in `map2`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **✅ Alternative Using Lambda for Merge Function**
 Instead of an anonymous inner class, you can use a **lambda function**:
@@ -5918,6 +7236,8 @@ Instead of an anonymous inner class, you can use a **lambda function**:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **🔥 Key Takeaways**
 ✔ **Use `Stream.concat()`** to merge two `Stream<Map.Entry<K, V>>`.  
 ✔ **Use `Collectors.toMap()`** to collect entries into a custom `Map`.  
@@ -5926,11 +7246,15 @@ Instead of an anonymous inner class, you can use a **lambda function**:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ## **Merging Two Maps with Same Keys in Java 8**  
 
 When merging two maps that **share common keys**, we need to decide how to handle the duplicate keys. Java 8 provides multiple approaches using **Streams and Collectors**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Approach 1: Using `Stream.concat()` and `Collectors.toMap()`**
 ✔ **Concatenates both maps into a single stream**  
@@ -5967,6 +7291,8 @@ public class MergeMapsUsingStream {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -5976,6 +7302,8 @@ public class MergeMapsUsingStream {
 ✔ `"D"` is added as `25`  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Approach 2: Using `Map.merge()`**
 ✔ **Iterates through one map and merges with another**  
@@ -6006,6 +7334,8 @@ public class MergeMapsUsingMergeMethod {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -6017,6 +7347,8 @@ public class MergeMapsUsingMergeMethod {
 🔹 **Efficient**, as it modifies `map1` directly instead of creating a new map.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Approach 3: Using `Collectors.toMap()` with a Custom Map (LinkedHashMap)**
 ✔ **Maintains insertion order**  
@@ -6054,6 +7386,8 @@ public class MergeMapsUsingLinkedHashMap {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -6065,6 +7399,8 @@ public class MergeMapsUsingLinkedHashMap {
 🔹 **Maintains order** because of `LinkedHashMap::new`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **📌 Approach 4: Using Java 8 `reduce()`**
 ✔ **Merges multiple maps into one using `reduce()`**  
@@ -6104,6 +7440,8 @@ public class MergeMapsUsingReduce {
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### **🔹 Output**
 ```
 {A=10, B=25, C=45, D=25}
@@ -6112,6 +7450,8 @@ public class MergeMapsUsingReduce {
 ✔ **Good for merging multiple maps dynamically.**  
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🔥 Comparison of Methods**
 | **Approach**                 | **Pros** | **Cons** |
@@ -6123,6 +7463,8 @@ public class MergeMapsUsingReduce {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## **✅ Best Choice Based on Use Case**
 | **Scenario** | **Best Approach** |
 |-------------|----------------|
@@ -6132,6 +7474,8 @@ public class MergeMapsUsingReduce {
 | Merge multiple maps dynamically | `reduce()` |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## **🚀 Summary**
 ✔ **If modifying an existing map** → Use `Map.merge()`  
@@ -6145,3 +7489,5 @@ public class MergeMapsUsingReduce {
 
 
 
+
+[⬆ Back to top](#table-of-contents)

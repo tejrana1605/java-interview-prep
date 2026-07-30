@@ -1,12 +1,80 @@
 # Java 8 Interview Questions and Answers
 
+## Table of Contents
+
+- [Java 8 Interview Questions and Answers](#java-8-interview-questions-and-answers)
+  - [After Java 8, what do you think about Java? Is it still an object oriented language or it has turned into functional programming language?](#after-java-8-what-do-you-think-about-java-is-it-still-an-object-oriented-language-or-it-has-turned-into-functional-programming-language)
+  - [What are the three main features of Java 8 which make Java as a functional programming language?](#what-are-the-three-main-features-of-java-8-which-make-java-as-a-functional-programming-language)
+  - [What are lambda expressions? How this feature has changed the way you write code in Java? Explain with some before Java 8 and after Java 8 examples?](#what-are-lambda-expressions-how-this-feature-has-changed-the-way-you-write-code-in-java-explain-with-some-before-java-8-and-after-java-8-examples)
+  - [How the signature of lambda expressions are determined?](#how-the-signature-of-lambda-expressions-are-determined)
+  - [5) How the compiler determines the return type of a lambda expression?](#5-how-the-compiler-determines-the-return-type-of-a-lambda-expression)
+  - [Can we use non-final local variables inside a lambda expression?](#can-we-use-non-final-local-variables-inside-a-lambda-expression)
+  - [7) What are the advantages of lambda expressions?](#7-what-are-the-advantages-of-lambda-expressions)
+  - [What are the functional interfaces? Do they exist before Java 8 or they are the whole new features introduced in Java 8?](#what-are-the-functional-interfaces-do-they-exist-before-java-8-or-they-are-the-whole-new-features-introduced-in-java-8)
+  - [What are the new functional interfaces introduced in Java 8? In which package they have kept in?](#what-are-the-new-functional-interfaces-introduced-in-java-8-in-which-package-they-have-kept-in)
+  - [What is the difference between Predicate and BiPredicate?](#what-is-the-difference-between-predicate-and-bipredicate)
+  - [What is the difference between Function and BiFunction?](#what-is-the-difference-between-function-and-bifunction)
+  - [Which functional interface do you use if you want to perform some operations on an object and returns nothing?](#which-functional-interface-do-you-use-if-you-want-to-perform-some-operations-on-an-object-and-returns-nothing)
+  - [Which functional interface is the best suitable for an operation which creates new objects?](#which-functional-interface-is-the-best-suitable-for-an-operation-which-creates-new-objects)
+  - [When you use UnaryOperator and BinaryOperator interfaces?](#when-you-use-unaryoperator-and-binaryoperator-interfaces)
+  - [Along with functional interfaces which support object types, Java 8 has introduced functional interfaces which support primitive types. For example, Consumer for object types and intConsumer, LongConsumer, DoubleConsumer for primitive types. What do you think, is it necessary to introduce separate interfaces for primitive types and object types?](#along-with-functional-interfaces-which-support-object-types-java-8-has-introduced-functional-interfaces-which-support-primitive-types-for-example-consumer-for-object-types-and-intconsumer-longconsumer-doubleconsumer-for-primitive-types-what-do-you-think-is-it-necessary-to-introduce-separate-interfaces-for-primitive-types-and-object-types)
+  - [How functional interfaces and lambda expressions are inter related?](#how-functional-interfaces-and-lambda-expressions-are-inter-related)
+  - [What are the method references? What is the use of them?](#what-are-the-method-references-what-is-the-use-of-them)
+  - [What are the different syntax of Java 8 method references?](#what-are-the-different-syntax-of-java-8-method-references)
+  - [What are the major changes made to interfaces from Java 8?](#what-are-the-major-changes-made-to-interfaces-from-java-8)
+  - [What are default methods of an interface? Why they are introduced?](#what-are-default-methods-of-an-interface-why-they-are-introduced)
+  - [As interfaces can also have concrete methods from Java 8, how do you solve diamond problem i.e conflict of classes inhering multiple methods with same signature?](#as-interfaces-can-also-have-concrete-methods-from-java-8-how-do-you-solve-diamond-problem-ie-conflict-of-classes-inhering-multiple-methods-with-same-signature)
+  - [Why static methods are introduced to interfaces from Java 8?](#why-static-methods-are-introduced-to-interfaces-from-java-8)
+  - [What are streams? Why they are introduced?](#what-are-streams-why-they-are-introduced)
+  - [Can we consider streams as another type of data structure in Java? Justify your answer?](#can-we-consider-streams-as-another-type-of-data-structure-in-java-justify-your-answer)
+  - [What are intermediate and terminal operations?](#what-are-intermediate-and-terminal-operations)
+  - [What do you mean by pipeline of operations? What is the use of it?](#what-do-you-mean-by-pipeline-of-operations-what-is-the-use-of-it)
+  - [“Stream operations do the iteration implicitly” what does it mean?](#stream-operations-do-the-iteration-implicitly-what-does-it-mean)
+  - [Which type of resource loading do Java 8 streams support? Lazy Loading OR Eager Loading?](#which-type-of-resource-loading-do-java-8-streams-support-lazy-loading-or-eager-loading)
+  - [What are short circuiting operations?](#what-are-short-circuiting-operations)
+  - [What are selection operations available in Java 8 Stream API?](#what-are-selection-operations-available-in-java-8-stream-api)
+  - [What are sorting operations available in Java 8 streams?](#what-are-sorting-operations-available-in-java-8-streams)
+  - [What are reducing operations? Name the reducing operations available in Java 8 streams?](#what-are-reducing-operations-name-the-reducing-operations-available-in-java-8-streams)
+  - [What are searching / finding operations available in Java 8 streams?](#what-are-searching-finding-operations-available-in-java-8-streams)
+  - [Name the mapping operations available in Java 8 streams?](#name-the-mapping-operations-available-in-java-8-streams)
+  - [What is the difference between map() and flatMap()?](#what-is-the-difference-between-map-and-flatmap)
+  - [What is the difference between limit() and skip()?](#what-is-the-difference-between-limit-and-skip)
+  - [What is the difference between findFirst() and findAny()?](#what-is-the-difference-between-findfirst-and-findany)
+  - [Do you know Stream.collect() method, Collector interface and Collectors class? What is the relation between them?](#do-you-know-streamcollect-method-collector-interface-and-collectors-class-what-is-the-relation-between-them)
+  - [Name any 5 methods of Collectors class and their usage?](#name-any-5-methods-of-collectors-class-and-their-usage)
+  - [What are the differences between collections and streams?](#what-are-the-differences-between-collections-and-streams)
+  - [What is the purpose of Java 8 Optional class?](#what-is-the-purpose-of-java-8-optional-class)
+  - [What is the difference between Java 8 Spliterator and the iterators available before Java 8?](#what-is-the-difference-between-java-8-spliterator-and-the-iterators-available-before-java-8)
+  - [What is the difference between Java 8 StringJoiner, String.join() and Collectors.joining()?](#what-is-the-difference-between-java-8-stringjoiner-stringjoin-and-collectorsjoining)
+  - [Name three important classes of Java 8 Date and Time API?](#name-three-important-classes-of-java-8-date-and-time-api)
+  - [How do you get current date and time using Java 8 features?](#how-do-you-get-current-date-and-time-using-java-8-features)
+  - [Questions from 54 to 61 are on the following Employee class.](#questions-from-54-to-61-are-on-the-following-employee-class)
+  - [54) Given a list of employees, write a Java 8 code to count the number of employees in each department?](#54-given-a-list-of-employees-write-a-java-8-code-to-count-the-number-of-employees-in-each-department)
+  - [55) Given a list of employees, find out the average salary of male and female employees?](#55-given-a-list-of-employees-find-out-the-average-salary-of-male-and-female-employees)
+  - [56) Write a Java 8 code to get the details of highest paid employee in the organization from the given list of employees?](#56-write-a-java-8-code-to-get-the-details-of-highest-paid-employee-in-the-organization-from-the-given-list-of-employees)
+  - [57) Write the Java 8 code to get the average age of each department in an organization?](#57-write-the-java-8-code-to-get-the-average-age-of-each-department-in-an-organization)
+  - [58) Given a list of employees, how do you find out who is the senior most employee in the organization?](#58-given-a-list-of-employees-how-do-you-find-out-who-is-the-senior-most-employee-in-the-organization)
+  - [59) Given a list of employees, get the details of the most youngest employee in the organization?](#59-given-a-list-of-employees-get-the-details-of-the-most-youngest-employee-in-the-organization)
+  - [60) How do you get the number of employees in each department if you have given a list of employees?](#60-how-do-you-get-the-number-of-employees-in-each-department-if-you-have-given-a-list-of-employees)
+  - [61) Given a list of employees, find out the number of male and female employees in the organization?](#61-given-a-list-of-employees-find-out-the-number-of-male-and-female-employees-in-the-organization)
+  - [62) What will be the output of the following statement?](#62-what-will-be-the-output-of-the-following-statement)
+
+---
+
+
+[⬆ Back to top](#table-of-contents)
+
 ## After Java 8, what do you think about Java? Is it still an object oriented language or it has turned into functional programming language?
 
 Java is still an object oriented language where everything is done keeping objects (data) in mind. But, with the introduction of new features in Java 8, you can use Java as a functional programming language also. You can treat it as as an added advantage over the other languages which are either object oriented or functions oriented. From Java 8, you can use Java either in an object-oriented programming paradigm or in a functional programming paradigm. It supports both.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are the three main features of Java 8 which make Java as a functional programming language?
 
 Lambda expressions, functional interfaces and Stream API are the three main features of Java 8 which enables developers to write functional style of programming in Java also.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are lambda expressions? How this feature has changed the way you write code in Java? Explain with some before Java 8 and after Java 8 examples?
 
@@ -54,12 +122,16 @@ Implementation of Runnable interface using lambda expressions after Java 8 :
 Runnable r = () -> System.out.println("Runnable Implementation Using Lambda Expressions");
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## How the signature of lambda expressions are determined?
 
 The signature of lambda expressions are derived from the signature of abstract method of functional interface. For example,
 run() method of Runnable interface accepts nothing and returns nothing. Then signature of lambda expression implementing Runnable interface will be () -> void.
 
 compare() method of Comparator interface takes two arguments of type Object and returns int. Then signature of lambda expression for implementing Comparator interface will be (Object, Object) -> int.
+
+[⬆ Back to top](#table-of-contents)
 
 ## 5) How the compiler determines the return type of a lambda expression?
 
@@ -74,15 +146,21 @@ Runnable r = () -> System.out.println("Runnable Implementation Using Lambda Expr
 
 In this example, target type of lambda expression is Runnable. Compiler uses run() method of Runnable interface to check the return type of lambda expression.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Can we use non-final local variables inside a lambda expression?
 
 No. Only final local variables are allowed to use inside a lambda expressions just like anonymous inner classes.
+
+[⬆ Back to top](#table-of-contents)
 
 ## 7) What are the advantages of lambda expressions?
 
 Lambda expressions let you to write more clear, concise and readable code.
 
 Lambda expressions removes verbosity and repetition of code.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are the functional interfaces? Do they exist before Java 8 or they are the whole new features introduced in Java 8?
 
@@ -92,11 +170,15 @@ There were functional interfaces exist before Java 8. It is not like that they a
 
 The new set of functional interfaces are introduced in Java 8 for writing lambda expressions. Lambda expressions must implement any one of these new functional interfaces.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are the new functional interfaces introduced in Java 8? In which package they have kept in?
 
 Below is the list of new functional interfaces introduced in Java 8. They have kept in java.util.function package.
 
 ![alt text](image-9.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ## What is the difference between Predicate and BiPredicate?
 
@@ -104,19 +186,27 @@ Predicate is a functional interface which represents a boolean operation which t
 
 BiPredicate is also functional interface but it represents a boolean operation which takes two arguments.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What is the difference between Function and BiFunction?
 
 Function is a functional interface which represents an operation which takes one argument of type T and returns result of type R.
 
 BiFunction is also functional interface which represents an operation which takes two arguments of type T and U and returns a result of type R.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Which functional interface do you use if you want to perform some operations on an object and returns nothing?
 
 Consumer
 
+[⬆ Back to top](#table-of-contents)
+
 ## Which functional interface is the best suitable for an operation which creates new objects?
 
 Supplier
+
+[⬆ Back to top](#table-of-contents)
 
 ## When you use UnaryOperator and BinaryOperator interfaces?
 
@@ -124,17 +214,25 @@ UnaryOperator performs same operation as Function but it is used when type of th
 
 BinaryOperator performs same operation as BiFunction but it is used when type of the arguments and result should be of same type.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Along with functional interfaces which support object types, Java 8 has introduced functional interfaces which support primitive types. For example, Consumer for object types and intConsumer, LongConsumer, DoubleConsumer for primitive types. What do you think, is it necessary to introduce separate interfaces for primitive types and object types?
 
 Yes. If an input or output to an functional interface is a primitive type then using functional interfaces which support primitive types improves performance rather than using functional interfaces which support object types. Because it removes unnecessary boxing and unboxing of data.
+
+[⬆ Back to top](#table-of-contents)
 
 ## How functional interfaces and lambda expressions are inter related?
 
 Lambda expressions are introduced to implement functional interfaces in a simplest way and new functional interfaces are introduced to support lambda expressions in Java 8. Both together have given a new dimension to Java programming where you can write more complex data processing queries in a few lines of code.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are the method references? What is the use of them?
 
 Java 8 method references can be defined as shortened versions of lambda expressions calling a specific method. Method references are the easiest way to refer a method than the lambdas calling a specific method. Method references will enhance the readability of your code.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are the different syntax of Java 8 method references?
 
@@ -145,14 +243,20 @@ Java 8 method references can be defined as shortened versions of lambda expressi
 |Instance method of non-existing object	| ClassName::MethodName |
 |Constructor Reference	| ClassName::new |
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are the major changes made to interfaces from Java 8?
 From Java 8, interfaces can also have concrete methods i.e methods with body along with abstract methods. This is the major change made to interfaces from Java 8 to help Java API developers to update and maintain the interfaces. The interfaces can have concrete methods either in the form of default methods or static methods.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are default methods of an interface? Why they are introduced?
 
 Default methods of an interface are the concrete methods for which implementing classes need not to give implementation. They inherit default implementation.
 
 Default methods are introduced to add extra features to current interfaces without disrupting their existing implementations. For example, stream() is a default method which is added to Collection interface in Java 8. If stream() would have been added as abstract method, then all classes implementing Collection interface must have implemented stream() method which may have irritated existing users. To overcome such issues, default methods are introduced to interfaces from Java 8.
+
+[⬆ Back to top](#table-of-contents)
 
 ## As interfaces can also have concrete methods from Java 8, how do you solve diamond problem i.e conflict of classes inhering multiple methods with same signature?
 
@@ -170,6 +274,8 @@ Rule 3 : InterfaceName.super.methodName()
 
 If your class doesn’t extend any class and inherit multiple methods with same signature from multiple interfaces which doesn’t belong to same hierarchy, then override that method and from within body explicitly call desired method as InterfaceName.super.methodName().
 
+[⬆ Back to top](#table-of-contents)
+
 ## Why static methods are introduced to interfaces from Java 8?
 
 Java API developers have followed the pattern of supplying an utility class along with an interface to perform basic operations on such objects.
@@ -178,15 +284,21 @@ For example, Collection and Collections. Collection is an interface and Collecti
 
 But from Java 8, they have break this pattern by introducing static methods to interfaces. With the introduction of static methods to interface, such utility classes will disappear gradually and methods to perform basic operations will be kept as static methods in interface itself.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are streams? Why they are introduced?
 
 streams can be defined as operations on data. They are the sequence of elements from a source which support data processing operations. Using Java 8 Streams, you can write most complex data processing queries without much difficulties.
 
 Almost every Java application use Collections API to store and process the data. Despite being the most used Java API, it is not easy to write the code for even some common data processing operations like filtering, finding, matching, sorting, mapping etc using Collections API . So, there needed Next-Gen API to process the data. So Java API designers have come with Java 8 Streams API to write more complex data processing operations with much of ease.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Can we consider streams as another type of data structure in Java? Justify your answer?
 
 You can’t consider streams as data structure. Because they don’t store the data. You can’t add or remove elements from the streams. They are the just operations on data. Stream consumes a data source, performs operations on it and produces the result. Source may be a collection or an array or an I/O resource. They don’t modify the source.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are intermediate and terminal operations?
 
@@ -194,21 +306,31 @@ The operations which return stream themselves are called intermediate operations
 
 The operations which return other than stream are called terminal operations. count(). min(), max() are some terminal operations.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What do you mean by pipeline of operations? What is the use of it?
 
 A pipeline of operations consists of three things – a source, one or more intermediate operations and a terminal operation. Pipe-lining of operations let you to write database-like queries on a data source. Using this, you can write more complex data processing queries with much of ease.
+
+[⬆ Back to top](#table-of-contents)
 
 ## “Stream operations do the iteration implicitly” what does it mean?
 
 Collections need to be iterated explicitly. i.e you have to write the code to iterate over collections. But, all stream operations do the iteration internally behind the scene for you. You need not to worry about iteration at all while writing the code using Java 8 Streams API.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Which type of resource loading do Java 8 streams support? Lazy Loading OR Eager Loading?
 
 Lazy Loading.
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are short circuiting operations?
 
 Short circuiting operations are the operations which don’t need the whole stream to be processed to produce a result. For example – findFirst(), findAny(), limit() etc.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are selection operations available in Java 8 Stream API?
 
@@ -219,8 +341,12 @@ Short circuiting operations are the operations which don’t need the whole stre
 | limit()	|Selects first n elements|
 | skip()	|Selects the elements after skipping first n elements|
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are sorting operations available in Java 8 streams?
 There is only one sorting operation available in Java 8 streams which is sorted(). It has two versions. One which takes no argument sorts the elements in natural order and another one which takes Comparator as an argument sorts the elements according to supplied Comparator.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are reducing operations? Name the reducing operations available in Java 8 streams?
 
@@ -235,12 +361,16 @@ Reducing operations available in Java 8 streams are,
 |count()	|Returns the number of elements|
 |collect()	|Returns mutable result container|
 
+[⬆ Back to top](#table-of-contents)
+
 ## What are searching / finding operations available in Java 8 streams?
 
 |Operation	| Description|
 |-----------|------------|
 |findFirst()	|Returns first element of a stream|
 |findAny()	|Randomly returns any one element in a stream|
+
+[⬆ Back to top](#table-of-contents)
 
 ## Name the mapping operations available in Java 8 streams?
 
@@ -249,9 +379,13 @@ Reducing operations available in Java 8 streams are,
 |map()	    |Returns a stream consisting of results after applying given function to elements of the stream.|
 |flatMap()	| |
 
+[⬆ Back to top](#table-of-contents)
+
 ## What is the difference between map() and flatMap()?
 
 Java 8 map() and flatMap() are two important methods of java.util.stream.Stream interface used for transformation or mapping operations. Both are intermediate operations. The only difference is that map() takes Stream<T> as input and return Stream<R> where as flatMap() takes Stream<Stream<T> as input and return Stream<R> i.e flatmap() removes extra layer of nesting around input values.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What is the difference between limit() and skip()?
 
@@ -259,11 +393,15 @@ limit() is an intermediate operation in Java 8 streams which returns a stream co
 
 skip() is also an intermediate operation in Java 8 streams which returns a stream containing the remaining elements of the input stream after skipping first n elements.
 
+[⬆ Back to top](#table-of-contents)
+
 ##  What is the difference between findFirst() and findAny()?
 
 findFirst() is a terminal operation in Java 8 streams which returns first element of the input stream. The result of this operation is predictable.
 
 findAny() is also terminal operation in Java 8 streams which randomly returns any one element of the input stream. The result of this operation is unpredictable. It may select any element in a stream.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Do you know Stream.collect() method, Collector interface and Collectors class? What is the relation between them?
 
@@ -275,6 +413,8 @@ Collectors class, also a member of java.util.stream package, is an utility class
 
 All the methods of Collectors class return Collector type which will be supplied to collect() method as an argument.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Name any 5 methods of Collectors class and their usage?
 
 |Method	| Description|
@@ -284,6 +424,8 @@ All the methods of Collectors class return Collector type which will be supplied
 |groupingBy()	|Groups the input elements according supplied classifier and returns the results in a Map.|
 |partitioningBy()	|Partitions the input elements according to supplied Predicate and returns a Map<Boolean, List<T>>|
 |toList()	|Collects all input elements into a new List|
+
+[⬆ Back to top](#table-of-contents)
 
 ## What are the differences between collections and streams?
 
@@ -296,8 +438,12 @@ All the methods of Collectors class return Collector type which will be supplied
 |Collections are eagerly constructed.	| Streams are lazily constructed.|
 |Ex : List, Set, Map…	| Ex : filtering, mapping, matching…|
 
+[⬆ Back to top](#table-of-contents)
+
 ## What is the purpose of Java 8 Optional class?
 Java 8 Optional class is used represent an absence of a value i.e null. Before Java 8, if-constructs are used to check for null value. But, Optional class gives better mechanism to handle null vale or absence of a value.
+
+[⬆ Back to top](#table-of-contents)
 
 ## What is the difference between Java 8 Spliterator and the iterators available before Java 8?
 
@@ -312,6 +458,8 @@ Java 8 Optional class is used represent an absence of a value i.e null. Before J
 |You can’t extract properties of the iterating elements.	|You can extract some properties of the iterating elements.|
 |External iteration.	|Internal iteration.|
 
+[⬆ Back to top](#table-of-contents)
+
 ## What is the difference between Java 8 StringJoiner, String.join() and Collectors.joining()?
 
 StringJoiner is a class in java.util package which internally uses StringBuilder class to join the strings. Using StringJoiner, you can join only the strings, but not the array of strings or list of strings.
@@ -320,13 +468,19 @@ String.join() method internally uses StringJoiner class. This method can be used
 
 Collectors.joining() method can also be used to join strings or array of strings or list of strings with delimiter and it also supports prefix and suffix.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Name three important classes of Java 8 Date and Time API?
 
 java.time.LocalDate, java.time.LocalTime and java.time.LocalDateTime
 
+[⬆ Back to top](#table-of-contents)
+
 ## How do you get current date and time using Java 8 features?
 	
 LocalDateTime currentDateTime = LocalDateTime.now();
+
+[⬆ Back to top](#table-of-contents)
 
 ## Questions from 54 to 61 are on the following Employee class.
 
@@ -407,6 +561,8 @@ class Employee
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 54) Given a list of employees, write a Java 8 code to count the number of employees in each department?
 
 ```java
@@ -414,6 +570,8 @@ Map<String, Long> employeeCountByDepartment =
 employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
 
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## 55) Given a list of employees, find out the average salary of male and female employees?
 
@@ -423,12 +581,16 @@ Map<String, Double> avgSalaryOfMaleAndFemaleEmployees=
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 56) Write a Java 8 code to get the details of highest paid employee in the organization from the given list of employees?
 
 ```java
 Optional<Employee> highestPaidEmployeeWrapper=
 employeeList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## 57) Write the Java 8 code to get the average age of each department in an organization?
 
@@ -437,12 +599,16 @@ Map<String, Double> avgAgeOfEachDepartment =
                 employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingInt(Employee::getAge)));
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 58) Given a list of employees, how do you find out who is the senior most employee in the organization?
 
 ```java
 Optional<Employee> seniorMostEmployeeWrapper=
 employeeList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst();
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## 59) Given a list of employees, get the details of the most youngest employee in the organization?
 
@@ -452,6 +618,8 @@ Optional<Employee> youngestEmployee =
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 60) How do you get the number of employees in each department if you have given a list of employees?
 
 ```java
@@ -460,6 +628,8 @@ employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Col
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 61) Given a list of employees, find out the number of male and female employees in the organization?
 
 ```java
@@ -467,9 +637,12 @@ Map<String, Long> noOfMaleAndFemaleEmployees=
 employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 62) What will be the output of the following statement?
 
 ```java
 	
 System.out.println(IntStream.range(0, 5).sum());
 ```
+[⬆ Back to top](#table-of-contents)

@@ -1,10 +1,30 @@
 # How HashMap Works Internally After Java 8?
 
+## Table of Contents
+
+- [How HashMap Works Internally After Java 8?](#how-hashmap-works-internally-after-java-8)
+  - [How HashMap Works Internally After Java 8 :](#how-hashmap-works-internally-after-java-8-2)
+    - [1) Node<K, V> And table[]](#1-nodek-v-and-table)
+    - [2) Determining / Calculating Bucket Index](#2-determining-calculating-bucket-index)
+    - [3) Handling The Hash Collisions](#3-handling-the-hash-collisions)
+    - [4) Java 8 Enhancements](#4-java-8-enhancements)
+    - [5) Resizing table[]](#5-resizing-table)
+  - [HashMap Internal Structure After Java 8 :](#hashmap-internal-structure-after-java-8)
+  - [How put() method of HashMap works?](#how-put-method-of-hashmap-works)
+  - [How get() method of HashMap works?](#how-get-method-of-hashmap-works)
+
+---
+
+
 HashMap is the most used data structure in Java because it almost gives average time performance of O(1) for put and get operations irrespective of how big is the data. As you already know, HashMap stores the data in the form of key-value pairs. In this post, we will see HashMap internal structure, how HashMap works internally after Java 8, how it stores its elements to give O(1) performance for put and get operations and what are the enhancements made to HashMap in Java 8.
 
 ![alt text](image-12.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## How HashMap Works Internally After Java 8 :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Node<K, V> And table[]
 HashMap stores the data in the form of key-value pairs. Every key-value pair you insert into HashMap is stored as an instance of Node<K,V> class. Node<K,V> is a static inner class of HashMap which is defined as below.
@@ -42,6 +62,8 @@ Every element in this table[] is called as Bucket. Each bucket holds Node<K, V> 
 
 This array is initially of size 16 (Default Capacity) and can be resized whenever necessary. whenever resized, size of this array is doubled i.e 16 to 32 to 64 to 128 and so on.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2) Determining / Calculating Bucket Index
 
 HashMap uses hashing technique to determine the bucket index in table[] array for every key-value pair you insert into HashMap.
@@ -68,6 +90,8 @@ int index = (n - 1) & hash;
 //Where n is the length of table[] and hash is the transformed hashcode of the key
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3) Handling The Hash Collisions
 It is possible that more than one key can have same hashcode. Then the keys having same hashcode will be fighting for same bucket index in table[]. In such cases, all key-value pairs fighting for the same bucket index are chained together as linked list (Before Java 8). This is called chaining.
 
@@ -76,6 +100,8 @@ But from Java 8, if this linked list grows beyond certain limit (Default is 8) t
 Before Java 8, chaining was the preferred method to handle the hash collisions. But from Java 8, treeification is also added to improve the performance of look-up operation.
 
 Searching an element in linked list takes O(n) time in worst case scenario i.e going through almost all of elements in a linked list to search for an element. But, searching an element in binary search tree takes O(log n) time in worst case scenario. Thus significantly improving the performance of search operation in HashMap.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 4) Java 8 Enhancements
 Before Java 8, chaining is used to handle the hash collisions. In chaining method, keys having same hashcode are organized as linked list in a bucket. But, searching an element in linked list takes O(n) time. This downgrades the performance of HashMap significantly while performing the search operation.
@@ -97,6 +123,8 @@ It is the minimum number of nodes that a binary tree must have. If the number of
 **min_treeify_capacity :**
 
 It is the minimum capacity that an array of buckets (table[]) must have before a bucket is converted from linked list to binary tree. This field makes sure that table[] is sufficiently big before a bucket is treefied. If table[] is too small then resizing table[] is more efficient than converting linked lists to binary trees. By default, it is 64.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5) Resizing table[]
 
@@ -122,10 +150,14 @@ That means, table[] is resized when 12th element is inserted into HashMap i.e 75
 
 Resizing table[] is a costly affair in HashMap. It is both time and space consuming as all existing key-value pairs have to be placed in new table[] with larger size after calculating all their bucket index again. So, it is wise to choose the initial capacity of HashMap by keeping number of expected entries in mind so that resizing doesn’t take place more often.
 
+[⬆ Back to top](#table-of-contents)
+
 ## HashMap Internal Structure After Java 8 :
 Below image best describes the HashMap internal structure after Java 8.
 
 ![alt text](image-13.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ## How put() method of HashMap works?
 
@@ -223,6 +255,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## How get() method of HashMap works?
 get() method of HashMap is used to retrieve an element from HashMap.
 
@@ -275,3 +309,4 @@ final Node<K,V> getNode(Object key)
     return null;
 }
 ```
+[⬆ Back to top](#table-of-contents)

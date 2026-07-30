@@ -1,10 +1,28 @@
 # How TreeMap Works Internally In Java?
 
+## Table of Contents
+
+- [How TreeMap Works Internally In Java?](#how-treemap-works-internally-in-java)
+  - [TreeMap Internal Structure In Java :](#treemap-internal-structure-in-java)
+    - [1) Red-Black Tree :](#1-red-black-tree)
+    - [2) Core Internal Data Structure](#2-core-internal-data-structure)
+  - [How TreeMap Works Internally In Java?](#how-treemap-works-internally-in-java-2)
+    - [1) Insertion Operations : put(), putIfAbsent(), putAll(), compute()…](#1-insertion-operations-put-putifabsent-putall-compute)
+  - [2) Search Operations : get(), containsKey()….](#2-search-operations-get-containskey)
+  - [3) Removal Operations : remove(), removeAll(), retainAll()…](#3-removal-operations-remove-removeall-retainall)
+
+---
+
+
 TreeMap is a sorted map which sorts the key-value pairs according to supplied comparator. If comparator is not supplied, key-value pairs are sorted according to natural ordering of keys. TreeMap internally uses Red-Black tree – a self balancing binary search tree – to store its elements. TreeMap gives O(log n) performance for all operations – insertion, search and removal – in all possible scenarios – best, average and worst case. In this post, we will see TreeMap internal structure and how it works internally in Java.
+
+[⬆ Back to top](#table-of-contents)
 
 ## TreeMap Internal Structure In Java :
 
 TreeMap, unlike HashMap, LinkedHashMap, ConcurrentHashMap or any other hash based data structures, doesn’t use hashing and array of buckets to store its elements. TreeMap internally uses Red-Black tree to store it’s elements.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Red-Black Tree :
 
@@ -23,6 +41,8 @@ Red-Black tree follows following rules to re-structure and re-balance itself aft
 5) Leaf Rule : All leaves (NIL nodes) must be BLACK.
 
 Along with above 5 rules, Red-Black tree follows rule of a binary search tree where all values in left subtree are less than value of a node and all values in right subtree are greater than value of a node. This rule holds true for every single node of a Red-Black tree.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 2) Core Internal Data Structure
 Every key-value pair of a TreeMap are stored as instances of Entry<K, V> class. These Entry<K, V> instances are stored as nodes of a Red-Black tree.
@@ -72,7 +92,11 @@ fixAfterDeletion();
 
 ![alt text](image-17.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## How TreeMap Works Internally In Java?
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Insertion Operations : put(), putIfAbsent(), putAll(), compute()…
 
@@ -202,6 +226,8 @@ size++;
 modCount++; 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 2) Search Operations : get(), containsKey()….
 
 All search operations on TreeMap internally call getEntry() which do core search operation on Red-Black tree. Search operation on Red-Black tree is always binary search.
@@ -241,6 +267,8 @@ while (p != null)
 
 return null;     //otherwise return null
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## 3) Removal Operations : remove(), removeAll(), retainAll()…
 All removal operations on TreeMap first locate the entry using getEntry() method. After locating the entry, call deleteEntry() which performs deletion from Red-Black tree.
@@ -346,3 +374,4 @@ else
 modCount++;
 size--;
 ```
+[⬆ Back to top](#table-of-contents)

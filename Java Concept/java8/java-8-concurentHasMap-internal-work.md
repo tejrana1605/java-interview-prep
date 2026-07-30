@@ -1,6 +1,35 @@
 # How LinkedHashMap Works Internally After Java 8?
 
+## Table of Contents
+
+- [How LinkedHashMap Works Internally After Java 8?](#how-linkedhashmap-works-internally-after-java-8)
+  - [LinkedHashMap Internal Structure After Java 8 :](#linkedhashmap-internal-structure-after-java-8)
+    - [1) Core Internal Data Structure](#1-core-internal-data-structure)
+    - [2) Order Of Elements : Insertion Or Access](#2-order-of-elements-insertion-or-access)
+  - [How LinkedHashMap Works Internally After Java 8?](#how-linkedhashmap-works-internally-after-java-8-2)
+  - [How put(), putIfAbsent() & putAll() methods work?](#how-put-putifabsent-putall-methods-work)
+    - [put() calling putVal() :](#put-calling-putval)
+    - [putVal() Method :](#putval-method)
+    - [newNode() Method :](#newnode-method)
+    - [linkNodeAtEnd() Method :](#linknodeatend-method)
+    - [afterNodeAccess() Method :](#afternodeaccess-method)
+    - [afterNodeInsertion() Method :](#afternodeinsertion-method)
+  - [How get() and getOrDefault() methods work?](#how-get-and-getordefault-methods-work)
+    - [get() Method :](#get-method)
+    - [getOrDefault() Method :](#getordefault-method)
+  - [How replace() method works?](#how-replace-method-works)
+  - [How remove() method works?](#how-remove-method-works)
+    - [remove() calling removeNode() :](#remove-calling-removenode)
+    - [removeNode() calling afterNodeRemoval() :](#removenode-calling-afternoderemoval)
+    - [afterNodeRemoval() Method :](#afternoderemoval-method)
+    - [5) Traversal](#5-traversal)
+
+---
+
+
 LinkedHashMap is an ordered implementation of Map interface where elements are ordered either in insertion order or in access order. LinkedHashMap extends HashMap, so all the functionalities of HashMap are inherited to LinkedHashMap by default. With addition to these inherited functionalities, LinkedHashMap internally maintains one doubly linked list to inject the order among the elements. You can say that LinkedHashMap is an ordered version of HashMap. In this post, we will see LinkedHashMap internal structure after Java 8, how it maintains order among the elements and how LinkedHashMap methods work internally after Java 8 with some source code explanation.
+
+[⬆ Back to top](#table-of-contents)
 
 ## LinkedHashMap Internal Structure After Java 8 :
 As LinkedHashMap extends HashMap, the core internal structure of LinkedHashMap remains the same as HashMap. LinkedHashMap also internally maintains an array of buckets where each bucket holds key-value pairs either stored as linked list or as binary tree (Java 8+) if the number of key-value pairs in a bucket reach TREEIFY_THRESHOLD (it is 8, by default).
@@ -12,6 +41,8 @@ With addition to this, LinkedHashMap internally maintains one extra doubly linke
 Don’t confuse doubly linked list with bucket level linked list. Doubly linked list is globally maintained by LinkedHashMap running through all of its elements internally connecting them in an order. Where as bucket level linked list is specific to that bucket which holds key-value pairs of that bucket only.
 
 If you go through the source code of LinkedHashMap, you will notice that it’s developers have not touched the core functionalities inherited from HashMap. Node<K, V> is the static inner class of HashMap which defines the core structure of a node in a bucket. LinkedHashMap extends this inner class of HashMap and adds two more fields – before and after. These two fields make all the elements (key-value pairs) inter-connected via a globally maintained doubly linked list in an order – insertion or access. This is the main structural modification they have done to LinkedHashMap. The remaining internal structures largely remains the same.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Core Internal Data Structure
 In HashMap, if a bucket is a linked list, key-value pairs are stored as instances of Node<K, V> and if a bucket is a binary tree, key-value pairs are stored as instances of TreeNode<K, V>. Both Node<K, V> and TreeNode<K, V> are static inner classes of HashMap.
@@ -56,6 +87,8 @@ transient LinkedHashMap.Entry<K,V> head;
 transient LinkedHashMap.Entry<K,V> tail;
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2) Order Of Elements : Insertion Or Access
 LinkedHashMap maintains order of elements as they are inserted (Insertion Order) or as they are accessed (Access Order). By default, it is insertion order. If you want your elements to be ordered as they are accessed, you can configure it while creating the LinkedHashMap itself.
 
@@ -82,14 +115,20 @@ Below image best describes the LinkedHashMap internal structure after Java 8.
 
 ![alt text](image-14.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## How LinkedHashMap Works Internally After Java 8?
 
 Let’s see how different methods of LinkedHashMap work internally after Java 8.
 
 LinkedHashMap developers have not modified the main methods inherited from HashMap. Instead, they have overridden and modified some hook methods specially provided by HashMap developers to be overridden in LinkedHashMap. These hook methods eventually called by the main methods.
 
+[⬆ Back to top](#table-of-contents)
+
 ## How put(), putIfAbsent() & putAll() methods work?
 put(), putIfAbsent() & putAll() – all these methods internally call putVal() method which executes all core operations of inserting a key-value pair into a map like calculating bucket index, inserting a new node if bucket is empty, if bucket is not empty, traversing that bucket (linked list or binary tree) to find out whether given key already exist, if key already exist, updating its value with new value, if key doesn’t exist, inserting a new node at appropriate place in the bucket (linked list or binary tree), treeifying a bucket if number of nodes in a bucket exceed TREEIFY_THRESHOLD, resizing table[] if it has reached THRESHOLD. All these core operations are carried out by putVal() method.
+
+[⬆ Back to top](#table-of-contents)
 
 ### put() calling putVal() :
 
@@ -99,6 +138,8 @@ public V put(K key, V value)
         return putVal(hash(key), key, value, false, true);
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### putVal() Method :
 
@@ -154,6 +195,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict)
 
 If you notice putVal() method, it internally calls newNode(), afterNodeAccess() and afterNodeInsertion() methods (highlighted). These three methods are hook methods specially provided by HashMap to be overridden in LinkedHashMap. LinkedHashMap overrides these hook methods and inject its ordering logic in these methods.
 
+[⬆ Back to top](#table-of-contents)
+
 ### newNode() Method :
 
 It just creates a new LinkedHashMap.Entry object, links it at the end of doubly linked list and returns it.
@@ -168,6 +211,8 @@ Node<K,V> newNode(int hash, K key, V value, Node<K,V> e)
 ```
 
 linkNodeAtEnd() is internal utility method of LinkedHashMap which links the node at the end of globally maintained doubly linked list by default or at the beginning of doubly linked list if it is PUT_FIRST.
+
+[⬆ Back to top](#table-of-contents)
 
 ### linkNodeAtEnd() Method :
 
@@ -202,6 +247,8 @@ private void linkNodeAtEnd(LinkedHashMap.Entry<K,V> p)
         }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### afterNodeAccess() Method :
 
@@ -262,6 +309,8 @@ void afterNodeAccess(Node<K,V> e)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### afterNodeInsertion() Method :
 
 It is called only when an oldest entry has to be deleted for every new entry inserted into doubly linked list. It is useful when you are developing a LRU cache where fixed number of entries are to be maintained in a cache and old entries has to be deleted as new entries are inserted.
@@ -279,10 +328,14 @@ void afterNodeInsertion(boolean evict)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## How get() and getOrDefault() methods work?
 get() and getOrDefault() methods internally call getNode() method which performs all core operation of extracting a node from the bucket after calculating bucket index, traversing a linked list or a binary tree of that bucket and extracting a value associated with a given key if it exist.
 
 After a node is retrieved, LinkedHashMap updates doubly linked list if access order is to be maintained by calling afterNodeAccess() method.
+
+[⬆ Back to top](#table-of-contents)
 
 ### get() Method :
 
@@ -298,6 +351,8 @@ public V get(Object key)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### getOrDefault() Method :
 
 ```java
@@ -311,6 +366,8 @@ public V getOrDefault(Object key, V defaultValue)
        return e.value;
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## How replace() method works?
 
@@ -331,10 +388,14 @@ public V replace(K key, V value)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## How remove() method works?
 remove() method is not overridden in LinkedHashMap. remove() method internally calls removeNode() method which performs majority of removal operation like calculating bucket index, traversing that bucket (linked list or binary tree) to find out the given key, if key exist, removing the key from the bucket after updating its neighbours.
 
 After a node is successfully removed from a bucket, removeNode() calls afterNodeRemoval() method. afterNodeRemoval() is a hook method which is overridden in LinkedHashMap. It unlinks the removed node from the doubly linked list.
+
+[⬆ Back to top](#table-of-contents)
 
 ### remove() calling removeNode() :
 
@@ -346,6 +407,8 @@ public V remove(Object key)
             null : e.value;
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### removeNode() calling afterNodeRemoval() :
 
@@ -398,6 +461,8 @@ final Node<K,V> removeNode(int hash, Object key, Object value, boolean matchValu
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### afterNodeRemoval() Method :
 
 ```java
@@ -418,5 +483,8 @@ void afterNodeRemoval(Node<K,V> e)
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5) Traversal
 Traversal of a LinkedHashMap is carried out via globally maintained doubly linked list not through the array of buckets. Hence, elements are traversed as they are inserted or as they are accessed if access order is configured.
+[⬆ Back to top](#table-of-contents)

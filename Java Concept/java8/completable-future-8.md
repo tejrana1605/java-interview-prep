@@ -1,21 +1,44 @@
 # CompletableFuture in java 8
 
+## Table of Contents
+
+- [CompletableFuture in java 8](#completablefuture-in-java-8)
+  - [Need of CompletableFuture in Java 8?](#need-of-completablefuture-in-java-8)
+    - [1. It can’t be manually completed](#1-it-cant-be-manually-completed)
+    - [2. Notify the completion](#2-notify-the-completion)
+    - [3. Doesn’t support chained task](#3-doesnt-support-chained-task)
+    - [4. No Exception Handling](#4-no-exception-handling)
+  - [Creating a CompletableFuture](#creating-a-completablefuture)
+
+---
+
+
 The **CompletableFuture in Java** was also introduced in Java 8 to support asynchronous programming. **CompletableFuture** is an extension of **Future’s** API. Here we will discuss why we needed CompletableFuture when we have Future’s API.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Need of CompletableFuture in Java 8?
 As we know **Future interface** was introduced in Java 5  and used represents the result of an asynchronous computation. But Future interface has some limitations like there is no provision for a callback method which can be called once the task completes. The Future interface has **isDone()** and **isCancelled() method** to check whether the task has completed or canceled. To get the result we use the **get() method**.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1. It can’t be manually completed
 
 Suppose you have written a function to get the address of employee (Updated address) from a remote API. You will run it in sperate thread by use of Callable and it will return a Future object. But API is taking time due to down service. Then you want to complete Future manually which is not possible by Future interface.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2. Notify the completion
 
 You can get the result by using get() method, but the Future doesn’t notify the main thread after its completion. The get() method blocks until the result is available. Java doesn’t provide any mechanism of the call back method so that the main thread can get a notification after completion of the task.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3. Doesn’t support chained task
 
 There may be a situation when you want to execute a long long-running computation and send the result to the next long-running computation. In this case, the next computation starts when it gets results from the previous computation. But we can’t create such a chained task in the future.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 4. No Exception Handling
 
@@ -41,6 +64,8 @@ The Future interface is used to hold the result from the Callable interface. We 
 **CompletionStage interface** is used to represent the asynchronous operation in a pipeline of computations. You can assume some tasks chained together and the computation of the next task depends on the previous task.
 
 The CompletionStage interface provides some methods to achieve end result like **thenAccept()**, **thenApply()**, **thenCombine()**, **thenRun()**, whenComplete.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Creating a CompletableFuture
 You can create an object of CompletableFuture by use of default constructor.
@@ -82,3 +107,4 @@ public class CompletableFutureExample1
     }
 }
 ```
+[⬆ Back to top](#table-of-contents)

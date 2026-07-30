@@ -1,5 +1,90 @@
 # Callable and Future in java
 
+## Table of Contents
+
+- [Callable and Future in java](#callable-and-future-in-java)
+  - [The need for Callable interface](#the-need-for-callable-interface)
+  - [2. Callable interface in java](#2-callable-interface-in-java)
+  - [3. Java Callable Interface Definition](#3-java-callable-interface-definition)
+  - [4. Implementing Callable and java callable example](#4-implementing-callable-and-java-callable-example)
+  - [Difference between callable and runnable](#difference-between-callable-and-runnable)
+  - [Future interface in java](#future-interface-in-java)
+    - [Java future example](#java-future-example)
+- [Callable and Future in Java](#callable-and-future-in-java-2)
+  - [Callable Interface](#callable-interface)
+  - [Future](#future)
+- [What is the difference between Callable and Runnable interface explain with an example.](#what-is-the-difference-between-callable-and-runnable-interface-explain-with-an-example)
+    - [Example](#example)
+    - [Key Points](#key-points)
+    - [Summary](#summary)
+- [difference between implementation of Runnable and Callable interface in java explain with an example.](#difference-between-implementation-of-runnable-and-callable-interface-in-java-explain-with-an-example)
+    - [Implementation of `Runnable` and `Callable` Interface in Java](#implementation-of-runnable-and-callable-interface-in-java)
+      - [Runnable Implementation](#runnable-implementation)
+      - [Callable Implementation](#callable-implementation)
+    - [Key Differences in Implementation](#key-differences-in-implementation)
+    - [Summary](#summary-2)
+- [How we can create a single thread using Runnable and Callable interface explain with an example.](#how-we-can-create-a-single-thread-using-runnable-and-callable-interface-explain-with-an-example)
+    - [Using Runnable](#using-runnable)
+    - [Using Callable](#using-callable)
+    - [Key Points](#key-points-2)
+- [Is this possible to use Callable interface with Thread class to create a thread?](#is-this-possible-to-use-callable-interface-with-thread-class-to-create-a-thread)
+    - [Explanation](#explanation)
+    - [Key Points](#key-points-3)
+- [What is future, futureTask explain with an example how they are used?](#what-is-future-futuretask-explain-with-an-example-how-they-are-used)
+    - [Future and FutureTask in Java](#future-and-futuretask-in-java)
+      - [Future](#future-2)
+      - [FutureTask](#futuretask)
+    - [Example: Using Future and FutureTask](#example-using-future-and-futuretask)
+    - [Explanation](#explanation-2)
+    - [Key Points](#key-points-4)
+- [All Methods of Future](#all-methods-of-future)
+    - [Example Usage of Future Methods](#example-usage-of-future-methods)
+    - [Explanation](#explanation-3)
+- [All type of constructor of FutureTask](#all-type-of-constructor-of-futuretask)
+    - [Example Usage of FutureTask Constructors](#example-usage-of-futuretask-constructors)
+    - [Explanation](#explanation-4)
+    - [Key Points](#key-points-5)
+- [Why FutureTask is introduce in java](#why-futuretask-is-introduce-in-java)
+    - [Key Reasons for the Introduction of `FutureTask`](#key-reasons-for-the-introduction-of-futuretask)
+    - [Example Usage of `FutureTask`](#example-usage-of-futuretask)
+    - [Explanation](#explanation-5)
+    - [Key Points](#key-points-6)
+- [list all the methods of FutureTask](#list-all-the-methods-of-futuretask)
+    - [FutureTask Methods](#futuretask-methods)
+    - [Example Usage](#example-usage)
+    - [Explanation](#explanation-6)
+- [Real Time Business Example of FutureTask?](#real-time-business-example-of-futuretask)
+    - [Scenario: E-Commerce Order Processing](#scenario-e-commerce-order-processing)
+    - [Implementation](#implementation)
+    - [Explanation](#explanation-7)
+    - [Benefits](#benefits)
+- [Real Time Example of Future](#real-time-example-of-future)
+    - [Scenario: Financial Data Processing](#scenario-financial-data-processing)
+    - [Implementation](#implementation-2)
+    - [Explanation](#explanation-8)
+    - [Benefits](#benefits-2)
+- [Real Time Complete Example of Future.](#real-time-complete-example-of-future)
+    - [Scenario: Comprehensive Financial Report Generation](#scenario-comprehensive-financial-report-generation)
+    - [Implementation](#implementation-3)
+    - [Explanation](#explanation-9)
+    - [Benefits](#benefits-3)
+- [How many ways we can create a thread using Callable Interface](#how-many-ways-we-can-create-a-thread-using-callable-interface)
+    - [1. Using `ExecutorService` and `Future`](#1-using-executorservice-and-future)
+    - [2. Using `ExecutorService` and `FutureTask`](#2-using-executorservice-and-futuretask)
+    - [3. Using `Thread` with `FutureTask`](#3-using-thread-with-futuretask)
+    - [Summary](#summary-3)
+- [Give all the name of all implementation class of Future](#give-all-the-name-of-all-implementation-class-of-future)
+- [Explain with an example of ForkJoinTask.](#explain-with-an-example-of-forkjointask)
+    - [Example: ForkJoinTask Using RecursiveTask](#example-forkjointask-using-recursivetask)
+    - [Explanation](#explanation-10)
+    - [Benefits](#benefits-4)
+- [list of methods of ForkJoinTask](#list-of-methods-of-forkjointask)
+    - [Main Methods](#main-methods)
+    - [Example Usage](#example-usage-2)
+
+---
+
+
 To create a thread in java we have two ways, one is the **Runnable interface**, and another is **Thread class**. The **Runnable interface** has some limitations in a multithreading environment. So, Java introduced **Callable** and **Future** interfaces to remove the limitations. In this topic, we will learn these advanced topics of **concurrency in java** and show how these are useful. We believe all of you have a basic understanding of threads. If you haven’t the basic idea, then read **multithreading in java**.
 
 1. The need for Callable interface?
@@ -10,15 +95,21 @@ To create a thread in java we have two ways, one is the **Runnable interface**, 
 6. Future interface in java?
 7. Java future example?
 
+[⬆ Back to top](#table-of-contents)
+
 ## The need for Callable interface
 
 We can understand the use of the **Callable interface** when we will understand the problem without Callable. As we know, Java provides two ways to create thread- one by extending the Thread class and others by creating a thread with a Runnable. The Runnable interface has limitations because it can’t return the object after termination. But sometimes we wish that a thread could return some value that we can use.  To support this feature, Java introduced the Callable interface.
+
+[⬆ Back to top](#table-of-contents)
 
 ## 2. Callable interface in java
 
 The **java.util.concurrent** package was introduced in java 5. The **callable interface** was introduced in the currency package and supports an asynchronous task which can be executed by a separate thread. The **callable interface** is similar to the **Runnable interface**, except it can return an object and it can **throw a checked Exception**.
 
 **Note**: We can’t create a thread with a Callable, it can only be created with a Runnable.
+
+[⬆ Back to top](#table-of-contents)
 
 ## 3. Java Callable Interface Definition
 The Callable interface is a functional interface because it has only one method named call(). You can see the JDK code below:
@@ -38,6 +129,8 @@ public interface Callable<V> {
 ```
 
 The Callable interface uses the Generics concept of java, so we can return any type of Object. The **call () method** will be implemented by a class that will implement the Callable interface. The **call() method** works exactly same as the **run () method** of the **Runnable interface**, except it returns an object and it can throw a checked exception.
+
+[⬆ Back to top](#table-of-contents)
 
 ## 4. Implementing Callable and java callable example
 
@@ -91,6 +184,8 @@ class CallableFactorialTask implements Callable<Integer>
 Output:120
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Difference between callable and runnable
 The callable and runnable interfaces have similarities and dissimilarities. Let’s see how callable vs runnable.
 
@@ -103,6 +198,8 @@ The callable and runnable interfaces have similarities and dissimilarities. Let�
 4. Java Runnable interface is not generic, so it doesn’t take any parameter. But the Callable interface is generic.
 
 <a href="#" target="_blank"><img src="https://javagoal.com/wp-content/uploads/2020/10/3.png" alt="Callable Interface"/></a>
+
+[⬆ Back to top](#table-of-contents)
 
 ## Future interface in java
 
@@ -126,6 +223,8 @@ public interface Future<V>
    boolean isDone();
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java future example
 
@@ -199,6 +298,8 @@ Sat Oct 10 14:21:27 IST 2020::pool-1-thread-2
 
 <a href="#" target="_blank"><img src="https://javagoal.com/wp-content/uploads/2020/10/2.png" alt="future example"/></a>
 
+[⬆ Back to top](#table-of-contents)
+
 # Callable and Future in Java
 
 In Java, Callable and Future are the two most important concepts that are used with thread. In this section, we will understand how we can use Callable and Future in our code.
@@ -206,6 +307,8 @@ In Java, Callable and Future are the two most important concepts that are used w
 Future is used for storing a result received from a different thread, whereas Callable is the same as Runnable in that it encapsulates a task that is meant to be run on another thread.
 
 <a href="#" target="_blank"><img src="https://static.javatpoint.com/core/images/callable-and-future-in-java.png" alt="future example"/></a>
+
+[⬆ Back to top](#table-of-contents)
 
 ## Callable Interface
 
@@ -252,6 +355,8 @@ class CallableInterfaceExample implements Callable<Object> {
     }      
 }    
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## Future
 
@@ -427,6 +532,8 @@ public class RunnableExample {
 }  
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # What is the difference between Callable and Runnable interface explain with an example.
 
 In Java, both the `Callable` and `Runnable` interfaces are designed to represent tasks that can be executed by multiple threads. However, there are key differences between the two:
@@ -451,6 +558,8 @@ In Java, both the `Callable` and `Runnable` interfaces are designed to represent
 
 3. **Usage in Thread Pool**:
    - Both can be used to represent tasks that can be executed by a thread pool, but `Callable` is typically used when the task needs to return a result.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example
 
@@ -511,19 +620,29 @@ public class CallableExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - **Runnable**: Use this when you don't need to return a result or throw a checked exception.
 - **Callable**: Use this when you need to return a result or handle a checked exception.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Summary
 
 - **Runnable** is simpler and used for tasks that don't return a result.
 - **Callable** is more flexible and is used for tasks that need to return a result or throw exceptions.
 
+[⬆ Back to top](#table-of-contents)
+
 # difference between implementation of Runnable and Callable interface in java explain with an example.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Implementation of `Runnable` and `Callable` Interface in Java
+
+[⬆ Back to top](#table-of-contents)
 
 #### Runnable Implementation
 
@@ -558,6 +677,8 @@ public class RunnableExample {
 In this example:
 - A `Runnable` task is created by implementing the `run` method.
 - The task is submitted to an `ExecutorService` for execution.
+
+[⬆ Back to top](#table-of-contents)
 
 #### Callable Implementation
 
@@ -604,6 +725,8 @@ In this example:
 - The task is submitted to an `ExecutorService`, which returns a `Future` object.
 - The result of the task is retrieved using the `Future.get()` method.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Differences in Implementation
 
 1. **Method Definition**:
@@ -635,14 +758,20 @@ In this example:
    - `Runnable` is used when you do not need to return a result or handle checked exceptions.
    - `Callable` is used when you need to return a result or handle checked exceptions.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Summary
 
 - **Runnable**: Implement the `run` method, do not return a result, do not throw checked exceptions. Suitable for simple tasks where the outcome is not needed.
 - **Callable**: Implement the `call` method, return a result, can throw checked exceptions. Suitable for tasks where you need a result or need to handle exceptions.
 
+[⬆ Back to top](#table-of-contents)
+
 # How we can create a single thread using Runnable and Callable interface explain with an example.
 
 To create a single thread using the `Runnable` and `Callable` interfaces, you can use the `Thread` class for `Runnable` and the `ExecutorService` for `Callable`. Here are examples for both:
+
+[⬆ Back to top](#table-of-contents)
 
 ### Using Runnable
 
@@ -675,6 +804,8 @@ public class SingleThreadRunnableExample {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Using Callable
 
@@ -717,6 +848,8 @@ public class SingleThreadCallableExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - **Runnable Example**:
@@ -732,6 +865,8 @@ public class SingleThreadCallableExample {
   - The executor is shut down after the task is complete.
 
 Both examples demonstrate how to execute a task in a single thread using the `Runnable` and `Callable` interfaces in Java.
+
+[⬆ Back to top](#table-of-contents)
 
 # Is this possible to use Callable interface with Thread class to create a thread?
 
@@ -774,6 +909,8 @@ public class CallableWithThreadExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Create a Callable Task**:
@@ -789,6 +926,8 @@ public class CallableWithThreadExample {
 4. **Retrieve the Result**:
    - Use the `get` method of the `FutureTask` to retrieve the result of the `Callable` task. This method blocks until the task is complete.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - `Callable` cannot be directly used with the `Thread` class.
@@ -797,9 +936,15 @@ public class CallableWithThreadExample {
 
 This approach allows you to take advantage of the `Callable` interface's ability to return results and throw exceptions, while still using the `Thread` class to execute the task.
 
+[⬆ Back to top](#table-of-contents)
+
 # What is future, futureTask explain with an example how they are used?
 
+[⬆ Back to top](#table-of-contents)
+
 ### Future and FutureTask in Java
+
+[⬆ Back to top](#table-of-contents)
 
 #### Future
 
@@ -812,9 +957,13 @@ Key methods in the `Future` interface:
 - `V get()`: Waits if necessary for the computation to complete and then retrieves the result.
 - `V get(long timeout, TimeUnit unit)`: Waits for the computation to complete within the specified timeout.
 
+[⬆ Back to top](#table-of-contents)
+
 #### FutureTask
 
 `FutureTask` is a concrete implementation of the `Future` interface and also implements the `Runnable` interface. This allows it to be used as a `Runnable` and be submitted to an executor. It wraps a `Callable` or `Runnable` and can be used to obtain the result of the asynchronous computation.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example: Using Future and FutureTask
 
@@ -870,6 +1019,8 @@ public class FutureAndFutureTaskExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Create an ExecutorService**:
@@ -890,6 +1041,8 @@ public class FutureAndFutureTaskExample {
 6. **Shutdown the Executor**:
    - The executor is shut down using the `shutdown` method.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - `Future` represents the result of an asynchronous computation.
@@ -897,6 +1050,8 @@ public class FutureAndFutureTaskExample {
 - `FutureTask` can be used with an `ExecutorService` to execute a `Callable` or `Runnable` task and retrieve the result asynchronously.
 
 This example demonstrates how `Future` and `FutureTask` can be used to manage and retrieve the results of asynchronous tasks in Java.
+
+[⬆ Back to top](#table-of-contents)
 
 # All Methods of Future
 
@@ -923,6 +1078,8 @@ The `Future` interface in Java provides several methods to manage the result of 
    - Throws `InterruptedException` if the current thread was interrupted while waiting.
    - Throws `ExecutionException` if the computation threw an exception.
    - Throws `TimeoutException` if the wait timed out before the task completed.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example Usage of Future Methods
 
@@ -984,6 +1141,8 @@ public class FutureMethodsExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Submit the Callable Task**:
@@ -1009,6 +1168,8 @@ public class FutureMethodsExample {
 
 This example demonstrates how to use all the methods of the `Future` interface to manage and retrieve the result of an asynchronous task in Java.
 
+[⬆ Back to top](#table-of-contents)
+
 # All type of constructor of FutureTask
 
 `FutureTask` in Java provides multiple constructors to create instances. These constructors allow you to create a `FutureTask` that can wrap either a `Callable` or a `Runnable` task.
@@ -1028,6 +1189,8 @@ Here are the constructors of `FutureTask`:
    ```
    - Creates a `FutureTask` that will run the given `Runnable` task.
    - The `result` is the result that the `FutureTask` returns upon completion of the `Runnable` task.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example Usage of FutureTask Constructors
 
@@ -1080,6 +1243,8 @@ public class FutureTaskConstructorsExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Using the Constructor with Callable**:
@@ -1092,6 +1257,8 @@ public class FutureTaskConstructorsExample {
    - A `Thread` is created with the `FutureTask` and started.
    - The result specified during the creation of the `FutureTask` is retrieved using the `get` method.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - **Constructor with Callable**: Useful when you need the task to return a result upon completion.
@@ -1099,9 +1266,13 @@ public class FutureTaskConstructorsExample {
 
 By using these constructors, you can create `FutureTask` instances to manage asynchronous tasks that return results or simply execute `Runnable` tasks with a predefined result.
 
+[⬆ Back to top](#table-of-contents)
+
 # Why FutureTask is introduce in java
 
 `FutureTask` was introduced in Java as part of the `java.util.concurrent` package to provide a flexible and powerful mechanism for handling asynchronous computations. It combines the functionalities of both the `Runnable` and `Future` interfaces, allowing for more versatile task management and result handling. Here are some key reasons why `FutureTask` was introduced:
+
+[⬆ Back to top](#table-of-contents)
 
 ### Key Reasons for the Introduction of `FutureTask`
 
@@ -1119,6 +1290,8 @@ By using these constructors, you can create `FutureTask` instances to manage asy
 
 5. **Synchronization and Concurrency**:
    - `FutureTask` provides built-in synchronization, ensuring that the task's result is accessed in a thread-safe manner. It is particularly useful in concurrent programming, where multiple threads may be involved in executing tasks and accessing results.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example Usage of `FutureTask`
 
@@ -1169,6 +1342,8 @@ public class FutureTaskExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Callable Task**:
@@ -1186,6 +1361,8 @@ public class FutureTaskExample {
 5. **Result Retrieval**:
    - The `get` method of `FutureTask` is used to retrieve the result of the computation, blocking until the task is complete.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Key Points
 
 - `FutureTask` simplifies asynchronous programming by combining task execution and result handling.
@@ -1194,9 +1371,13 @@ public class FutureTaskExample {
 
 Overall, `FutureTask` was introduced to provide a more efficient and versatile way to handle asynchronous tasks and their results in Java's concurrent programming environment.
 
+[⬆ Back to top](#table-of-contents)
+
 # list all the methods of FutureTask
 
 The `FutureTask` class in Java provides several methods that allow you to control and retrieve the results of asynchronous tasks. Below are all the methods of the `FutureTask` class, along with a brief explanation of each:
+
+[⬆ Back to top](#table-of-contents)
 
 ### FutureTask Methods
 
@@ -1237,6 +1418,8 @@ The `FutureTask` class in Java provides several methods that allow you to contro
 8. **runAndReset()**:
    - Runs this task to completion if not canceled, and then resets this task to its initial state if canceling is still possible.
    - Returns `true` if the task was run and reset successfully.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example Usage
 
@@ -1297,6 +1480,8 @@ public class FutureTaskExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Creating a Callable Task**:
@@ -1319,9 +1504,13 @@ public class FutureTaskExample {
 
 This example demonstrates how to use the various methods provided by `FutureTask` to manage and retrieve the results of asynchronous tasks in Java.
 
+[⬆ Back to top](#table-of-contents)
+
 # Real Time Business Example of FutureTask?
 
 Sure, let's consider a real-time business scenario where `FutureTask` can be particularly useful. In this example, we'll look at an e-commerce application that needs to process multiple tasks asynchronously, such as fetching product details, calculating shipping costs, and checking inventory status. These tasks can be executed in parallel to optimize performance and reduce response time for the user.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Scenario: E-Commerce Order Processing
 
@@ -1332,6 +1521,8 @@ Imagine an e-commerce platform where a customer places an order, and the system 
 3. Check the inventory status of the ordered items.
 
 By using `FutureTask`, we can execute these tasks in parallel, improving the overall efficiency and user experience.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Implementation
 
@@ -1423,6 +1614,8 @@ public class ECommerceOrderProcessing {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Task Definitions**:
@@ -1443,6 +1636,8 @@ public class ECommerceOrderProcessing {
 6. **Executor Shutdown**:
    - Finally, we shut down the `ExecutorService`.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Benefits
 
 - **Parallel Execution**: By executing tasks in parallel, the overall response time is reduced, enhancing user experience.
@@ -1451,13 +1646,19 @@ public class ECommerceOrderProcessing {
 
 This example demonstrates how `FutureTask` can be effectively used in a real-time business scenario to improve the performance and responsiveness of an e-commerce application.
 
+[⬆ Back to top](#table-of-contents)
+
 # Real Time Example of Future
 
 Let's consider a real-time business scenario where `Future` can be used effectively. We'll look at a scenario in a financial application where multiple independent calculations or data fetches need to be performed in parallel to generate a consolidated report. 
 
+[⬆ Back to top](#table-of-contents)
+
 ### Scenario: Financial Data Processing
 
 Imagine a financial application that generates a report based on multiple independent data sources. These data sources might include fetching stock prices, retrieving exchange rates, and getting market news. These tasks can be performed in parallel, and once all the data is retrieved, it can be processed to generate the final report.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Implementation
 
@@ -1544,6 +1745,8 @@ public class FinancialDataProcessing {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Task Definitions**:
@@ -1561,6 +1764,8 @@ public class FinancialDataProcessing {
 5. **Executor Shutdown**:
    - Finally, the `ExecutorService` is shut down to free up resources.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Benefits
 
 - **Parallel Execution**: By executing tasks in parallel, the overall time to generate the report is reduced.
@@ -1569,9 +1774,13 @@ public class FinancialDataProcessing {
 
 This example demonstrates how `Future` can be effectively used in a real-time business scenario to improve the performance and responsiveness of a financial data processing application.
 
+[⬆ Back to top](#table-of-contents)
+
 # Real Time Complete Example of Future.
 
 Sure, let's dive into a complete real-time example using `Future` in Java. We'll expand on the financial data processing scenario where an application needs to fetch data from multiple sources to generate a comprehensive financial report. This example will demonstrate how `Future` can be used to manage asynchronous tasks effectively.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Scenario: Comprehensive Financial Report Generation
 
@@ -1581,6 +1790,8 @@ In this scenario, we need to:
 3. Get market news from a news service.
 
 Once all data is retrieved, it will be processed to generate a financial report.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Implementation
 
@@ -1709,6 +1920,8 @@ public class FinancialDataProcessing {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **Task Definitions**:
@@ -1726,6 +1939,8 @@ public class FinancialDataProcessing {
 5. **Executor Shutdown**:
    - Finally, we shut down the `ExecutorService` to free up resources. This is important to prevent resource leaks and to ensure that the application terminates cleanly.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Benefits
 
 - **Parallel Execution**: Tasks are executed in parallel, reducing the overall time to fetch all the required data.
@@ -1733,6 +1948,8 @@ public class FinancialDataProcessing {
 - **Simplified Asynchronous Programming**: `Future` provides a straightforward way to manage asynchronous computations and retrieve results, simplifying the code and making it more maintainable.
 
 This complete example demonstrates how `Future` can be effectively used in a real-time business scenario to improve the performance and responsiveness of a financial data processing application.
+
+[⬆ Back to top](#table-of-contents)
 
 # How many ways we can create a thread using Callable Interface
 
@@ -1746,6 +1963,8 @@ Creating threads using the `Callable` interface in Java can be done in a few dif
 
 3. **Using `Thread` with `FutureTask`**:
    - Although not typical, you can create a thread by wrapping the `Callable` in a `FutureTask` and then using a `Thread` to execute the `FutureTask`.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1. Using `ExecutorService` and `Future`
 
@@ -1780,6 +1999,8 @@ public class CallableExample {
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 2. Using `ExecutorService` and `FutureTask`
 
@@ -1816,6 +2037,8 @@ public class CallableExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3. Using `Thread` with `FutureTask`
 
 Although not as common, you can use a `Thread` to execute a `FutureTask` directly. This method doesn't use an `ExecutorService`.
@@ -1846,6 +2069,8 @@ public class CallableExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Summary
 
 To summarize, the three main ways to create a thread using the `Callable` interface in Java are:
@@ -1855,6 +2080,8 @@ To summarize, the three main ways to create a thread using the `Callable` interf
 3. Wrapping the `Callable` in a `FutureTask` and executing it directly with a `Thread`.
 
 Each approach has its use cases, with the first two being more common and flexible due to their integration with the `ExecutorService` framework, which provides better thread management capabilities.
+
+[⬆ Back to top](#table-of-contents)
 
 # Give all the name of all implementation class of Future
 
@@ -1921,9 +2148,13 @@ public class FutureTaskExample {
 
 This example demonstrates how to use `FutureTask` to execute a `Callable` task and retrieve the result.
 
+[⬆ Back to top](#table-of-contents)
+
 # Explain with an example of ForkJoinTask.
 
 Sure, let's look at how `ForkJoinTask` works in Java, particularly through its subclasses `RecursiveTask` and `RecursiveAction`. The `ForkJoinTask` framework is part of the `java.util.concurrent` package and is designed for parallel execution of tasks that can be broken down into smaller sub-tasks.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example: ForkJoinTask Using RecursiveTask
 
@@ -1986,6 +2217,8 @@ public class ForkJoinSum extends RecursiveTask<Long> {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation
 
 1. **ForkJoinSum Class**:
@@ -2006,6 +2239,8 @@ public class ForkJoinSum extends RecursiveTask<Long> {
    - It creates an instance of `ForkJoinSum` for the entire array and invokes it using the `ForkJoinPool`.
    - Finally, it prints the result.
 
+[⬆ Back to top](#table-of-contents)
+
 ### Benefits
 
 - **Parallel Processing**: The task is divided into smaller sub-tasks, which can be processed in parallel, leading to better performance on multi-core processors.
@@ -2014,9 +2249,13 @@ public class ForkJoinSum extends RecursiveTask<Long> {
 
 This example demonstrates the power of the `ForkJoinTask` framework in handling parallelizable tasks, particularly those that can be broken down into smaller, independent sub-tasks.
 
+[⬆ Back to top](#table-of-contents)
+
 # list of methods of ForkJoinTask
 
 The `ForkJoinTask` class in Java is a part of the `java.util.concurrent` package and serves as a base class for tasks that run within a `ForkJoinPool`. Here is a list of important methods provided by `ForkJoinTask`:
+
+[⬆ Back to top](#table-of-contents)
 
 ### Main Methods
 
@@ -2134,6 +2373,8 @@ The `ForkJoinTask` class in Java is a part of the `java.util.concurrent` package
     protected abstract void setRawResult(V value)
     ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Example Usage
 
 Here is a simple example demonstrating some of these methods:
@@ -2178,4 +2419,4 @@ In this example:
 
 These methods and this example demonstrate the flexibility and power of the `ForkJoinTask` framework for parallel task execution.
 
-# 
+[⬆ Back to top](#table-of-contents)
