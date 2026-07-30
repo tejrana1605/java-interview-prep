@@ -1,8 +1,285 @@
 # Functional Interfaces
 
+## Table of Contents
+
+- [Functional Interfaces](#functional-interfaces)
+- [Java 8 Streams](#java-8-streams)
+- [Java 8 Stream Operations](#java-8-stream-operations)
+  - [5.1) Stream Creation Operations](#51-stream-creation-operations)
+    - [5.1.1) empty() : Creates an empty stream](#511-empty-creates-an-empty-stream)
+    - [5.1.2) of(T t) : Creates a stream of single element of type T](#512-oft-t-creates-a-stream-of-single-element-of-type-t)
+    - [5.1.3) of(T… values) : Creates a stream from values](#513-oft-values-creates-a-stream-from-values)
+    - [5.1.4) Creating streams from collections](#514-creating-streams-from-collections)
+  - [5.2) Selection Operations](#52-selection-operations)
+    - [5.2.1) filter() : Selecting with a predicate](#521-filter-selecting-with-a-predicate)
+    - [5.2.2) distinct() : Selects only unique elements](#522-distinct-selects-only-unique-elements)
+    - [5.2.3) limit() : Selects first n elements](#523-limit-selects-first-n-elements)
+    - [5.2.4) skip() : Skips first n elements](#524-skip-skips-first-n-elements)
+  - [5.3) Mapping Operations](#53-mapping-operations)
+    - [5.3.1) map() : Applies a function](#531-map-applies-a-function)
+  - [5.4) Sorting Operations](#54-sorting-operations)
+    - [5.4.1) sorted() : Sorting according to natural order](#541-sorted-sorting-according-to-natural-order)
+    - [5.4.2) sorted(Comparator) : Sorting according to supplied comparator](#542-sortedcomparator-sorting-according-to-supplied-comparator)
+  - [5.5) Reducing Operations](#55-reducing-operations)
+    - [5.5.1) reduce() : Produces a single value](#551-reduce-produces-a-single-value)
+    - [5.5.2) min() : Finding the minimum](#552-min-finding-the-minimum)
+    - [5.5.3) max() : Finding the maximum](#553-max-finding-the-maximum)
+    - [5.5.4) count() : Counting the elements](#554-count-counting-the-elements)
+    - [5.5.5) collect() : Returns mutable container](#555-collect-returns-mutable-container)
+  - [5.6) Finding And Matching Operations](#56-finding-and-matching-operations)
+    - [5.6.1) anyMatch() : Any one element matches](#561-anymatch-any-one-element-matches)
+    - [5.6.2) allMatch() : All elements matches](#562-allmatch-all-elements-matches)
+    - [5.6.3) noneMatch() : No element matches](#563-nonematch-no-element-matches)
+    - [5.6.4) findFirst() : Finding first element](#564-findfirst-finding-first-element)
+    - [5.6.5) findAny() : Finding any element](#565-findany-finding-any-element)
+  - [5.7) Other Operations](#57-other-operations)
+    - [5.7.1) forEach() :](#571-foreach)
+    - [5.7.2) toArray() : Stream to array](#572-toarray-stream-to-array)
+    - [5.7.3) peek() :](#573-peek)
+- [java.util.stream.Collector Interface methods](#javautilstreamcollector-interface-methods)
+  - [a) Supplier() :](#a-supplier)
+  - [b) accumulator() :](#b-accumulator)
+  - [c) combiner() :](#c-combiner)
+  - [d) finisher() :](#d-finisher)
+    - [📜 Collector Method Signatures](#collector-method-signatures)
+    - [Example: Custom Collector for joining Strings](#example-custom-collector-for-joining-strings)
+  - [🔍 Explanation](#explanation)
+  - [⚡ Quick Diagram](#quick-diagram)
+    - [Some collector optimizations are based on characteristics:](#some-collector-optimizations-are-based-on-characteristics)
+  - [🚀 Final Notes](#final-notes)
+- [Collector.of() Factory Method](#collectorof-factory-method)
+    - [🔥 Example Using Collector.of()](#example-using-collectorof)
+    - [🔧 Simpler Collector for Numbers (Sum Example)](#simpler-collector-for-numbers-sum-example)
+    - [📚 Summary](#summary)
+- [3) java.util.stream.Collectors Class methods](#3-javautilstreamcollectors-class-methods)
+    - [3.1) Collectors.toList() :](#31-collectorstolist)
+    - [3.2) Collectors.toSet() :](#32-collectorstoset)
+    - [3.3) Collectors.toMap() :](#33-collectorstomap)
+    - [3.4) Collectors.toCollection() :](#34-collectorstocollection)
+    - [3.5) Collectors.joining() :](#35-collectorsjoining)
+    - [3.6) Collectors.counting() :](#36-collectorscounting)
+    - [3.7) Collectors.maxBy() :](#37-collectorsmaxby)
+    - [3.8) Collectors.minBy() :](#38-collectorsminby)
+    - [3.9) summingInt(), summingLong(), summingDouble()](#39-summingint-summinglong-summingdouble)
+    - [3.10) averagingInt(), averagingLong(), averagingDouble()](#310-averagingint-averaginglong-averagingdouble)
+    - [3.11) summarizingInt(), summarizingLong(), summarizingDouble()](#311-summarizingint-summarizinglong-summarizingdouble)
+    - [3.12) Collectors.groupingBy() :](#312-collectorsgroupingby)
+    - [3.13) Collectors.partitioningBy() :](#313-collectorspartitioningby)
+    - [3.14) Collectors.collectingAndThen() :](#314-collectorscollectingandthen)
+  - [Great! Here's a **cheat sheet** of the most commonly used **built-in Collectors** from the `java.util.stream.Collectors` class, with syntax and examples. This will help you in interviews and real-world development.](#great-heres-a-cheat-sheet-of-the-most-commonly-used-built-in-collectors-from-the-javautilstreamcollectors-class-with-syntax-and-examples-this-will-help-you-in-interviews-and-real-world-development)
+  - [✅ Java 8 Collectors Cheat Sheet](#java-8-collectors-cheat-sheet)
+    - [1. **`Collectors.toList()`**](#1-collectorstolist)
+    - [2. **`Collectors.toSet()`**](#2-collectorstoset)
+    - [3. **`Collectors.toMap()`**](#3-collectorstomap)
+    - [4. **`Collectors.joining()`**](#4-collectorsjoining)
+    - [5. **`Collectors.counting()`**](#5-collectorscounting)
+    - [6. **`Collectors.summingInt()` / `summingLong()` / `summingDouble()`**](#6-collectorssummingint-summinglong-summingdouble)
+    - [7. **`Collectors.averagingInt()` / `averagingDouble()`**](#7-collectorsaveragingint-averagingdouble)
+    - [8. **`Collectors.maxBy()` / `minBy()`**](#8-collectorsmaxby-minby)
+    - [9. **`Collectors.groupingBy()`**](#9-collectorsgroupingby)
+    - [10. **`Collectors.partitioningBy()`**](#10-collectorspartitioningby)
+    - [11. **`Collectors.mapping()`**](#11-collectorsmapping)
+    - [12. **`Collectors.collectingAndThen()`**](#12-collectorscollectingandthen)
+    - [13. **`Collectors.reducing()`**](#13-collectorsreducing)
+    - [14. **`Collectors.toCollection()`**](#14-collectorstocollection)
+    - [💡 Summary Table](#summary-table)
+- [java.util.stream.Collector Interface methods](#javautilstreamcollector-interface-methods-2)
+    - [**1. `Supplier<A> supplier()`**](#1-suppliera-supplier)
+    - [**2. `BiConsumer<A, T> accumulator()`**](#2-biconsumera-t-accumulator)
+    - [**3. `BinaryOperator<A> combiner()`**](#3-binaryoperatora-combiner)
+    - [**4. `Function<A, R> finisher()`**](#4-functiona-r-finisher)
+    - [**5. `Set<Collector.Characteristics> characteristics()`**](#5-setcollectorcharacteristics-characteristics)
+    - [Full Method Signature:](#full-method-signature)
+  - [Would you like an example of a custom `Collector` implementation or how it's used in practice?](#would-you-like-an-example-of-a-custom-collector-implementation-or-how-its-used-in-practice)
+    - [✅ **Custom Collector Example: Join Strings with Comma**](#custom-collector-example-join-strings-with-comma)
+    - [🔍 Explanation:](#explanation-2)
+  - [Would you like a version of this example that collects objects or groups data instead?](#would-you-like-a-version-of-this-example-that-collects-objects-or-groups-data-instead)
+    - [✅ **Custom Collector Example: Group People by Age**](#custom-collector-example-group-people-by-age)
+    - [🎯 Goal:](#goal)
+    - [🛠️ Custom Collector Implementation:](#custom-collector-implementation)
+    - [🧠 Key Concepts:](#key-concepts)
+  - [Would you like this modified to group by a **custom key**, such as the first letter of the name, or include summarizing (e.g., count or average age per group)?](#would-you-like-this-modified-to-group-by-a-custom-key-such-as-the-first-letter-of-the-name-or-include-summarizing-eg-count-or-average-age-per-group)
+    - [✅ **Goal:**](#goal-2)
+    - [🧑 Person Class (same as before):](#person-class-same-as-before)
+    - [🛠️ Custom Collector: Group by Initial Letter → Average Age](#custom-collector-group-by-initial-letter-average-age)
+    - [🔍 Output (example):](#output-example)
+    - [💡 What’s Happening:](#whats-happening)
+  - [Would you like to extend this further to also include counts or total ages per group along with averages?](#would-you-like-to-extend-this-further-to-also-include-counts-or-total-ages-per-group-along-with-averages)
+    - [✅ Goal:](#goal-3)
+    - [🧮 Step 1: Define the `GroupStats` class](#step-1-define-the-groupstats-class)
+    - [🧑 `Person` class (unchanged):](#person-class-unchanged)
+    - [🛠️ Custom Collector](#custom-collector)
+    - [🔍 Sample Output:](#sample-output)
+  - [Would you like a version that also includes the list of names per group along with the stats?](#would-you-like-a-version-that-also-includes-the-list-of-names-per-group-along-with-the-stats)
+    - [✅ **Goal:**](#goal-4)
+    - [🧮 Step 1: Enhanced `GroupStats` class](#step-1-enhanced-groupstats-class)
+    - [🧑 `Person` Class (same as before)](#person-class-same-as-before-2)
+    - [🛠️ Updated Collector with Names](#updated-collector-with-names)
+    - [🔍 Sample Output:](#sample-output-2)
+  - [Would you like a version that sorts the final map by the group’s average age or name list?](#would-you-like-a-version-that-sorts-the-final-map-by-the-groups-average-age-or-name-list)
+    - [✅ Goal:](#goal-5)
+    - [🧠 Key Changes:](#key-changes)
+    - [🛠️ Updated Main Method with Sorting](#updated-main-method-with-sorting)
+    - [🔍 Output Example (sorted by avg age):](#output-example-sorted-by-avg-age)
+  - [Would you like to also export the sorted results as a CSV or JSON?](#would-you-like-to-also-export-the-sorted-results-as-a-csv-or-json)
+  - [✅ Export Sorted Results](#export-sorted-results)
+    - [1️⃣ CSV Format (Console Output)](#1-csv-format-console-output)
+    - [2️⃣ JSON Format (using Jackson or Gson)](#2-json-format-using-jackson-or-gson)
+      - [Option A: **Using Jackson**](#option-a-using-jackson)
+      - [Option B: **Using Gson**](#option-b-using-gson)
+  - [Would you like me to provide a complete working version of the CSV or JSON export using a specific library?](#would-you-like-me-to-provide-a-complete-working-version-of-the-csv-or-json-export-using-a-specific-library)
+    - [✅ Full Java Example with Jackson JSON Export](#full-java-example-with-jackson-json-export)
+    - [🔧 Maven Dependency for Jackson](#maven-dependency-for-jackson)
+  - [Would you like a version of this that writes the CSV or JSON directly to a file (e.g., `output.csv`, `output.json`)?](#would-you-like-a-version-of-this-that-writes-the-csv-or-json-directly-to-a-file-eg-outputcsv-outputjson)
+    - [✅ Updated Code Snippet: Save CSV and JSON to Disk](#updated-code-snippet-save-csv-and-json-to-disk)
+    - [🗃️ Result](#result)
+  - [Would you like to make the export location configurable or add timestamps to filenames for versioning?](#would-you-like-to-make-the-export-location-configurable-or-add-timestamps-to-filenames-for-versioning)
+    - [✅ Updated Code with Configurable Export Location & Timestamps](#updated-code-with-configurable-export-location-timestamps)
+    - [🧰 Key Updates:](#key-updates)
+    - [🗂️ Example Directory Structure:](#example-directory-structure)
+  - [Would you like to try it out and test the output on your system?](#would-you-like-to-try-it-out-and-test-the-output-on-your-system)
+- [Java 8 Optional Class methods](#java-8-optional-class-methods)
+  - [1) Instantiation :](#1-instantiation)
+  - [2) Extraction :](#2-extraction)
+  - [3) Mapping & Filtering :](#3-mapping-filtering)
+- [java.util.Optional class methods](#javautiloptional-class-methods)
+    - [1. **`isPresent()`**](#1-ispresent)
+    - [2. **`ifPresent(Consumer<? super T> action)`**](#2-ifpresentconsumer-super-t-action)
+    - [3. **`get()`**](#3-get)
+    - [4. **`orElse(T other)`**](#4-orelset-other)
+    - [5. **`orElseGet(Supplier<? extends T> other)`**](#5-orelsegetsupplier-extends-t-other)
+    - [6. **`orElseThrow()`**](#6-orelsethrow)
+    - [7. **`orElseThrow(Supplier<? extends X> exceptionSupplier)`**](#7-orelsethrowsupplier-extends-x-exceptionsupplier)
+    - [8. **`filter(Predicate<? super T> predicate)`**](#8-filterpredicate-super-t-predicate)
+    - [9. **`map(Function<? super T, ? extends U> mapper)`**](#9-mapfunction-super-t-extends-u-mapper)
+    - [10. **`flatMap(Function<? super T, Optional<U>> mapper)`**](#10-flatmapfunction-super-t-optionalu-mapper)
+    - [11. **`isEmpty()`**](#11-isempty)
+    - [12. **`stream()`**](#12-stream)
+    - [🔧 Practical Use Case of `Optional`:](#practical-use-case-of-optional)
+    - [Summary:](#summary-2)
+  - [how you can use `Optional` effectively in real-world scenarios.](#how-you-can-use-optional-effectively-in-real-world-scenarios)
+    - [🔧 **Real-World Example: Handling Null User Data**](#real-world-example-handling-null-user-data)
+    - [Example Scenario: Retrieving User Information](#example-scenario-retrieving-user-information)
+    - [Output:](#output)
+    - [Key Points from the Example:](#key-points-from-the-example)
+    - [🛠️ **Optional with Streams**](#optional-with-streams)
+    - [Explanation:](#explanation-3)
+    - [🧰 **Practical Use: Avoiding `NullPointerException` in Optional Chains**](#practical-use-avoiding-nullpointerexception-in-optional-chains)
+    - [Explanation:](#explanation-4)
+    - [🔑 **Summary of `Optional` Best Practices:**](#summary-of-optional-best-practices)
+  - [how `Optional` can be used effectively in real-world applications.](#how-optional-can-be-used-effectively-in-real-world-applications)
+    - [🛠️ **Advanced Example: Optional and Optional Chaining**](#advanced-example-optional-and-optional-chaining)
+    - [Scenario: **Order Processing System**](#scenario-order-processing-system)
+    - [Classes Setup:](#classes-setup)
+    - [Main Logic: **Chaining `Optional` Operations**](#main-logic-chaining-optional-operations)
+    - [Output:](#output-2)
+    - [Explanation:](#explanation-5)
+    - [🧰 **Combining `Optional` with `Stream` API**](#combining-optional-with-stream-api)
+    - [Scenario: **Handling Multiple User Profiles**](#scenario-handling-multiple-user-profiles)
+    - [Output:](#output-3)
+    - [Explanation:](#explanation-6)
+    - [🌐 **Handling Multiple Layers of Optionals with `map` and `flatMap`**](#handling-multiple-layers-of-optionals-with-map-and-flatmap)
+    - [Scenario: **Getting a User’s Country Code (Nested Optionals)**](#scenario-getting-a-users-country-code-nested-optionals)
+    - [Output:](#output-4)
+    - [Explanation:](#explanation-7)
+    - [🧩 **Summary of Techniques Covered:**](#summary-of-techniques-covered)
+- [java.util.Spliterator Methods & Characteristics](#javautilspliterator-methods-characteristics)
+  - [Working With Java 8 Spliterator :](#working-with-java-8-spliterator)
+    - [1) spliterator() : This method is added into java.lang.Iterable interface from Java 8 as a default method. So, it is available in all the classes and subinterfaces which implement or extend this interface. It is used to get Spliterator over the elements of arrays or collections or streams.](#1-spliterator-this-method-is-added-into-javalangiterable-interface-from-java-8-as-a-default-method-so-it-is-available-in-all-the-classes-and-subinterfaces-which-implement-or-extend-this-interface-it-is-used-to-get-spliterator-over-the-elements-of-arrays-or-collections-or-streams)
+    - [2) tryAdvance() : Performs the given action on next element. It is used to traverse the elements one by one.](#2-tryadvance-performs-the-given-action-on-next-element-it-is-used-to-traverse-the-elements-one-by-one)
+    - [3) forEachRemaining() : Performs the given action on each of the remaining elements. It is used to traverse the elements in bulk.](#3-foreachremaining-performs-the-given-action-on-each-of-the-remaining-elements-it-is-used-to-traverse-the-elements-in-bulk)
+    - [4) trySplit() : This method splits current Spliterator into another Spliterator. It is helpful in parallel programming.](#4-trysplit-this-method-splits-current-spliterator-into-another-spliterator-it-is-helpful-in-parallel-programming)
+    - [5) estimateSize() : It returns the estimate of number of elements yet to be traversed by the Spliterator.](#5-estimatesize-it-returns-the-estimate-of-number-of-elements-yet-to-be-traversed-by-the-spliterator)
+    - [6) getExactSizeIfKnown() : It returns exact size if known, otherwise returns -1.](#6-getexactsizeifknown-it-returns-exact-size-if-known-otherwise-returns--1)
+    - [7) characteristics() : Returns set of characteristics of elements in an integer form.](#7-characteristics-returns-set-of-characteristics-of-elements-in-an-integer-form)
+    - [8) hasCharacteristics() : Checks whether this Spliterator has specified characteristics or not.](#8-hascharacteristics-checks-whether-this-spliterator-has-specified-characteristics-or-not)
+    - [9) getComparator() : It returns Comparator of the source if it is sorted, otherwise throws IllegalStateException. If the source is sorted in natural order, it returns null.](#9-getcomparator-it-returns-comparator-of-the-source-if-it-is-sorted-otherwise-throws-illegalstateexception-if-the-source-is-sorted-in-natural-order-it-returns-null)
+- [java.util.Spliterator methods](#javautilspliterator-methods)
+  - [🔧 **Spliterator Interface – Key Methods**](#spliterator-interface-key-methods)
+  - [⚙️ **Spliterator Characteristics**](#spliterator-characteristics)
+  - [🔍 **Common Usage Example**](#common-usage-example)
+  - [✅ **Best Practices**](#best-practices)
+  - [Explain each Spliterator Characteristics with an example.](#explain-each-spliterator-characteristics-with-an-example)
+  - [✅ 1. `ORDERED`](#1-ordered)
+    - [🔹 Description:](#description)
+    - [🧪 Example:](#example)
+  - [✅ 2. `DISTINCT`](#2-distinct)
+    - [🔹 Description:](#description-2)
+    - [🧪 Example:](#example-2)
+  - [✅ 3. `SORTED`](#3-sorted)
+    - [🔹 Description:](#description-3)
+    - [🧪 Example:](#example-3)
+  - [✅ 4. `SIZED`](#4-sized)
+    - [🔹 Description:](#description-4)
+    - [🧪 Example:](#example-4)
+  - [✅ 5. `NONNULL`](#5-nonnull)
+    - [🔹 Description:](#description-5)
+    - [🧪 Example:](#example-5)
+  - [✅ 6. `IMMUTABLE`](#6-immutable)
+    - [🔹 Description:](#description-6)
+    - [🧪 Example:](#example-6)
+  - [✅ 7. `CONCURRENT`](#7-concurrent)
+    - [🔹 Description:](#description-7)
+    - [🧪 Example:](#example-7)
+  - [✅ 8. `SUBSIZED`](#8-subsized)
+    - [🔹 Description:](#description-8)
+    - [🧪 Example:](#example-8)
+  - [🧩 Summary Table](#summary-table-2)
+- [Java 8 Stream Intermediate And Terminal Operations](#java-8-stream-intermediate-and-terminal-operations)
+  - [1) Intermediate Operations :](#1-intermediate-operations)
+  - [2) Terminal Operations :](#2-terminal-operations)
+  - [Below is the list of intermediate and terminal operations.](#below-is-the-list-of-intermediate-and-terminal-operations)
+- [In Java 8, the **Stream API** provides powerful operations to process collections of data. These operations are classified into two main categories:](#in-java-8-the-stream-api-provides-powerful-operations-to-process-collections-of-data-these-operations-are-classified-into-two-main-categories)
+  - [🔁 **Intermediate Operations**](#intermediate-operations)
+  - [✅ **Terminal Operations**](#terminal-operations)
+  - [🧪 Example: Combining Both](#example-combining-both)
+- [Java 8 StringJoiner](#java-8-stringjoiner)
+  - [a) StringJoiner(CharSequence delimiter)](#a-stringjoinercharsequence-delimiter)
+  - [b) StringJoiner(CharSequence delimiter, CharSequence prefix, CharSequence suffix)](#b-stringjoinercharsequence-delimiter-charsequence-prefix-charsequence-suffix)
+    - [StringJoiner Example : Joining the strings with delimiter](#stringjoiner-example-joining-the-strings-with-delimiter)
+    - [StringJoiner Example : Joining the strings with delimiter, prefix and suffix](#stringjoiner-example-joining-the-strings-with-delimiter-prefix-and-suffix)
+- [Java 8 String.join() Method](#java-8-stringjoin-method)
+  - [a) public static String join(CharSequence delimiter, CharSequence… elements)](#a-public-static-string-joincharsequence-delimiter-charsequence-elements)
+  - [b) public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements)](#b-public-static-string-joincharsequence-delimiter-iterable-extends-charsequence-elements)
+    - [String.join() Method Example : Joining the strings](#stringjoin-method-example-joining-the-strings)
+    - [String.join() Method Example : Joining an array of strings](#stringjoin-method-example-joining-an-array-of-strings)
+    - [String.join() Method Example : Joining list of strings](#stringjoin-method-example-joining-list-of-strings)
+- [Java 8 Collectors.joining()](#java-8-collectorsjoining)
+  - [a) Collectors.joining()](#a-collectorsjoining)
+  - [b) Collectors.joining(CharSequence delimiter)](#b-collectorsjoiningcharsequence-delimiter)
+  - [c) Collectors.joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix)](#c-collectorsjoiningcharsequence-delimiter-charsequence-prefix-charsequence-suffix)
+    - [Collectors.joining() Example : Joining list of strings without delimiter](#collectorsjoining-example-joining-list-of-strings-without-delimiter)
+    - [Collectors.joining() Example : Joining list of strings with delimiter](#collectorsjoining-example-joining-list-of-strings-with-delimiter)
+    - [Collectors.joining() Example : Joining list of strings with delimiter, prefix and suffix](#collectorsjoining-example-joining-list-of-strings-with-delimiter-prefix-and-suffix)
+- [Java 8 Sort HashMap By Keys](#java-8-sort-hashmap-by-keys)
+  - [How To Sort HashMap By Keys Using TreeMap (Before Java 8)?](#how-to-sort-hashmap-by-keys-using-treemap-before-java-8)
+    - [Sorting HashMap according to natural order of keys using TreeMap without Comparator :](#sorting-hashmap-according-to-natural-order-of-keys-using-treemap-without-comparator)
+    - [Sorting HashMap in natural reverse order of keys using TreeMap with Comparator :](#sorting-hashmap-in-natural-reverse-order-of-keys-using-treemap-with-comparator)
+    - [Sorting HashMap by keys using TreeMap with customized Comparator :](#sorting-hashmap-by-keys-using-treemap-with-customized-comparator)
+  - [How To Sort HashMap By Keys Using Java 8 comparingByKey()?](#how-to-sort-hashmap-by-keys-using-java-8-comparingbykey)
+    - [Java 8 sort HashMap by keys in natural order :](#java-8-sort-hashmap-by-keys-in-natural-order)
+    - [Java 8 sorting HashMap in natural reverse order of keys :](#java-8-sorting-hashmap-in-natural-reverse-order-of-keys)
+    - [Java 8 sort HashMap by keys using customized Comparator :](#java-8-sort-hashmap-by-keys-using-customized-comparator)
+- [Java 8 Sort HashMap By Values](#java-8-sort-hashmap-by-values)
+  - [How To Sort HashMap By Values Before Java 8?](#how-to-sort-hashmap-by-values-before-java-8)
+  - [How To Sort HashMap By Values Using Java 8 comparingByValue()?](#how-to-sort-hashmap-by-values-using-java-8-comparingbyvalue)
+    - [Java 8 sort HashMap in natural order of values :](#java-8-sort-hashmap-in-natural-order-of-values)
+    - [Java 8 Sort HashMap By Values Using Customized Comparator :](#java-8-sort-hashmap-by-values-using-customized-comparator)
+- [Java 8 Merge Two Maps With Same Keys](#java-8-merge-two-maps-with-same-keys)
+  - [How To Merge Two Maps With Same Keys In Java 8?](#how-to-merge-two-maps-with-same-keys-in-java-8)
+    - [1) Map.merge() :](#1-mapmerge)
+    - [2) Stream.concat() :](#2-streamconcat)
+    - [3) Stream.of() and flatMap() :](#3-streamof-and-flatmap)
+    - [4) Using Stream() Pipeline :](#4-using-stream-pipeline)
+
+---
+
+
 All Java 8 functional interfaces are organised in java.util.function package.
 
 ![alt text](image.png)
+
+[⬆ Back to top](#table-of-contents)
 
 # Java 8 Streams
 
@@ -10,9 +287,15 @@ java.util.stream.Stream interface is the center of Java 8 Streams API. This inte
 
 ![alt text](image-1.png)
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Stream Operations
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.1) Stream Creation Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.1.1) empty() : Creates an empty stream
 
@@ -30,6 +313,8 @@ System.out.println(emptyStream.count());
 //Output : 0
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.1.2) of(T t) : Creates a stream of single element of type T
 
 Method Signature : public static<T> Stream<T> of(T t)
@@ -46,6 +331,8 @@ System.out.println(singleElementStream.count());
 //Output : 1
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.1.3) of(T… values) : Creates a stream from values
 
 Method Signature : public static<T> Stream<T> of(T… values)
@@ -61,6 +348,8 @@ System.out.println(streamOfNumbers.count());
                  
 //Output : 7
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.1.4) Creating streams from collections
 
@@ -86,7 +375,11 @@ listOfStrings.stream().forEach(System.out::println);
 //  Three
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.2) Selection Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.2.1) filter() : Selecting with a predicate
 
@@ -119,6 +412,8 @@ names.stream().filter((String name) -> name.length() > 5).forEach(System.out::pr
 //      Samontika
 //  Brijesh
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.2.2) distinct() : Selects only unique elements
 
@@ -158,6 +453,8 @@ names.stream().distinct().forEach(System.out::println);
 //  John
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.2.3) limit() : Selects first n elements
 
 Method Signature : Stream<T> limit(long maxSize)
@@ -195,6 +492,8 @@ names.stream().limit(4).forEach(System.out::println);
 //  Brijesh
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.2.4) skip() : Skips first n elements
 
 Method Signature : Stream<T> skip(long n)
@@ -231,7 +530,11 @@ names.stream().skip(4).forEach(System.out::println);
 //  Brijesh
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.3) Mapping Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.3.1) map() : Applies a function
 
@@ -267,7 +570,11 @@ names.add("John");
 ```
 Other versions of map() method : mapToInt(), mapToLong() and mapToDouble().
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.4) Sorting Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.4.1) sorted() : Sorting according to natural order
 
@@ -303,6 +610,8 @@ names.stream().sorted().forEach(System.out::println);
 //  Samontika
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.4.2) sorted(Comparator) : Sorting according to supplied comparator
 
 Method Signature : Stream<T> sorted(Comparator<T> comparator)
@@ -336,9 +645,13 @@ names.stream().sorted((String name1, String name2) -> name1.length() - name2.len
 //  Brijesh
 //  Samontika
 ```
+[⬆ Back to top](#table-of-contents)
+
 ## 5.5) Reducing Operations
 
 Reducing operations are the operations which combine all the elements of a stream repeatedly to produce a single value. For example, counting number of elements, calculating average of elements, finding maximum or minimum of elements etc.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.5.1) reduce() : Produces a single value
 
@@ -363,6 +676,8 @@ OptionalInt sum = Arrays.stream(new int[] {7, 5, 9, 2, 8, 1}).reduce((a, b) -> a
 ```
 Methods min(), max(), count() and collect() are special cases of reduction operation.
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.5.2) min() : Finding the minimum
 
 Method Signature : Optional<T> min(Comparator<T> comparator)
@@ -379,6 +694,8 @@ OptionalInt min = Arrays.stream(new int[] {7, 5, 9, 2, 8, 1}).min();
 //Here, min() of IntStream will be used as we are passing an array of ints
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.5.3) max() : Finding the maximum
 
 Method Signature : Optional<T> max(Comparator<T> comparator)
@@ -394,6 +711,8 @@ OptionalInt max = Arrays.stream(new int[] {7, 5, 9, 2, 8, 1}).max();
  
 //Here, max() of IntStream will be used as we are passing an array of ints
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.5.4) count() : Counting the elements
 
@@ -425,6 +744,8 @@ System.out.println(noOfBigNames);
 //  Output : 3
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.5.5) collect() : Returns mutable container
 
 Method Signature : R collect(Collector<T> collector)
@@ -455,7 +776,11 @@ System.out.println(first3Names);
 //  Output : [David, Johnson, Samontika]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.6) Finding And Matching Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.6.1) anyMatch() : Any one element matches
 
@@ -484,6 +809,8 @@ if(names.stream().anyMatch((String name) -> name.length() == 5))
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.6.2) allMatch() : All elements matches
 
 Method Signature : boolean allMatch(Predicate<T> predicate)
@@ -508,6 +835,8 @@ if(names.stream().allMatch((String name) -> name.length() > 5))
     System.out.println("All are big names");
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.6.3) noneMatch() : No element matches
 
@@ -536,6 +865,8 @@ if(names.stream().noneMatch((String name) -> name.length() == 2))
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.6.4) findFirst() : Finding first element
 
 Method Signature : Optional<T> findFirst()
@@ -550,6 +881,8 @@ Optional<String> firstElement = Stream.of("First", "Second", "Third", "Fourth").
 //Output : Optional[First]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5.6.5) findAny() : Finding any element
 
 Method Signature : Optional<T> findAny()
@@ -562,7 +895,11 @@ What It Does? : Randomly returns any one element in a stream. The result of this
 Optional<String> anyElement = Stream.of("First", "Second", "Third", "Fourth").findAny();
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 5.7) Other Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.7.1) forEach() :
 
@@ -580,6 +917,8 @@ Stream.of("First", "Second", "Second", "Third", "Fourth").limit(3).distinct().fo
 //  First
 //  Second
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.7.2) toArray() : Stream to array
 
@@ -612,6 +951,8 @@ System.out.println(Arrays.toString(streamArray));
          
 //  [David, Johnson, Samontika]
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5.7.3) peek() :
 
@@ -653,25 +994,37 @@ names.stream()
 //Mapped Name :BRIJESH
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # java.util.stream.Collector Interface methods
 
 java.util.stream.Collector interface contains four functions that work together to accumulate input elements into a mutable result container and optionally performs a final transformation on the result. Those four functions are,
+
+[⬆ Back to top](#table-of-contents)
 
 ## a) Supplier() :
 
 A function that creates and returns a new mutable result container.
 
+[⬆ Back to top](#table-of-contents)
+
 ## b) accumulator() :
 
 A function that accumulates a value into a mutable result container.
+
+[⬆ Back to top](#table-of-contents)
 
 ## c) combiner() :
 
 A function that accepts two partial results and merges them.
 
+[⬆ Back to top](#table-of-contents)
+
 ## d) finisher() :
 
 A function that performs final transformation from the intermediate accumulation type to the final result type.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 📜 Collector Method Signatures
 
@@ -688,6 +1041,8 @@ T = Stream element type
 A = Accumulation type (intermediate type)
 
 R = Result type (final result)
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example: Custom Collector for joining Strings
 
@@ -753,6 +1108,8 @@ public class CustomCollectorExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 🔍 Explanation
 
 **Phase** - **What Happens**
@@ -767,6 +1124,8 @@ finisher - Converts StringBuilder into final String
 
 characteristics - No optimization hints (can set IDENTITY_FINISH, UNORDERED, etc.)
 
+[⬆ Back to top](#table-of-contents)
+
 ## ⚡ Quick Diagram
 
 ```java
@@ -778,6 +1137,8 @@ accumulator() --> Alice -> Alice, Bob -> Alice, Bob, Charlie
 
 finisher() --> "Alice, Bob, Charlie"
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Some collector optimizations are based on characteristics:
 
@@ -792,11 +1153,15 @@ IDENTITY_FINISH	-   Finisher is identity (no transformation needed)
 
 Example: Collectors.toList() has IDENTITY_FINISH.
 
+[⬆ Back to top](#table-of-contents)
+
 ## 🚀 Final Notes
 
 * Collectors.toList(), Collectors.toSet(), Collectors.joining(), etc., are predefined Collectors.
 
 * You can always write your own custom collector if you need advanced behavior.
+
+[⬆ Back to top](#table-of-contents)
 
 # Collector.of() Factory Method
 
@@ -811,6 +1176,8 @@ static <T, A, R> Collector<T, A, R> of(
 )
 ```
 There’s also a 5-argument version that includes characteristics.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🔥 Example Using Collector.of()
 
@@ -847,6 +1214,8 @@ public class CollectorOfExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔧 Simpler Collector for Numbers (Sum Example)
 
 ```java
@@ -862,6 +1231,8 @@ int sum = numbers.stream().collect(Collector.of(
 System.out.println(sum);  // Output: 15
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 📚 Summary
 
 **Approach	-   Best Use**
@@ -870,45 +1241,81 @@ Full Collector interface	-   Advanced control & customization
 
 Collector.of()	-   Quick and readable custom collectors
 
+[⬆ Back to top](#table-of-contents)
+
 # 3) java.util.stream.Collectors Class methods
 
 java.util.stream.Collectors class contains static factory methods which perform some common reduction operations such as accumulating elements into Collection, finding min, max, average, sum of elements etc. All the methods of Collectors class return Collector type which will be supplied to collect() method as an argument.
 
 ![alt text](image-2.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.1) Collectors.toList() :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.2) Collectors.toSet() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.3) Collectors.toMap() :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.4) Collectors.toCollection() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.5) Collectors.joining() :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.6) Collectors.counting() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.7) Collectors.maxBy() :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.8) Collectors.minBy() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.9) summingInt(), summingLong(), summingDouble()
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.10) averagingInt(), averagingLong(), averagingDouble()
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.11) summarizingInt(), summarizingLong(), summarizingDouble()
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3.12) Collectors.groupingBy() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.13) Collectors.partitioningBy() :
 
+[⬆ Back to top](#table-of-contents)
+
 ### 3.14) Collectors.collectingAndThen() :
+
+[⬆ Back to top](#table-of-contents)
 
 ## Great! Here's a **cheat sheet** of the most commonly used **built-in Collectors** from the `java.util.stream.Collectors` class, with syntax and examples. This will help you in interviews and real-world development.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ Java 8 Collectors Cheat Sheet
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1. **`Collectors.toList()`**
 Collects elements into a `List`.
@@ -919,6 +1326,8 @@ List<String> result = stream.collect(Collectors.toList());
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2. **`Collectors.toSet()`**
 Collects elements into a `Set`.
 
@@ -927,6 +1336,8 @@ Set<String> result = stream.collect(Collectors.toSet());
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3. **`Collectors.toMap()`**
 Collects elements into a `Map`.
@@ -950,6 +1361,8 @@ Map<Character, String> map = names.stream().collect(Collectors.toMap(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 4. **`Collectors.joining()`**
 Joins strings with delimiter, prefix, and suffix.
 
@@ -958,6 +1371,8 @@ String joined = stream.collect(Collectors.joining(", ", "[", "]"));
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 5. **`Collectors.counting()`**
 Counts the number of elements.
@@ -968,6 +1383,8 @@ long count = stream.collect(Collectors.counting());
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 6. **`Collectors.summingInt()` / `summingLong()` / `summingDouble()`**
 Sums the numeric values.
 
@@ -977,6 +1394,8 @@ int sum = stream.collect(Collectors.summingInt(String::length));
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 7. **`Collectors.averagingInt()` / `averagingDouble()`**
 Calculates the average.
 
@@ -985,6 +1404,8 @@ double avg = stream.collect(Collectors.averagingInt(String::length));
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 8. **`Collectors.maxBy()` / `minBy()`**
 Finds the max/min using a comparator.
@@ -997,6 +1418,8 @@ Optional<String> longest = stream.collect(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 9. **`Collectors.groupingBy()`**
 Groups elements by a classifier function.
 
@@ -1007,6 +1430,8 @@ Map<Integer, List<String>> grouped = stream.collect(
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 10. **`Collectors.partitioningBy()`**
 Partitions elements into two groups by a predicate.
@@ -1019,6 +1444,8 @@ Map<Boolean, List<String>> partitioned = stream.collect(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 11. **`Collectors.mapping()`**
 Used inside `groupingBy()` or `collectingAndThen()` to transform values.
 
@@ -1030,6 +1457,8 @@ Map<Integer, Set<Character>> mapped = stream.collect(
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 12. **`Collectors.collectingAndThen()`**
 Wraps another collector and applies a finisher function.
@@ -1045,6 +1474,8 @@ List<String> unmodifiableList = stream.collect(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 13. **`Collectors.reducing()`**
 Performs a general reduction.
 
@@ -1056,6 +1487,8 @@ int totalLength = stream.collect(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 14. **`Collectors.toCollection()`**
 Collects elements into a custom collection (e.g., LinkedList, TreeSet).
 
@@ -1066,6 +1499,8 @@ LinkedList<String> linked = stream.collect(
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 💡 Summary Table
 
@@ -1087,6 +1522,8 @@ LinkedList<String> linked = stream.collect(
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 # java.util.stream.Collector Interface methods
 
 The `java.util.stream.Collector` interface in Java is a part of the **Stream API** and provides a way to define mutable reduction operations (like grouping, partitioning, summarizing, etc.) on stream elements. It is a **generic interface** used by the terminal operation `Stream.collect()`.
@@ -1095,12 +1532,16 @@ Here are the **core methods** defined in the `Collector` interface:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **1. `Supplier<A> supplier()`**
 
 * Provides a function that creates a new result container (an instance of a mutable accumulation type `A`).
 * **Example:** `() -> new ArrayList<>()`
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **2. `BiConsumer<A, T> accumulator()`**
 
@@ -1110,12 +1551,16 @@ Here are the **core methods** defined in the `Collector` interface:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### **3. `BinaryOperator<A> combiner()`**
 
 * Combines two result containers into one. Mainly used in parallel stream processing.
 * **Example:** `(list1, list2) -> { list1.addAll(list2); return list1; }`
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **4. `Function<A, R> finisher()`**
 
@@ -1124,6 +1569,8 @@ Here are the **core methods** defined in the `Collector` interface:
 * **Example:** `Function.identity()`
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### **5. `Set<Collector.Characteristics> characteristics()`**
 
@@ -1134,6 +1581,8 @@ Here are the **core methods** defined in the `Collector` interface:
   * `IDENTITY_FINISH`: Finisher is the identity function (i.e., `A` and `R` are the same).
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### Full Method Signature:
 
@@ -1147,11 +1596,15 @@ public interface Collector<T, A, R> {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like an example of a custom `Collector` implementation or how it's used in practice?
 
 Great! Here's a **complete example** that demonstrates how to **create and use a custom `Collector`** in Java. This example collects strings into a comma-separated single string, similar to `Collectors.joining(", ")`, but using a **custom implementation**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ **Custom Collector Example: Join Strings with Comma**
 
@@ -1204,6 +1657,8 @@ public class CustomCollectorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔍 Explanation:
 
 * **Supplier:** Provides a new `StringJoiner` initialized with `", "`.
@@ -1214,11 +1669,15 @@ public class CustomCollectorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like a version of this example that collects objects or groups data instead?
 
 Let's build on the concept and create a **custom `Collector`** that collects **objects** and groups them by a specific field.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ **Custom Collector Example: Group People by Age**
 
@@ -1251,11 +1710,15 @@ class Person {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🎯 Goal:
 
 Group a list of `Person` objects into a `Map<Integer, List<Person>>`, where the key is age.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ Custom Collector Implementation:
 
@@ -1324,6 +1787,8 @@ public class GroupByAgeCollectorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧠 Key Concepts:
 
 * Uses `computeIfAbsent` to initialize and populate the list by age.
@@ -1332,17 +1797,23 @@ public class GroupByAgeCollectorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like this modified to group by a **custom key**, such as the first letter of the name, or include summarizing (e.g., count or average age per group)?
 
 Great! Let's now **group people by the first letter of their name**, and for each group, **calculate the average age**.
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### ✅ **Goal:**
 
 Create a custom `Collector` that groups `Person` objects by the **first letter of their name**, and computes the **average age** for each group.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧑 Person Class (same as before):
 
@@ -1367,6 +1838,8 @@ class Person {
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ Custom Collector: Group by Initial Letter → Average Age
 
@@ -1442,6 +1915,8 @@ public class GroupByInitialAverageAge {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔍 Output (example):
 
 ```
@@ -1452,15 +1927,21 @@ C: 36.0
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 💡 What’s Happening:
 
 * We're grouping by the **first letter** of each name.
 * Using `IntSummaryStatistics` to collect and compute averages.
 * The `finisher()` maps the stats to final average values.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like to extend this further to also include counts or total ages per group along with averages?
 
 Perfect! Let’s extend the previous example to group `Person` objects by the **first letter of their name** and calculate **three things per group**:
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ Goal:
 
@@ -1479,6 +1960,8 @@ Map<Character, GroupStats>
 Where `GroupStats` is a custom class that holds count, total age, and average.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧮 Step 1: Define the `GroupStats` class
 
@@ -1515,6 +1998,8 @@ class GroupStats {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧑 `Person` class (unchanged):
 
 ```java
@@ -1538,6 +2023,8 @@ class Person {
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ Custom Collector
 
@@ -1608,6 +2095,8 @@ public class GroupStatsCollectorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔍 Sample Output:
 
 ```
@@ -1620,11 +2109,15 @@ C: Count: 2, Total: 72, Avg: 36.0
 
 This structure is flexible—you can add min/max ages, names list, or even nested grouping if needed.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like a version that also includes the list of names per group along with the stats?
 
 Great choice! Let’s now enhance `GroupStats` to include a **list of names** in each group alongside count, total age, and average.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ **Goal:**
 
@@ -1642,6 +2135,8 @@ Map<Character, GroupStats>
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧮 Step 1: Enhanced `GroupStats` class
 
@@ -1685,6 +2180,8 @@ class GroupStats {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧑 `Person` Class (same as before)
 
 ```java
@@ -1708,6 +2205,8 @@ class Person {
 ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ Updated Collector with Names
 
@@ -1778,6 +2277,8 @@ public class GroupStatsWithNamesExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔍 Sample Output:
 
 ```
@@ -1790,11 +2291,15 @@ C: Count: 2, Total Age: 72, Average Age: 36.0, Names: [Charlie, Cathy]
 
 This setup gives you a rich, flexible summary per group.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like a version that sorts the final map by the group’s average age or name list?
 
 Awesome! Let's now **sort the final result** by **average age per group**, while keeping everything else the same (counts, totals, names, etc.).
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ Goal:
 
@@ -1802,12 +2307,16 @@ Return a `**LinkedHashMap<Character, GroupStats>**` sorted by average age **in d
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧠 Key Changes:
 
 * After collecting the map using your custom collector, sort its entries by average age.
 * Use `LinkedHashMap` to preserve the sorted order.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ Updated Main Method with Sorting
 
@@ -1854,6 +2363,8 @@ public class GroupStatsSortedExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔍 Output Example (sorted by avg age):
 
 ```
@@ -1869,11 +2380,15 @@ This approach is clean and easy to modify:
 * You can sort by **count**, **total age**, or **name count**.
 * Or sort **ascending** by switching to `Comparator.comparingDouble(...)` without `.reversed()`.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like to also export the sorted results as a CSV or JSON?
 
 Great! Let's add an option to **export the sorted group statistics to a CSV and JSON format**.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## ✅ Export Sorted Results
 
@@ -1884,6 +2399,8 @@ Map<Character, GroupStats> sortedByAvgAge
 ```
 
 Let’s output it in:
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1️⃣ CSV Format (Console Output)
 
@@ -1914,7 +2431,11 @@ A,2,58,29.0,"Alice;Aaron"
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2️⃣ JSON Format (using Jackson or Gson)
+
+[⬆ Back to top](#table-of-contents)
 
 #### Option A: **Using Jackson**
 
@@ -1944,6 +2465,8 @@ System.out.println(jsonOutput);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 #### Option B: **Using Gson**
 
 If you're using Gson instead:
@@ -1959,6 +2482,8 @@ System.out.println(jsonOutput);
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like me to provide a complete working version of the CSV or JSON export using a specific library?
 
 Great! Here's a **complete working Java example** that:
@@ -1971,6 +2496,8 @@ Great! Here's a **complete working Java example** that:
    * **JSON** (printed to console using Jackson)
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ Full Java Example with Jackson JSON Export
 
@@ -2115,6 +2642,8 @@ public class GroupStatsExportExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔧 Maven Dependency for Jackson
 
 Add this to your `pom.xml`:
@@ -2129,11 +2658,15 @@ Add this to your `pom.xml`:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like a version of this that writes the CSV or JSON directly to a file (e.g., `output.csv`, `output.json`)?
 
 Perfect! Here's how to **write both CSV and JSON output to files** — `output.csv` and `output.json` — in addition to console output.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ Updated Code Snippet: Save CSV and JSON to Disk
 
@@ -2183,6 +2716,8 @@ public class GroupStatsExportExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🗃️ Result
 
 * `output.csv` will contain:
@@ -2211,6 +2746,8 @@ public class GroupStatsExportExample {
 
 This setup is ready for file-based reporting or integration with other tools.
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like to make the export location configurable or add timestamps to filenames for versioning?
 
 To make the file export location configurable and add timestamps to filenames, let's implement a **dynamic approach** where:
@@ -2219,6 +2756,8 @@ To make the file export location configurable and add timestamps to filenames, l
 2. Filenames will include a **timestamp** to prevent overwriting and allow versioning.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### ✅ Updated Code with Configurable Export Location & Timestamps
 
@@ -2381,6 +2920,8 @@ public class GroupStatsExportExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧰 Key Updates:
 
 1. **Timestamped Filenames:**
@@ -2394,6 +2935,8 @@ public class GroupStatsExportExample {
    * It ensures that the directory exists using `Files.createDirectories()`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🗂️ Example Directory Structure:
 
@@ -2412,11 +2955,17 @@ With this setup:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Would you like to try it out and test the output on your system?
+
+[⬆ Back to top](#table-of-contents)
 
 # Java 8 Optional Class methods
 
 ![alt text](image-3.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ## 1) Instantiation :
 
@@ -2438,6 +2987,8 @@ Optional.ofNullable() : It creates an Optional object with specified value if th
 House house = new House();
 Optional<House> optionalHouse = Optional.ofNullable(house);
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ## 2) Extraction :
 
@@ -2483,6 +3034,8 @@ Optional<House> optionalHouse = Optional.ofNullable(new House());
 optionalHouse.orElseThrow(() -> new NoSuchElementException());
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## 3) Mapping & Filtering :
 
 map() : If the value is present, applies given mapping function to it and if the result is null, returns empty Optional. Otherwise returns Optional containing the result.
@@ -2508,6 +3061,8 @@ optionalHouse.filter((House house) -> house.getHouseType() == “Heritage”)
 .map(HouseLoan::getHouseLoanDetails);
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # java.util.Optional class methods
 
 The `Optional` class in Java 8 is a container object which may or may not contain a non-null value. It is used to avoid `NullPointerExceptions` and to represent the idea that a value may be present or absent. The `Optional` class is part of the `java.util` package.
@@ -2515,6 +3070,8 @@ The `Optional` class in Java 8 is a container object which may or may not contai
 Here is a summary of the **methods** provided by the `Optional` class along with their descriptions:
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1. **`isPresent()`**
 
@@ -2527,6 +3084,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   System.out.println(opt.isPresent()); // true
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2. **`ifPresent(Consumer<? super T> action)`**
 
 * **Description**: If a value is present, it executes the given action with the value. Otherwise, it does nothing.
@@ -2537,6 +3096,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   Optional<String> opt = Optional.of("Hello");
   opt.ifPresent(value -> System.out.println(value.toUpperCase())); // Outputs: HELLO
   ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3. **`get()`**
 
@@ -2549,6 +3110,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   System.out.println(opt.get()); // Hello
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 4. **`orElse(T other)`**
 
 * **Description**: Returns the value if present, otherwise returns the provided default value (`other`).
@@ -2560,6 +3123,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   System.out.println(opt.orElse("Default Value")); // Default Value
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 5. **`orElseGet(Supplier<? extends T> other)`**
 
 * **Description**: Returns the value if present, otherwise invokes the provided `Supplier` and returns its result.
@@ -2570,6 +3135,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   Optional<String> opt = Optional.empty();
   System.out.println(opt.orElseGet(() -> "Generated Default")); // Generated Default
   ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 6. **`orElseThrow()`**
 
@@ -2583,6 +3150,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   opt.orElseThrow(); 
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 7. **`orElseThrow(Supplier<? extends X> exceptionSupplier)`**
 
 * **Description**: Returns the value if present, otherwise throws the exception provided by the `exceptionSupplier`.
@@ -2595,6 +3164,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   opt.orElseThrow(() -> new IllegalArgumentException("Value not found"));
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 8. **`filter(Predicate<? super T> predicate)`**
 
 * **Description**: If a value is present and matches the given predicate, it returns an `Optional` with the value; otherwise, it returns an empty `Optional`.
@@ -2605,6 +3176,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   Optional<String> opt = Optional.of("Hello");
   System.out.println(opt.filter(s -> s.length() > 3).get()); // Hello
   ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 9. **`map(Function<? super T, ? extends U> mapper)`**
 
@@ -2618,6 +3191,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   System.out.println(result.get()); // HELLO
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 10. **`flatMap(Function<? super T, Optional<U>> mapper)`**
 
 * **Description**: Similar to `map`, but the mapping function must return an `Optional` instead of a value. If the result is non-empty, the resulting `Optional` is returned; otherwise, an empty `Optional` is returned.
@@ -2630,6 +3205,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   System.out.println(length.get()); // 5
   ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 11. **`isEmpty()`**
 
 * **Description**: Returns `true` if the `Optional` is empty (i.e., does not contain a value), otherwise `false`. This method was introduced in Java 11.
@@ -2640,6 +3217,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   Optional<String> opt = Optional.empty();
   System.out.println(opt.isEmpty()); // true
   ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 12. **`stream()`**
 
@@ -2653,6 +3232,8 @@ Here is a summary of the **methods** provided by the `Optional` class along with
   ```
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🔧 Practical Use Case of `Optional`:
 
@@ -2683,16 +3264,24 @@ public class OptionalExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### Summary:
 
 * **`Optional`** is a great way to handle nullability and avoid `NullPointerExceptions`.
 * It provides methods like `map`, `filter`, `ifPresent`, `orElse`, `orElseThrow`, and more, allowing you to chain operations without worrying about nulls.
 
+[⬆ Back to top](#table-of-contents)
+
 ## how you can use `Optional` effectively in real-world scenarios.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🔧 **Real-World Example: Handling Null User Data**
 
 Imagine you have a system that retrieves a user's profile. Sometimes, the user might not exist, and the system could return a `null` or an empty result. Using `Optional` can help simplify this scenario.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Example Scenario: Retrieving User Information
 
@@ -2741,12 +3330,16 @@ public class OptionalUserExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Output:
 
 ```
 User found: John Doe
 Default User
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Key Points from the Example:
 
@@ -2755,6 +3348,8 @@ Default User
 3. **Using `orElse()`**: If the user is not found, it provides a default `User` object.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ **Optional with Streams**
 
@@ -2778,6 +3373,8 @@ public class OptionalStreamExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation:
 
 * **`map(String::toUpperCase)`**: Transforms the value to uppercase if it is present.
@@ -2785,6 +3382,8 @@ public class OptionalStreamExample {
 * **`flatMap` and `forEach`**: Breaks the string into individual characters and prints them.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧰 **Practical Use: Avoiding `NullPointerException` in Optional Chains**
 
@@ -2821,12 +3420,16 @@ public class OptionalChainExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation:
 
 * **`flatMap()`**: Allows the use of an `Optional` inside another `Optional`. If the address is `null`, it returns an empty `Optional`.
 * **`orElse()`**: If the address is absent, it returns `"Default Address"` as a fallback.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🔑 **Summary of `Optional` Best Practices:**
 
@@ -2852,17 +3455,25 @@ public class OptionalChainExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## how `Optional` can be used effectively in real-world applications.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🛠️ **Advanced Example: Optional and Optional Chaining**
 
 This example will show how you can chain multiple `Optional` operations, safely handling situations where nested objects or properties might be absent.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Scenario: **Order Processing System**
 
 Imagine an e-commerce system where you have `Customer`, `Order`, and `Product`. A customer places an order for a product, and sometimes the order might not have a product or the product might be out of stock.
 
 Here's how we can model this scenario using `Optional` to avoid null checks:
+
+[⬆ Back to top](#table-of-contents)
 
 ### Classes Setup:
 
@@ -2914,6 +3525,8 @@ class Customer {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### Main Logic: **Chaining `Optional` Operations**
 
 Now let's say we want to fetch a customer's order details and check if the product is in stock.
@@ -2955,12 +3568,16 @@ public class OptionalChainingExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Output:
 
 ```
 Product in stock: Laptop
 Product is out of stock
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Explanation:
 
@@ -2982,9 +3599,13 @@ Product is out of stock
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🧰 **Combining `Optional` with `Stream` API**
 
 Sometimes you may want to work with a collection of `Optional` values, filtering, mapping, or reducing them. Here's an example using `Optional` and `Stream`.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Scenario: **Handling Multiple User Profiles**
 
@@ -3031,12 +3652,16 @@ public class OptionalStreamExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Output:
 
 ```
 alice@example.com
 charlie@example.com
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Explanation:
 
@@ -3052,9 +3677,13 @@ charlie@example.com
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🌐 **Handling Multiple Layers of Optionals with `map` and `flatMap`**
 
 Sometimes you might have multiple layers of `Optional` objects. Here's an example:
+
+[⬆ Back to top](#table-of-contents)
 
 ### Scenario: **Getting a User’s Country Code (Nested Optionals)**
 
@@ -3108,6 +3737,8 @@ public class NestedOptionalExample {
 }
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Output:
 
 ```
@@ -3115,12 +3746,16 @@ US
 No country code available
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Explanation:
 
 * **`flatMap()`**: We use `flatMap()` to "unwrap" the `Optional` at each level.
 * **Handling Missing Values**: When a value is missing (like the address), it results in an empty `Optional`, and we handle that gracefully with `orElse()`.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧩 **Summary of Techniques Covered:**
 
@@ -3131,11 +3766,17 @@ No country code available
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 # java.util.Spliterator Methods & Characteristics
 
 ![alt text](image-4.png)
 
+[⬆ Back to top](#table-of-contents)
+
 ## Working With Java 8 Spliterator :
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) spliterator() : This method is added into java.lang.Iterable interface from Java 8 as a default method. So, it is available in all the classes and subinterfaces which implement or extend this interface. It is used to get Spliterator over the elements of arrays or collections or streams.
 
@@ -3157,6 +3798,8 @@ Spliterator<String> spliteratorOfStream = languageStream.spliterator();
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 2) tryAdvance() : Performs the given action on next element. It is used to traverse the elements one by one.
 
 ```java
@@ -3169,6 +3812,8 @@ languageSpliterator.tryAdvance(System.out::println);
 //      Java
 //      C
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3) forEachRemaining() : Performs the given action on each of the remaining elements. It is used to traverse the elements in bulk.
 
@@ -3187,6 +3832,8 @@ languageSpliterator.forEachRemaining(System.out::println);
 //      Scala
 //      Kotlin
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### 4) trySplit() : This method splits current Spliterator into another Spliterator. It is helpful in parallel programming.
 
 ```java
@@ -3216,6 +3863,8 @@ anotherLanguageSpliterator.forEachRemaining(System.out::println);
 //      C
 //      C++
 ```
+[⬆ Back to top](#table-of-contents)
+
 ### 5) estimateSize() : It returns the estimate of number of elements yet to be traversed by the Spliterator.
 
 ```java
@@ -3225,6 +3874,8 @@ System.out.println(languageSpliterator.estimateSize());       //Output : 6
 languageSpliterator.tryAdvance(System.out::println);
 System.out.println(languageSpliterator.estimateSize());       //Output : 5
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 6) getExactSizeIfKnown() : It returns exact size if known, otherwise returns -1.
 
@@ -3236,6 +3887,8 @@ languageSpliterator.tryAdvance(System.out::println);
 System.out.println(languageSpliterator.getExactSizeIfKnown());       //Output : 5
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 7) characteristics() : Returns set of characteristics of elements in an integer form.
 
 ```java
@@ -3245,6 +3898,8 @@ System.out.println(languageSpliterator.characteristics());
          
 //Output : 16464
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 8) hasCharacteristics() : Checks whether this Spliterator has specified characteristics or not.
 
@@ -3256,6 +3911,8 @@ System.out.println(languageSpliterator.hasCharacteristics(16464));
 //Output : true
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 9) getComparator() : It returns Comparator of the source if it is sorted, otherwise throws IllegalStateException. If the source is sorted in natural order, it returns null.
 
 ```java
@@ -3266,11 +3923,15 @@ System.out.println(languageSpliterator.getComparator());
 //Output : Exception in thread "main" java.lang.IllegalStateException
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # java.util.Spliterator methods
 
 The `java.util.Spliterator` interface in Java 8 is part of the `java.util` package and is used for traversing and partitioning elements of a source, such as a `Collection`. It is especially useful in parallel processing with the Stream API.
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## 🔧 **Spliterator Interface – Key Methods**
 
@@ -3285,6 +3946,8 @@ Here are the primary methods of the `Spliterator` interface:
 | `int characteristics()`                             | Returns a set of characteristics of this `Spliterator` (as bitwise OR-ed values).                                                   |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## ⚙️ **Spliterator Characteristics**
 
@@ -3302,6 +3965,8 @@ These are constant fields (bit flags) representing the properties of a `Splitera
 | `SUBSIZED` (0x00004000)   | All sub-spliterators are also `SIZED`.                                      |
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## 🔍 **Common Usage Example**
 
@@ -3339,6 +4004,8 @@ public class SpliteratorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ **Best Practices**
 
 * Use `Spliterator` with parallel streams for performance optimization.
@@ -3348,19 +4015,27 @@ public class SpliteratorExample {
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## Explain each Spliterator Characteristics with an example.
 
 Sure! Here's a detailed explanation of each `Spliterator` **characteristic constant** in Java, along with real-world **examples** to illustrate their behavior:
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 1. `ORDERED`
 
 **Bitmask:** `0x00000010`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 Elements have a defined encounter order (e.g., in a `List`). A `Spliterator` with this characteristic guarantees that elements will be processed in a predictable sequence.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3375,13 +4050,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.ORDERED)); // true
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 2. `DISTINCT`
 
 **Bitmask:** `0x00000001`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 Indicates that elements are unique (no duplicates). Common in `Set` implementations like `HashSet`.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3396,13 +4077,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.DISTINCT)); // tru
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 3. `SORTED`
 
 **Bitmask:** `0x00000004`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 The elements are sorted in natural order or using a specified comparator.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3417,13 +4104,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.SORTED)); // true
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 4. `SIZED`
 
 **Bitmask:** `0x00000040`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 The `Spliterator` knows the exact number of elements it will traverse.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3439,13 +4132,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.SIZED)); // true
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 5. `NONNULL`
 
 **Bitmask:** `0x00000100`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 The source does **not** contain any `null` elements.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3460,13 +4159,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.NONNULL)); // true
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 6. `IMMUTABLE`
 
 **Bitmask:** `0x00000400`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 Indicates that the data source is immutable and cannot be structurally modified during traversal.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3481,13 +4186,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.IMMUTABLE)); // tr
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 7. `CONCURRENT`
 
 **Bitmask:** `0x00001000`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 The source may be safely modified concurrently (e.g., `ConcurrentHashMap`).
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3504,13 +4215,19 @@ System.out.println(spliterator.hasCharacteristics(Spliterator.CONCURRENT)); // t
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ 8. `SUBSIZED`
 
 **Bitmask:** `0x00004000`
 
+[⬆ Back to top](#table-of-contents)
+
 ### 🔹 Description:
 
 Indicates that all sub-spliterators created via `trySplit()` will also report `SIZED`.
+
+[⬆ Back to top](#table-of-contents)
 
 ### 🧪 Example:
 
@@ -3527,6 +4244,8 @@ System.out.println(split.estimateSize()); // 2 (approx.)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## 🧩 Summary Table
 
 | Characteristic | Applies To                          | Purpose                       |
@@ -3542,23 +4261,35 @@ System.out.println(split.estimateSize()); // 2 (approx.)
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Stream Intermediate And Terminal Operations
+
+[⬆ Back to top](#table-of-contents)
 
 ## 1) Intermediate Operations :
 
 map(), filter(), distinct(), sorted(), limit(), skip()
 
+[⬆ Back to top](#table-of-contents)
+
 ## 2) Terminal Operations :
 
 forEach(), toArray(), reduce(), collect(), min(), max(), count(), anyMatch(), allMatch(), noneMatch(), findFirst(), findAny()
+
+[⬆ Back to top](#table-of-contents)
 
 ## Below is the list of intermediate and terminal operations.
 
 ![alt text](image-5.png)
 
+[⬆ Back to top](#table-of-contents)
+
 # In Java 8, the **Stream API** provides powerful operations to process collections of data. These operations are classified into two main categories:
 
 ---
+
+[⬆ Back to top](#table-of-contents)
 
 ## 🔁 **Intermediate Operations**
 
@@ -3579,6 +4310,8 @@ These return a new stream and are **lazy** — they are only executed when a ter
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## ✅ **Terminal Operations**
 
 These produce a result or a side-effect and **trigger the stream pipeline execution**.
@@ -3598,6 +4331,8 @@ These produce a result or a side-effect and **trigger the stream pipeline execut
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 ## 🧪 Example: Combining Both
 
 ```java
@@ -3614,11 +4349,19 @@ System.out.println(count); // Outputs number of names with >3 chars
 
 ---
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 StringJoiner
+
+[⬆ Back to top](#table-of-contents)
 
 ## a) StringJoiner(CharSequence delimiter)
 
+[⬆ Back to top](#table-of-contents)
+
 ## b) StringJoiner(CharSequence delimiter, CharSequence prefix, CharSequence suffix)
+
+[⬆ Back to top](#table-of-contents)
 
 ### StringJoiner Example : Joining the strings with delimiter
 
@@ -3650,6 +4393,8 @@ Output :
 Facebook | Twitter | YouTube | WhatsApp | LinkedIn
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### StringJoiner Example : Joining the strings with delimiter, prefix and suffix
 
 ```java
@@ -3680,11 +4425,19 @@ Output :
 [Facebook, Twitter, YouTube, WhatsApp, LinkedIn]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 String.join() Method
+
+[⬆ Back to top](#table-of-contents)
 
 ## a) public static String join(CharSequence delimiter, CharSequence… elements)
 
+[⬆ Back to top](#table-of-contents)
+
 ## b) public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements)
+
+[⬆ Back to top](#table-of-contents)
 
 ### String.join() Method Example : Joining the strings
 
@@ -3702,6 +4455,8 @@ public class Java8StringJoinMethod
 Output :
 Facebook | Twitter | YouTube | WhatsApp | LinkedIn
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### String.join() Method Example : Joining an array of strings
 
@@ -3722,6 +4477,8 @@ Output :
 
 Facebook | Twitter | YouTube | WhatsApp | LinkedIn
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### String.join() Method Example : Joining list of strings
 
@@ -3746,14 +4503,24 @@ Output :
 Facebook | Twitter | YouTube | WhatsApp | LinkedIn
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Collectors.joining()
 There are three forms of Collectors.joining() method available. They are,
 
+[⬆ Back to top](#table-of-contents)
+
 ## a) Collectors.joining()
+
+[⬆ Back to top](#table-of-contents)
 
 ## b) Collectors.joining(CharSequence delimiter)
 
+[⬆ Back to top](#table-of-contents)
+
 ## c) Collectors.joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix)
+
+[⬆ Back to top](#table-of-contents)
 
 ### Collectors.joining() Example : Joining list of strings without delimiter
 
@@ -3778,6 +4545,8 @@ Output :
 
 FacebookTwitterYouTubeWhatsAppLinkedIn
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Collectors.joining() Example : Joining list of strings with delimiter
 
@@ -3804,6 +4573,8 @@ Facebook | Twitter | YouTube | WhatsApp | LinkedIn
 
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Collectors.joining() Example : Joining list of strings with delimiter, prefix and suffix
 
 ```java
@@ -3828,13 +4599,19 @@ Output :
 [Facebook, Twitter, YouTube, WhatsApp, LinkedIn]
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Sort HashMap By Keys
 
 HashMap, LinkedHashMap and TreeMap are three most popular Map types. LinkedHashMap maintains insertion order i.e elements are stored as they are inserted. TreeMap stores the elements according to supplied Comparator or in natural order if you don’t supply any Comparator. HashMap doesn’t guarantee any order. There are different methods to sort HashMap either by keys or values.
 
+[⬆ Back to top](#table-of-contents)
+
 ## How To Sort HashMap By Keys Using TreeMap (Before Java 8)?
 
 One of the easiest and traditional method of sorting HashMap is that inserting HashMap elements into TreeMap. It will sort the elements according to supplied Comparator or in natural order if no Comparator is supplied.
+
+[⬆ Back to top](#table-of-contents)
 
 ### Sorting HashMap according to natural order of keys using TreeMap without Comparator :
 
@@ -3875,6 +4652,8 @@ Before Sorting :
 After Sorting :
 {Arunkumar=86, Jyous=87, Klusener=82, Lisa=89, Narayan=95, Xiangh=91}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Sorting HashMap in natural reverse order of keys using TreeMap with Comparator :
 
@@ -3920,6 +4699,8 @@ Before Sorting :
 After Sorting :
 {Xiangh=91, Narayan=95, Lisa=89, Klusener=82, Jyous=87, Arunkumar=86}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Sorting HashMap by keys using TreeMap with customized Comparator :
 
@@ -4036,6 +4817,8 @@ After Sorting :
 {Arunkumar=86, Klusener=82, Narayan=95, Xiangh=91, Jyous=87, Lisa=89}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ## How To Sort HashMap By Keys Using Java 8 comparingByKey()?
 
 From Java 8, two new methods are introduced into Map.Entry class to facilitate the sorting of Map objects by keys and by values. They are – comparingByKey() and comparingByValue(). In this post, we will just focus on comparingByKey() method.
@@ -4043,6 +4826,8 @@ From Java 8, two new methods are introduced into Map.Entry class to facilitate t
 Below image describes steps involved in sorting HashMap by keys using Java 8 comparingByKey().
 
 ![alt text](image-6.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java 8 sort HashMap by keys in natural order :
 
@@ -4089,6 +4874,8 @@ Before Sorting :
 After Sorting :
 {Arunkumar=86, Jyous=87, Klusener=82, Lisa=89, Narayan=95, Xiangh=91}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java 8 sorting HashMap in natural reverse order of keys :
 
@@ -4143,6 +4930,8 @@ Before Sorting :
 After Sorting :
 {Xiangh=91, Narayan=95, Lisa=89, Klusener=82, Jyous=87, Arunkumar=86}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java 8 sort HashMap by keys using customized Comparator :
 
@@ -4243,9 +5032,13 @@ After Sorting :
 {Arunkumar=86, Klusener=82, Narayan=95, Xiangh=91, Jyous=87, Lisa=89}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Sort HashMap By Values
 
 In previous post, we have seen how to sort HashMap by keys using Java 8 comparingByKey() method. In this post, we will see how to sort HashMap by values using Java 8 comparingByValue() method.
+
+[⬆ Back to top](#table-of-contents)
 
 ## How To Sort HashMap By Values Before Java 8?
 Before Java 8, Collections.sort() method is used to sort HashMap by values. Steps to sort HashMap by values using Collections.sort() are,
@@ -4330,6 +5123,8 @@ After Sorting :
 To sort above HashMap in the reverse order, either use Collections.reverseOrder() or else return o2.getValue().compareTo(o1.getValue()) instead of o1.getValue().compareTo(o2.getValue()) inside the customized Comparator.
 
 
+[⬆ Back to top](#table-of-contents)
+
 ## How To Sort HashMap By Values Using Java 8 comparingByValue()?
 
 From Java 8, two important methods are added to Map.Entry class to facilitate the sorting of HashMap by keys and by values. They are – comparingByKey() and comparingByValue(). In the previous post, we have seen how to use comparingByKey() method with various examples. In this post, we concentrate on comparingByValue()method.
@@ -4337,6 +5132,8 @@ From Java 8, two important methods are added to Map.Entry class to facilitate th
 Below image describes steps involved in sorting HashMap by values using Java 8 comparingByValue() method.
 
 ![alt text](image-7.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ### Java 8 sort HashMap in natural order of values :
 
@@ -4456,6 +5253,8 @@ After Sorting :
 {333=Xiangh, 222=Narayan, 111=Lisa, 666=Klusener, 555=Jyous, 444=Arunkumar}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### Java 8 Sort HashMap By Values Using Customized Comparator :
 
 The following program sorts HashMap in increasing order of length of values using Java 8 comparingByValue() by passing customized Comparator.
@@ -4571,11 +5370,15 @@ After Sorting :
 {444=Arunkumar, 666=Klusener, 222=Narayan, 333=Xiangh, 555=Jyous, 111=Lisa}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 # Java 8 Merge Two Maps With Same Keys
 
 **Problem :**
 
 Write a Java 8 program or function which merge two maps with same keys. Your program should take two maps (which may have same keys) as input and merge them into single map. The values of same keys must be result of an applied merging function like adding values or concatenating values or selecting smallest or largest value if two keys are found same.
+
+[⬆ Back to top](#table-of-contents)
 
 ## How To Merge Two Maps With Same Keys In Java 8?
 There are four different Java 8 methods you can use for this problem. They are,
@@ -4589,6 +5392,8 @@ There are four different Java 8 methods you can use for this problem. They are,
 4. Using Stream() Pipeline
 
 ![alt text](image-8.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ### 1) Map.merge() :
 merge() method is added to java.util.Map from Java 8 to facilitate merging of two maps. Map.merge() takes three arguments – key, value and remappingFunction which decides the value if two keys are found same.
@@ -4638,6 +5443,8 @@ public class Java8MergeTwoMaps
     }
 }
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 2) Stream.concat() :
 
@@ -4696,6 +5503,8 @@ Map 1 : {Maths=45, Chemistry=52, History=41, Physics=57}
 Map 2 : {Economics=49, Maths=42, Biology=41, History=55}
 Map 3 : {Economics=49, Maths=45, Chemistry=52, Biology=41, History=55, Physics=57}
 ```
+
+[⬆ Back to top](#table-of-contents)
 
 ### 3) Stream.of() and flatMap() :
 
@@ -4756,6 +5565,8 @@ Map 2 : {Economics=49, Maths=42, Biology=41, History=55}
 Map 3 : {Economics=49, Maths=87, Chemistry=52, Biology=41, History=96, Physics=57}
 ```
 
+[⬆ Back to top](#table-of-contents)
+
 ### 4) Using Stream() Pipeline :
 
 The following program first converts entrySet of subjectToStudentCountMap2 to Stream using stream() and collect the result into new HashMap using Collectors.toMap() after passing four arguments – keyMapper, valueMapper, mergeFunction and mapSupplier which is already initialized with subjectToStudentCountMap1. If any two keys are same, smallest value is selected.
@@ -4812,3 +5623,4 @@ Map 2 : {Economics=49, Maths=42, Biology=41, History=55}
 Map 3 : {Economics=49, Maths=42, Biology=41, Chemistry=52, History=41, Physics=57}
 
 ```
+[⬆ Back to top](#table-of-contents)
